@@ -4,8 +4,7 @@
     <p class="mva-gate-eyebrow">Mount Veritas</p>
     <h1 class="mva-gate-title">Your account</h1>
     <p class="mva-gate-sub">Sign in to view your orders, address, and account details.</p>
-    <a class="mva-gate-btn" href="/pages/account-login">Sign in</a>
-    <a class="mva-gate-create" href="/pages/account-register">Don't have an account? Create one</a>
+    <a class="mva-gate-btn" href="{{ routes.account_url }}">Sign in</a>
   </div>
 </div>
 <style>
@@ -16,8 +15,6 @@
 .mva-gate-sub{ font-family:'Fira Sans Condensed',sans-serif; color:#9b988f; font-size:15px; line-height:1.6; margin:0 0 28px; }
 .mva-gate-btn{ display:block; background:#ECE9E2; color:#0d0d0b; border-radius:6px; padding:14px; font-family:'Fira Sans Condensed',sans-serif; font-weight:700; font-size:14px; letter-spacing:.08em; text-transform:uppercase; text-decoration:none; transition:background .2s; }
 .mva-gate-btn:hover{ background:#fff; }
-.mva-gate-create{ display:block; text-align:center; margin-top:14px; font-family:'Fira Sans Condensed',sans-serif; color:#9b988f; font-size:13px; text-decoration:underline; }
-.mva-gate-create:hover{ color:#ECE9E2; }
 </style>
 {% endunless %}
 
