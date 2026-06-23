@@ -1,0 +1,18 @@
+{% layout none %}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Affiliate Dashboard &mdash; Mount Veritas</title>
+</head>
+<body style="margin:0;padding:0;background:#ffffff;min-height:100vh;">
+{% if customer %}
+  {% comment %} ——— AFFILIATE DASHBOARD — built out in next phase ——— {% endcomment %}
+  <div style="min-height:100vh;background:#ffffff;"></div>
+{% else %}
+  <script>window.location.replace('/pages/affiliate');</script>
+{% endif %}
+</body>
+</html>

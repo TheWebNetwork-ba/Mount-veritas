@@ -1,0 +1,144 @@
+<div class="slides">
+
+  <header class="slide hero">
+    {% if section.settings.hero_image != blank %}
+      <div class="slide-bg"><img src="{{ section.settings.hero_image | image_url: width: 2400 }}" alt="" loading="lazy"><span class="slide-shade"></span></div>
+    {% endif %}
+    <div class="hero-inner">
+      <p class="eyebrow">The Uniform of the Climb</p>
+      <h1>Wear the<br>Greater Man.</h1>
+      <p class="sub">The one at the top of the climb. He&rsquo;s still you.</p>
+      <a class="cta" href="#shop">Begin the Climb</a>
+    </div>
+  </header>
+
+  <section class="slide firstpieces" id="shop" aria-label="The First Pieces">
+    <a class="fp-link" href="{{ section.settings.fp_link | default: routes.all_products_collection_url }}">
+      {% if section.settings.fp_image != blank %}
+        <div class="fp-bg">
+          <img src="{{ section.settings.fp_image | image_url: width: 2400 }}" alt="" loading="lazy">
+          <span class="fp-shade"></span>
+        </div>
+      {% endif %}
+      <div class="fp-inner">
+        {% if section.settings.fp_eyebrow != blank %}<span class="fp-eyebrow">{{ section.settings.fp_eyebrow | escape }}</span>{% endif %}
+        <h2 class="fp-title">{{ section.settings.fp_title | default: 'Where the climb begins.' | escape }}</h2>
+        {% if section.settings.fp_text != blank %}<p class="fp-text">{{ section.settings.fp_text | escape }}</p>{% endif %}
+        <span class="fp-cta">{{ section.settings.fp_cta | default: 'See the first pieces' | escape }} &rarr;</span>
+      </div>
+    </a>
+  </section>
+
+  <section class="slide liked" aria-label="Most worn">
+    {% if section.settings.liked_image != blank %}
+      <div class="slide-bg"><img src="{{ section.settings.liked_image | image_url: width: 2400 }}" alt="" loading="lazy"><span class="slide-shade"></span></div>
+    {% endif %}
+    <div class="liked-inner">
+      <div class="liked-head">
+        {% if section.settings.liked_eyebrow != blank %}<span class="liked-eyebrow">{{ section.settings.liked_eyebrow | escape }}</span>{% endif %}
+        <h2 class="liked-title">{{ section.settings.liked_title | default: 'The Most Worn' | escape }}</h2>
+      </div>
+      <div class="liked-grid">
+        {% for n in (1..3) %}
+          {% assign lkey = 'liked_product_' | append: n %}
+          {% assign lp = section.settings[lkey] %}
+          {% if lp != blank %}
+            <a class="liked-card" href="{{ lp.url }}">
+              <div class="liked-card-img">
+                {% if lp.featured_image %}
+                  <img src="{{ lp.featured_image | image_url: width: 800 }}" alt="{{ lp.title | escape }}" loading="lazy">
+                {% else %}
+                  <svg viewBox="0 0 100 100" aria-hidden="true"><path d="M30 18 L42 12 Q50 18 58 12 L70 18 L82 32 L70 42 L70 88 L30 88 L30 42 L18 32 Z" fill="none" stroke="#56544d" stroke-width="1.4"/></svg>
+                {% endif %}
+              </div>
+              <div class="liked-card-meta">
+                <span class="liked-card-title">{{ lp.title }}</span>
+                <span class="liked-card-price">{{ lp.price | money }}</span>
+              </div>
+            </a>
+          {% else %}
+            <div class="liked-card liked-card--empty">
+              <div class="liked-card-img"><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M30 18 L42 12 Q50 18 58 12 L70 18 L82 32 L70 42 L70 88 L30 88 L30 42 L18 32 Z" fill="none" stroke="#56544d" stroke-width="1.4"/></svg></div>
+              <div class="liked-card-meta"><span class="liked-card-title">Connect a product</span><span class="liked-card-price"></span></div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="slide mountain" aria-label="The Mountain Collection">
+    {% if section.settings.mtn_image != blank %}
+      <div class="slide-bg"><img src="{{ section.settings.mtn_image | image_url: width: 2400 }}" alt="" loading="lazy"><span class="slide-shade"></span></div>
+    {% endif %}
+    <div class="mtn-inner">
+      <div class="mtn-head">
+        {% if section.settings.mtn_eyebrow != blank %}<span class="mtn-eyebrow">{{ section.settings.mtn_eyebrow | escape }}</span>{% endif %}
+        <h2 class="mtn-title">{{ section.settings.mtn_title | default: 'Built for the climb.' | escape }}</h2>
+        {% if section.settings.mtn_text != blank %}<p class="mtn-text">{{ section.settings.mtn_text | escape }}</p>{% endif %}
+      </div>
+      <div class="mtn-grid">
+        {% for n in (1..4) %}
+          {% assign mkey = 'mtn_collection_' | append: n %}
+          {% assign col = section.settings[mkey] %}
+          {% if col != blank %}
+            {% assign cimg = col.image %}
+            {% unless cimg %}{% assign cimg = col.products.first.featured_image %}{% endunless %}
+            <a class="mtn-card" href="{{ col.url }}">
+              {% if cimg %}<img src="{{ cimg | image_url: width: 900 }}" alt="{{ col.title | escape }}" loading="lazy">{% endif %}
+              <span class="mtn-card-shade"></span>
+              <span class="mtn-card-name">{{ col.title }}</span>
+            </a>
+          {% else %}
+            <div class="mtn-card mtn-card--empty">
+              <span class="mtn-card-shade"></span>
+              <span class="mtn-card-name">Connect a collection</span>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <a class="mtn-btn" href="{{ section.settings.mtn_button_link | default: routes.all_products_collection_url }}">{{ section.settings.mtn_button_label | default: 'Enter the collection' | escape }} &rarr;</a>
+    </div>
+  </section>
+
+</div>
+
+{% schema %}
+{
+  "name": "MV Home",
+  "settings": [
+    { "type": "header", "content": "Slide 1 - Hero" },
+    { "type": "image_picker", "id": "hero_image", "label": "Background image (optional)" },
+
+    { "type": "header", "content": "Slide 2 - First Pieces" },
+    { "type": "text", "id": "fp_eyebrow", "label": "Eyebrow", "default": "The First Pieces" },
+    { "type": "text", "id": "fp_title", "label": "Headline", "default": "Where the climb begins." },
+    { "type": "text", "id": "fp_text", "label": "Line under headline", "default": "The first ascent. Numbered, finished by hand, made to be worn into who you're becoming." },
+    { "type": "text", "id": "fp_cta", "label": "Button text", "default": "See the first pieces" },
+    { "type": "image_picker", "id": "fp_image", "label": "Background image (optional)" },
+    { "type": "url", "id": "fp_link", "label": "Link (blank = all products)" },
+
+    { "type": "header", "content": "Slide 3 - Most Worn" },
+    { "type": "text", "id": "liked_eyebrow", "label": "Eyebrow", "default": "Most Worn" },
+    { "type": "text", "id": "liked_title", "label": "Headline", "default": "The Most Worn" },
+    { "type": "image_picker", "id": "liked_image", "label": "Background image (optional)" },
+    { "type": "product", "id": "liked_product_1", "label": "Product 1" },
+    { "type": "product", "id": "liked_product_2", "label": "Product 2" },
+    { "type": "product", "id": "liked_product_3", "label": "Product 3" },
+
+    { "type": "header", "content": "Slide 4 - Mountain Collection" },
+    { "type": "text", "id": "mtn_eyebrow", "label": "Eyebrow", "default": "The Mountain Collection" },
+    { "type": "text", "id": "mtn_title", "label": "Headline", "default": "Built for the climb." },
+    { "type": "text", "id": "mtn_text", "label": "Line under headline", "default": "Four collections. One ascent." },
+    { "type": "image_picker", "id": "mtn_image", "label": "Background image (optional)" },
+    { "type": "collection", "id": "mtn_collection_1", "label": "Collection 1" },
+    { "type": "collection", "id": "mtn_collection_2", "label": "Collection 2" },
+    { "type": "collection", "id": "mtn_collection_3", "label": "Collection 3" },
+    { "type": "collection", "id": "mtn_collection_4", "label": "Collection 4" },
+    { "type": "text", "id": "mtn_button_label", "label": "Button text", "default": "Enter the collection" },
+    { "type": "url", "id": "mtn_button_link", "label": "Button link" }
+  ],
+  "blocks": [],
+  "presets": [ { "name": "MV Home" } ]
+}
+{% endschema %}

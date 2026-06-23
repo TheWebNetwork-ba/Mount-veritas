@@ -1,0 +1,132 @@
+{% if section.settings.enabled %}
+<div id="mv-pop" class="mv-pop" data-delay="{{ section.settings.delay | default: 6 }}" hidden>
+  <div class="mv-pop-backdrop" data-mv-close></div>
+  <div class="mv-pop-card" role="dialog" aria-modal="true" aria-label="{{ section.settings.headline | escape }}">
+    <button class="mv-pop-x" type="button" data-mv-close aria-label="Close">&times;</button>
+
+    <div data-mv-state="offer">
+      {% if section.settings.eyebrow != blank %}<p class="mv-pop-eyebrow">{{ section.settings.eyebrow }}</p>{% endif %}
+      <h2 class="mv-pop-title">{{ section.settings.headline | default: '10% off your first piece.' }}</h2>
+      {% if section.settings.subtext != blank %}<p class="mv-pop-sub">{{ section.settings.subtext }}</p>{% endif %}
+      <form id="mv-pop-form" novalidate>
+        <input class="mv-pop-input" type="email" name="email" placeholder="Email" aria-label="Email" autocomplete="email" required>
+        <button class="mv-pop-btn" type="submit">{{ section.settings.button_label | default: 'Get my code' }}</button>
+        {% if section.settings.fine_print != blank %}<p class="mv-pop-fine">{{ section.settings.fine_print }}</p>{% endif %}
+        <p class="mv-pop-err" id="mv-pop-err" hidden>That didn't go through &mdash; try again.</p>
+      </form>
+    </div>
+
+    <div data-mv-state="thanks" hidden>
+      <h2 class="mv-pop-title">{{ section.settings.thanks_headline | default: "You're in." }}</h2>
+      {% if section.settings.thanks_subtext != blank %}<p class="mv-pop-sub">{{ section.settings.thanks_subtext }}</p>{% endif %}
+      <button class="mv-pop-code" id="mv-pop-code" type="button" aria-label="Copy discount code">
+        <span class="mv-pop-code-tx">{{ section.settings.discount_code | default: 'BASECAMP' }}</span>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+      </button>
+      <p class="mv-pop-copied" id="mv-pop-copied" hidden>Copied</p>
+    </div>
+  </div>
+</div>
+
+<style>
+.mv-pop{ position:fixed; inset:0; z-index:9999; display:flex; align-items:center; justify-content:center; padding:20px; }
+.mv-pop[hidden]{ display:none; }
+.mv-pop-backdrop{ position:absolute; inset:0; background:rgba(8,8,7,.72); }
+.mv-pop-card{ position:relative; width:100%; max-width:380px; background:#1b1914; border:1px solid rgba(236,233,226,.12); border-radius:10px; padding:32px 26px; box-sizing:border-box; }
+.mv-pop-x{ position:absolute; top:10px; right:12px; background:none; border:none; color:#6f6c64; font-size:24px; line-height:1; cursor:pointer; padding:4px 8px; }
+.mv-pop-x:hover{ color:#ECE9E2; }
+.mv-pop-eyebrow{ text-align:center; font-family:'Fira Sans Condensed',sans-serif; color:#ffb800; font-size:12px; letter-spacing:2px; margin:0 0 12px; }
+.mv-pop-title{ text-align:center; font-family:'Abril Fatface',serif; font-weight:400; color:#ECE9E2; font-size:26px; line-height:1.1; margin:0 0 10px; }
+.mv-pop-sub{ text-align:center; font-family:'Fira Sans Condensed',sans-serif; color:#9b988f; font-size:13.5px; line-height:1.5; margin:0 0 18px; }
+.mv-pop-input{ width:100%; box-sizing:border-box; background:#0f0f0d; border:1px solid #3a392f; border-radius:6px; padding:13px 15px; color:#ECE9E2; font-family:'Fira Sans Condensed',sans-serif; font-size:15px; margin-bottom:10px; }
+.mv-pop-input::placeholder{ color:#6f6c64; }
+.mv-pop-input:focus{ outline:none; border-color:#ECE9E2; }
+.mv-pop-btn{ width:100%; background:#ECE9E2; color:#0d0d0b; border:none; border-radius:6px; padding:14px; font-family:'Fira Sans Condensed',sans-serif; font-weight:500; font-size:15px; letter-spacing:.3px; cursor:pointer; }
+.mv-pop-btn:hover{ background:#ffffff; }
+.mv-pop-btn:disabled{ opacity:.6; cursor:default; }
+.mv-pop-fine{ text-align:center; font-family:'Fira Sans Condensed',sans-serif; color:#6f6c64; font-size:11px; margin:10px 0 0; }
+.mv-pop-err{ text-align:center; color:#d98a8a; font-family:'Fira Sans Condensed',sans-serif; font-size:12px; margin:8px 0 0; }
+.mv-pop-code{ width:100%; box-sizing:border-box; display:flex; align-items:center; justify-content:center; gap:10px; background:rgba(255,184,0,.06); border:1px solid rgba(255,184,0,.45); border-radius:6px; padding:14px; cursor:pointer; color:#9b988f; }
+.mv-pop-code:hover{ border-color:rgba(255,184,0,.75); }
+.mv-pop-code-tx{ font-family:'Fira Sans Condensed',sans-serif; color:#ffd27a; font-size:19px; font-weight:500; letter-spacing:3px; }
+.mv-pop-copied{ text-align:center; font-family:'Fira Sans Condensed',sans-serif; color:#8fd3a8; font-size:12px; margin:8px 0 0; }
+@media (max-width:600px){ .mv-pop-card{ padding:28px 20px; } }
+</style>
+
+<script>
+(function(){
+  var KEY='mv_launch_popup_seen';
+  var pop=document.getElementById('mv-pop');
+  if(!pop) return;
+  try{ if(localStorage.getItem(KEY)) return; }catch(e){}
+  var delay=(parseInt(pop.getAttribute('data-delay'),10)||6)*1000;
+  var timer=setTimeout(open,delay);
+
+  function open(){
+    try{ localStorage.setItem(KEY,'1'); }catch(e){}
+    pop.hidden=false;
+  }
+  function close(){
+    pop.hidden=true;
+    if(timer) clearTimeout(timer);
+  }
+  pop.querySelectorAll('[data-mv-close]').forEach(function(el){ el.addEventListener('click',close); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&!pop.hidden) close(); });
+
+  var form=document.getElementById('mv-pop-form');
+  var err=document.getElementById('mv-pop-err');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var input=form.querySelector('input[type=email]');
+    var email=(input.value||'').trim();
+    if(!email||email.indexOf('@')<1){ if(err) err.hidden=false; return; }
+    if(err) err.hidden=true;
+    var btn=form.querySelector('button[type=submit]');
+    btn.disabled=true;
+    var body=new URLSearchParams();
+    body.append('form_type','customer');
+    body.append('utf8','\u2713');
+    body.append('contact[tags]','popup-launch');
+    body.append('contact[email]',email);
+    fetch('/contact',{method:'POST',body:body,headers:{'Accept':'application/json'}})
+      .then(thanks).catch(thanks);
+  });
+  function thanks(){
+    var o=pop.querySelector('[data-mv-state="offer"]');
+    var t=pop.querySelector('[data-mv-state="thanks"]');
+    if(o) o.hidden=true;
+    if(t) t.hidden=false;
+  }
+
+  var codeBtn=document.getElementById('mv-pop-code');
+  if(codeBtn){
+    codeBtn.addEventListener('click',function(){
+      var code=codeBtn.querySelector('.mv-pop-code-tx').textContent.trim();
+      try{ navigator.clipboard.writeText(code); }catch(e){}
+      var c=document.getElementById('mv-pop-copied');
+      if(c){ c.hidden=false; setTimeout(function(){ c.hidden=true; },1500); }
+    });
+  }
+})();
+</script>
+
+{% endif %}
+
+{% schema %}
+{
+  "name": "Launch popup",
+  "settings": [
+    { "type": "checkbox", "id": "enabled", "label": "Enable popup", "default": true },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Launch offer" },
+    { "type": "text", "id": "headline", "label": "Headline", "default": "10% off your first piece." },
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Enter your email \u2014 your code is yours." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Get my code" },
+    { "type": "text", "id": "fine_print", "label": "Fine print", "default": "First order. One use." },
+    { "type": "text", "id": "thanks_headline", "label": "Thank-you headline", "default": "You're in." },
+    { "type": "textarea", "id": "thanks_subtext", "label": "Thank-you subtext", "default": "Here's 10% off your first piece. Use it at checkout." },
+    { "type": "text", "id": "discount_code", "label": "Discount code shown", "info": "Must match a real 10% code in Shopify Discounts.", "default": "BASECAMP" },
+    { "type": "range", "id": "delay", "label": "Delay before showing", "min": 0, "max": 30, "step": 1, "unit": "s", "default": 6 }
+  ],
+  "presets": [{ "name": "Launch popup" }]
+}
+{% endschema %}

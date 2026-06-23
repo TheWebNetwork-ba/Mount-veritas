@@ -1,0 +1,75 @@
+<div class="mv-auth">
+  <div class="mv-auth-inner">
+
+    <h1 class="mv-auth-title">Sign in to your account</h1>
+
+    {% form 'customer_login' %}
+      {% if form.errors %}
+        <p class="mv-auth-err">Incorrect email or password &mdash; try again.</p>
+      {% endif %}
+
+      <label class="mv-auth-label" for="LoginEmail">Email</label>
+      <input class="mv-auth-input" type="email" name="customer[email]" id="LoginEmail" autocomplete="email" required>
+
+      <label class="mv-auth-label" for="LoginPassword">Password</label>
+      <input class="mv-auth-input" type="password" name="customer[password]" id="LoginPassword" autocomplete="current-password" required>
+
+      <button class="mv-auth-btn" type="submit">Sign in</button>
+    {% endform %}
+
+    <div class="mv-auth-links">
+      <a href="/account/register">Don't have an account? Create one</a>
+      <a href="/account/recover_password">Forgot your password?</a>
+    </div>
+
+  </div>
+</div>
+
+<style>
+.mv-auth{
+  min-height:100svh; display:flex; align-items:center; justify-content:center;
+  padding:120px 24px 80px; box-sizing:border-box;
+}
+.mv-auth-inner{
+  width:100%; max-width:420px;
+  background:rgba(13,13,11,.85); border:1px solid rgba(236,233,226,.12);
+  border-radius:6px; padding:36px 32px;
+}
+.mv-auth-title{
+  font-family:'Abril Fatface',serif; font-weight:400; color:#ECE9E2;
+  font-size:clamp(26px,4vw,36px); line-height:1.06; margin:0 0 28px; text-align:center;
+}
+.mv-auth-label{
+  display:block; font-family:'Fira Sans Condensed',sans-serif; font-size:11px;
+  letter-spacing:.14em; text-transform:uppercase; color:#9b988f; margin:0 0 6px;
+}
+.mv-auth-input{
+  width:100%; box-sizing:border-box;
+  background:#0f0f0d; border:1px solid #3a392f; border-radius:6px;
+  padding:13px 15px; color:#ECE9E2;
+  font-family:'Fira Sans Condensed',sans-serif; font-size:15px; margin-bottom:18px;
+}
+.mv-auth-input::placeholder{ color:#6f6c64; }
+.mv-auth-input:focus{ outline:none; border-color:#ECE9E2; }
+.mv-auth-err{
+  font-family:'Fira Sans Condensed',sans-serif; color:#d98a8a; font-size:13px;
+  text-align:center; margin:0 0 18px;
+}
+.mv-auth-btn{
+  width:100%; background:#ECE9E2; color:#0d0d0b; border:none; border-radius:6px;
+  padding:14px; font-family:'Fira Sans Condensed',sans-serif; font-weight:700;
+  font-size:14px; letter-spacing:.08em; text-transform:uppercase; cursor:pointer;
+  margin-top:4px; transition:background .2s;
+}
+.mv-auth-btn:hover{ background:#fff; }
+.mv-auth-links{
+  display:flex; flex-direction:column; gap:10px;
+  margin-top:22px; text-align:center;
+}
+.mv-auth-links a{
+  font-family:'Fira Sans Condensed',sans-serif; color:#9b988f; font-size:13px;
+  text-decoration:underline; transition:color .2s;
+}
+.mv-auth-links a:hover{ color:#ECE9E2; }
+@media(max-width:480px){ .mv-auth-inner{ padding:28px 18px; } }
+</style>

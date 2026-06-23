@@ -1,0 +1,25 @@
+{% layout none %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Checking access&hellip;</title>
+</head>
+<body>
+{% if customer %}
+  {% if customer.tags contains 'affiliate' %}
+    <script>window.location.replace('/pages/affiliate-dashboard');</script>
+  {% else %}
+    <script>
+      /* Customer exists but has no affiliate tag — block and redirect back */
+      sessionStorage.setItem('mv_aff_blocked','1');
+      window.location.replace('/account/logout');
+    </script>
+  {% endif %}
+{% else %}
+  <script>window.location.replace('/pages/affiliate');</script>
+{% endif %}
+</body>
+</html>

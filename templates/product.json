@@ -1,0 +1,77 @@
+{
+  "sections": {
+    "main": {
+      "type": "mv-product",
+      "blocks": {
+        "details": {
+          "type": "panel",
+          "settings": {
+            "heading": "Details",
+            "use_description": true
+          }
+        },
+        "shipping": {
+          "type": "panel",
+          "settings": {
+            "heading": "Shipping",
+            "content": "<p>Orders are processed within 2-3 business days. A tracking link is emailed the moment your order ships. Worldwide shipping; duties and taxes are calculated at checkout.</p>"
+          }
+        },
+        "sizefit": {
+          "type": "panel",
+          "settings": {
+            "heading": "Size & Fit",
+            "content": "<p>Cut with a relaxed, boxy fit and a dropped shoulder. If you prefer a closer fit, size down. Full per-size measurements are added soon.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "details",
+        "shipping",
+        "sizefit"
+      ]
+    },
+    "faq": {
+      "type": "mv-faq",
+      "blocks": {
+        "q1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How does the fit run?",
+            "answer": "<p>Relaxed and true to size. Prefer it closer? Size down one.</p>"
+          }
+        },
+        "q2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How fast does it ship?",
+            "answer": "<p>Orders process in 2-3 business days, with tracking emailed at dispatch.</p>"
+          }
+        },
+        "q3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I return it?",
+            "answer": "<p>Yes - unworn pieces within 14 days. Message us and we'll handle it.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3"
+      ],
+      "settings": {
+        "faq_title": "Questions"
+      }
+    },
+    "mv_popup": {
+      "type": "mv-popup"
+    }
+  },
+  "order": [
+    "main",
+    "faq",
+    "mv_popup"
+  ]
+}

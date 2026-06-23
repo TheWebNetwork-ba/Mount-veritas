@@ -1,0 +1,50 @@
+{
+  "sections": {
+    "main": {
+      "type": "mv-home",
+      "settings": {}
+    },
+    "faq": {
+      "type": "mv-faq",
+      "blocks": {
+        "q1": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How does the fit run?",
+            "answer": "<p>Relaxed and true to size. Prefer it closer? Size down one.</p>"
+          }
+        },
+        "q2": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How fast does it ship?",
+            "answer": "<p>Orders process in 2-3 business days. Tracking is emailed the moment it ships.</p>"
+          }
+        },
+        "q3": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What's the return policy?",
+            "answer": "<p>Unworn pieces can be returned within 14 days. Message us and we'll take care of it.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3"
+      ],
+      "settings": {
+        "faq_title": "Questions"
+      }
+    },
+    "mv_popup": {
+      "type": "mv-popup"
+    }
+  },
+  "order": [
+    "main",
+    "faq",
+    "mv_popup"
+  ]
+}

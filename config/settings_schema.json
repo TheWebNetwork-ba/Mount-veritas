@@ -1,0 +1,49 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Mount Veritas",
+    "theme_version": "1.0.0",
+    "theme_author": "Mount Veritas",
+    "theme_documentation_url": "https://mountveritas.com",
+    "theme_support_url": "https://mountveritas.com"
+  },
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Set where each footer button goes. Easiest way to get the exact address: Online Store > Pages > open the page > click View, then copy the address from your browser bar and paste it below. Social = your Instagram or TikTok link."
+      },
+      {
+        "type": "text",
+        "id": "footer_contact_url",
+        "label": "Contact us link",
+        "info": "Paste the Contact us page address (e.g. /pages/contact-us)."
+      },
+      {
+        "type": "text",
+        "id": "footer_client_url",
+        "label": "Client services link",
+        "info": "Paste the Client services page address."
+      },
+      {
+        "type": "text",
+        "id": "footer_legal_url",
+        "label": "Legal notices link",
+        "info": "Paste the Legal notices page address."
+      },
+      {
+        "type": "text",
+        "id": "social_url",
+        "label": "Social link (external)",
+        "info": "Paste your Instagram / TikTok URL. Opens in a new tab."
+      },
+      {
+        "type": "text",
+        "id": "footer_affiliate_url",
+        "label": "Affiliate program link",
+        "info": "Paste the affiliate page address (e.g. /pages/affiliate)."
+      }
+    ]
+  }
+]

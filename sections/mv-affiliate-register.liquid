@@ -1,0 +1,221 @@
+<div class="mv-reg">
+  <div class="mv-reg-inner">
+
+    <h1 class="mv-reg-title">Create an account</h1>
+
+    {% form 'create_customer', id: 'mv-reg-form' %}
+      <input type="hidden" name="customer[tags]" value="affiliate">
+      <input type="hidden" name="return_to" value="/pages/affiliate-dashboard">
+
+      {% if form.errors %}
+        <div class="mv-reg-err">{{ form.errors | default_errors }}</div>
+      {% endif %}
+
+      <div class="mv-reg-row">
+        <div class="mv-reg-field">
+          <label class="mv-reg-label" for="RegFirstName">First name <span class="mv-reg-req">*</span></label>
+          <input class="mv-reg-input" type="text" id="RegFirstName" name="customer[first_name]" autocomplete="given-name" required>
+        </div>
+        <div class="mv-reg-field">
+          <label class="mv-reg-label" for="RegLastName">Last name <span class="mv-reg-req">*</span></label>
+          <input class="mv-reg-input" type="text" id="RegLastName" name="customer[last_name]" autocomplete="family-name" required>
+        </div>
+      </div>
+
+      <div class="mv-reg-row">
+        <div class="mv-reg-field">
+          <label class="mv-reg-label" for="RegEmail">Email <span class="mv-reg-req">*</span></label>
+          <input class="mv-reg-input" type="email" id="RegEmail" name="customer[email]" autocomplete="email" required>
+        </div>
+        <div class="mv-reg-field">
+          <label class="mv-reg-label" for="RegPhone">Phone <span class="mv-reg-req">*</span></label>
+          <input class="mv-reg-input" type="tel" id="RegPhone" name="customer[phone]" autocomplete="tel" required>
+        </div>
+      </div>
+
+      <div class="mv-reg-field mv-reg-full">
+        <label class="mv-reg-label" for="RegPassword">Password <span class="mv-reg-req">*</span></label>
+        <input class="mv-reg-input" type="password" id="RegPassword" name="customer[password]" autocomplete="new-password" required>
+      </div>
+
+      <div class="mv-reg-field mv-reg-full">
+        <label class="mv-reg-label" for="RegNickname">Nickname <span class="mv-reg-req">*</span></label>
+        <input class="mv-reg-input" type="text" id="RegNickname" autocomplete="off" required>
+      </div>
+
+      <div class="mv-reg-divider"></div>
+
+      <div class="mv-reg-row">
+        <div class="mv-reg-field">
+          <label class="mv-reg-label" for="RegCountry">Country <span class="mv-reg-req">*</span></label>
+          <select class="mv-reg-input mv-reg-select" id="RegCountry" required>
+            <option value="" disabled selected>Select country</option>
+            {{ country_option_tags }}
+          </select>
+        </div>
+        <div class="mv-reg-field">
+          <label class="mv-reg-label" for="RegState">State / Province <span class="mv-reg-req">*</span></label>
+          <input class="mv-reg-input" type="text" id="RegState" autocomplete="address-level1" required>
+        </div>
+      </div>
+
+      <div class="mv-reg-field mv-reg-full">
+        <label class="mv-reg-label" for="RegCity">City <span class="mv-reg-req">*</span></label>
+        <input class="mv-reg-input" type="text" id="RegCity" autocomplete="address-level2" required>
+      </div>
+
+      <div class="mv-reg-field mv-reg-full">
+        <label class="mv-reg-label" for="RegAddr1">Address line 1 <span class="mv-reg-req">*</span></label>
+        <input class="mv-reg-input" type="text" id="RegAddr1" autocomplete="address-line1" required>
+      </div>
+
+      <div class="mv-reg-field mv-reg-full">
+        <label class="mv-reg-label" for="RegAddr2">Address line 2 <span class="mv-reg-optional">(optional)</span></label>
+        <input class="mv-reg-input" type="text" id="RegAddr2" autocomplete="address-line2">
+      </div>
+
+      <div class="mv-reg-field mv-reg-full">
+        <label class="mv-reg-label" for="RegPostal">Postal code <span class="mv-reg-req">*</span></label>
+        <input class="mv-reg-input" type="text" id="RegPostal" autocomplete="postal-code" required>
+      </div>
+
+      <div class="mv-reg-divider"></div>
+
+      <div class="mv-reg-field mv-reg-full">
+        <label class="mv-reg-label" for="RegAge">Age <span class="mv-reg-req">*</span></label>
+        <input class="mv-reg-input" type="number" id="RegAge" min="13" max="120" autocomplete="off" required>
+      </div>
+
+      <input type="hidden" name="customer[note]" id="RegNote">
+
+      <div class="mv-reg-tos">
+        <input class="mv-reg-tos-check" type="checkbox" id="RegTos">
+        <label class="mv-reg-tos-label" for="RegTos">
+          By creating an account I agree to the
+          <a href="/pages/terms-of-service" target="_blank">Terms of service</a>
+          and
+          <a href="/pages/privacy-policy" target="_blank">Privacy policy</a>
+        </label>
+      </div>
+
+      <button class="mv-reg-btn" type="submit" id="RegSubmit" disabled>Create account</button>
+
+      <p class="mv-reg-login">Already have an account? <a href="/pages/affiliate">Sign in</a></p>
+
+    {% endform %}
+  </div>
+</div>
+
+<style>
+.mv-reg{
+  min-height:100svh; display:flex; justify-content:center;
+  padding:120px 24px 80px; box-sizing:border-box;
+}
+.mv-reg-inner{
+  width:100%; max-width:600px;
+  background:rgba(13,13,11,.85); border:1px solid rgba(236,233,226,.12);
+  border-radius:6px; padding:40px 36px;
+  align-self:flex-start;
+}
+.mv-reg-title{
+  font-family:'Abril Fatface',serif; font-weight:400; color:#ECE9E2;
+  font-size:clamp(26px,4vw,38px); line-height:1.06; margin:0 0 30px; text-align:center;
+}
+.mv-reg-row{
+  display:grid; grid-template-columns:1fr 1fr; gap:14px;
+}
+.mv-reg-field{ display:flex; flex-direction:column; margin-bottom:16px; }
+.mv-reg-full{ grid-column:1 / -1; }
+.mv-reg-label{
+  font-family:'Fira Sans Condensed',sans-serif; font-size:11px;
+  letter-spacing:.14em; text-transform:uppercase; color:#9b988f; margin-bottom:6px;
+}
+.mv-reg-optional{ text-transform:none; letter-spacing:0; color:#56544d; font-size:11px; }
+.mv-reg-req{ color:#ffb800; font-size:12px; }
+.mv-reg-input{
+  width:100%; box-sizing:border-box;
+  background:#0f0f0d; border:1px solid #3a392f; border-radius:6px;
+  padding:12px 14px; color:#ECE9E2;
+  font-family:'Fira Sans Condensed',sans-serif; font-size:15px;
+}
+.mv-reg-input::placeholder{ color:#6f6c64; }
+.mv-reg-input:focus{ outline:none; border-color:#ECE9E2; }
+.mv-reg-select{
+  appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236f6c64' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 14px center; padding-right:36px;
+}
+.mv-reg-divider{ height:1px; background:rgba(236,233,226,.1); margin:8px 0 22px; }
+.mv-reg-err{
+  background:rgba(217,138,138,.1); border:1px solid rgba(217,138,138,.3);
+  border-radius:6px; padding:12px 16px; margin:0 0 20px;
+  font-family:'Fira Sans Condensed',sans-serif; color:#d98a8a; font-size:13px; line-height:1.5;
+}
+.mv-reg-tos{
+  display:flex; align-items:flex-start; gap:12px; margin:20px 0 18px;
+}
+.mv-reg-tos-check{
+  flex:none; width:16px; height:16px; margin-top:2px; accent-color:#ECE9E2; cursor:pointer;
+}
+.mv-reg-tos-label{
+  font-family:'Fira Sans Condensed',sans-serif; color:#9b988f; font-size:13px; line-height:1.55; cursor:pointer;
+}
+.mv-reg-tos-label a{ color:#ECE9E2; text-decoration:underline; }
+.mv-reg-tos-label a:hover{ color:#ffb800; }
+.mv-reg-btn{
+  width:100%; background:#ECE9E2; color:#0d0d0b; border:none; border-radius:6px;
+  padding:15px; font-family:'Fira Sans Condensed',sans-serif; font-weight:700;
+  font-size:14px; letter-spacing:.08em; text-transform:uppercase; cursor:pointer;
+  transition:background .2s, opacity .2s;
+}
+.mv-reg-btn:disabled{ opacity:.4; cursor:not-allowed; }
+.mv-reg-btn:not(:disabled):hover{ background:#fff; }
+.mv-reg-login{
+  text-align:center; margin-top:18px;
+  font-family:'Fira Sans Condensed',sans-serif; color:#9b988f; font-size:13px;
+}
+.mv-reg-login a{ color:#ECE9E2; text-decoration:underline; }
+.mv-reg-login a:hover{ color:#ffb800; }
+@media(max-width:560px){
+  .mv-reg-inner{ padding:28px 18px; }
+  .mv-reg-row{ grid-template-columns:1fr; }
+}
+</style>
+
+<script>
+(function(){
+  var tos = document.getElementById('RegTos');
+  var btn = document.getElementById('RegSubmit');
+  var form = document.getElementById('mv-reg-form');
+
+  if(tos && btn){
+    tos.addEventListener('change', function(){
+      btn.disabled = !tos.checked;
+    });
+  }
+
+  if(form){
+    form.addEventListener('submit', function(){
+      sessionStorage.setItem('mv_aff_redirect','1');
+      var note = [
+        'Nickname: ' + (document.getElementById('RegNickname').value || ''),
+        'Age: ' + (document.getElementById('RegAge').value || ''),
+        'Address: ' + (document.getElementById('RegAddr1').value || ''),
+        'Address 2: ' + (document.getElementById('RegAddr2').value || ''),
+        'City: ' + (document.getElementById('RegCity').value || ''),
+        'State/Province: ' + (document.getElementById('RegState').value || ''),
+        'Country: ' + (function(){ var s = document.getElementById('RegCountry'); return s.options[s.selectedIndex] ? s.options[s.selectedIndex].text : ''; })(),
+        'Postal: ' + (document.getElementById('RegPostal').value || '')
+      ].join(' | ');
+      document.getElementById('RegNote').value = note;
+    });
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Affiliate register",
+  "presets": [{ "name": "Affiliate register" }]
+}
+{% endschema %}

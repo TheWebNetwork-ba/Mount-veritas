@@ -1,0 +1,53 @@
+<section class="faq" id="faq" aria-label="FAQ">
+  <div class="faq-wrap">
+    {% if section.settings.faq_title != blank %}
+      <h2 class="faq-title">{{ section.settings.faq_title | escape }}</h2>
+    {% endif %}
+
+    <div class="faq-list">
+      {% for block in section.blocks %}
+        {% if block.type == 'faq_item' %}
+          <div class="faq-item" {{ block.shopify_attributes }}>
+            <button class="faq-q" type="button" aria-expanded="false">
+              <span>{{ block.settings.question | escape }}</span>
+              <span class="faq-ic" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-a">
+              <div class="faq-a-inner">{{ block.settings.answer }}</div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MV FAQ",
+  "settings": [
+    { "type": "text", "id": "faq_title", "label": "Heading", "default": "Questions" }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "Your question here" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Your answer here.</p>" }
+      ]
+    }
+  ],
+  "max_blocks": 20,
+  "presets": [
+    {
+      "name": "MV FAQ",
+      "blocks": [
+        { "type": "faq_item" },
+        { "type": "faq_item" },
+        { "type": "faq_item" }
+      ]
+    }
+  ]
+}
+{% endschema %}
