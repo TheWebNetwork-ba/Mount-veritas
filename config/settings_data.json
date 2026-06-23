@@ -9,8 +9,8 @@
  */
 {
   "current": {
-    "cart_ea_product": "dasfads",
-    "cart_pp_product": "fdgssa",
+    "cart_ea_product": "",
+    "cart_pp_product": "",
     "sections": {
       "mv-affiliate": {
         "type": "mv-affiliate",
