@@ -1,5 +1,21 @@
 {% unless customer %}
-  <script>window.location.replace('/account/login');</script>
+<div class="mva-gate">
+  <div class="mva-gate-box">
+    <p class="mva-gate-eyebrow">Mount Veritas</p>
+    <h1 class="mva-gate-title">Your account</h1>
+    <p class="mva-gate-sub">Sign in to view your orders, address, and account details.</p>
+    <a class="mva-gate-btn" href="{{ routes.account_url }}">Sign in</a>
+  </div>
+</div>
+<style>
+.mva-gate{ min-height:100svh; background:#0d0d0b; display:flex; align-items:center; justify-content:center; padding:24px; }
+.mva-gate-box{ width:100%; max-width:400px; background:#111110; border:1px solid rgba(236,233,226,.12); border-radius:6px; padding:40px 32px; text-align:center; }
+.mva-gate-eyebrow{ font-family:'Fira Sans Condensed',sans-serif; font-size:11px; letter-spacing:.4em; text-transform:uppercase; color:#ffb800; margin:0 0 16px; }
+.mva-gate-title{ font-family:'Abril Fatface',serif; font-weight:400; color:#ECE9E2; font-size:32px; margin:0 0 12px; }
+.mva-gate-sub{ font-family:'Fira Sans Condensed',sans-serif; color:#9b988f; font-size:15px; line-height:1.6; margin:0 0 28px; }
+.mva-gate-btn{ display:block; background:#ECE9E2; color:#0d0d0b; border-radius:6px; padding:14px; font-family:'Fira Sans Condensed',sans-serif; font-weight:700; font-size:14px; letter-spacing:.08em; text-transform:uppercase; text-decoration:none; transition:background .2s; }
+.mva-gate-btn:hover{ background:#fff; }
+</style>
 {% endunless %}
 
 {% if customer %}
