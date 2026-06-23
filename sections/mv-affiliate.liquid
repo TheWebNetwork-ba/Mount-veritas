@@ -1,10 +1,3 @@
-{% comment %} Auto-redirect if already signed in as affiliate {% endcomment %}
-{% if customer %}
-  {% if customer.tags contains 'affiliate' %}
-    <script>window.location.replace('/pages/affiliate-dashboard');</script>
-  {% endif %}
-{% endif %}
-
 <div class="mv-aff"{% if section.settings.background_image %} style="background-image:linear-gradient(rgba(13,13,11,.60),rgba(13,13,11,.72)),url({{ section.settings.background_image | image_url: width: 2200 }});background-size:cover;background-position:center;"{% endif %}>
   <div class="mv-aff-inner">
 
@@ -15,26 +8,9 @@
     </div>
 
     <div class="mv-aff-box">
-      <p class="mv-aff-box-head">Sign in to your account</p>
-
-      <div class="mv-aff-err" id="mv-aff-blocked" hidden>
-        This account isn't registered for the affiliate program.
-      </div>
-
-      {% form 'customer_login' %}
-        {% if form.errors %}
-          <p class="mv-aff-err">Incorrect email or password &mdash; try again.</p>
-        {% endif %}
-        <input type="hidden" name="return_to" value="/pages/affiliate-gate">
-        <input class="mv-aff-input" type="email" name="customer[email]" placeholder="Email" autocomplete="email" required>
-        <input class="mv-aff-input" type="password" name="customer[password]" placeholder="Password" autocomplete="current-password" required>
-        <button class="mv-aff-btn" type="submit">Sign in</button>
-      {% endform %}
-
+      <a class="mv-aff-btn-primary" href="https://Mountveritas.bixgrow.com/login">Sign in</a>
       <div class="mv-aff-divider"><span>or</span></div>
-      <p class="mv-aff-register">
-        Don't have an account? <a href="/pages/affiliate-register">Create one &rarr;</a>
-      </p>
+      <a class="mv-aff-btn-secondary" href="https://Mountveritas.bixgrow.com/register">Join the program &rarr;</a>
     </div>
 
   </div>
@@ -51,81 +27,48 @@
 }
 .mv-aff-top{ text-align:center; }
 .mv-aff-eyebrow{
-  font-family:'Fira Sans Condensed',sans-serif; font-size:11px;
+  font-family:"Fira Sans Condensed",sans-serif; font-size:11px;
   letter-spacing:.45em; text-transform:uppercase; color:#ffb800; margin:0 0 12px;
 }
 .mv-aff-title{
-  font-family:'Abril Fatface',serif; font-weight:400; color:#ECE9E2;
+  font-family:"Abril Fatface",serif; font-weight:400; color:#ECE9E2;
   font-size:clamp(32px,6vw,52px); line-height:1.04; margin:0 0 14px;
 }
 .mv-aff-sub{
-  font-family:'Fira Sans Condensed',sans-serif; color:#9b988f;
+  font-family:"Fira Sans Condensed",sans-serif; color:#9b988f;
   font-size:15px; line-height:1.6; margin:0;
 }
 .mv-aff-box{
   background:rgba(13,13,11,.85); border:1px solid rgba(236,233,226,.12);
-  border-radius:6px; padding:32px 28px;
+  border-radius:6px; padding:32px 28px; display:flex; flex-direction:column; gap:0;
 }
-.mv-aff-box-head{
-  font-family:'Fira Sans Condensed',sans-serif; font-weight:700;
-  font-size:17px; letter-spacing:.03em; color:#ECE9E2; margin:0 0 22px; text-align:center;
+.mv-aff-btn-primary{
+  display:block; width:100%; box-sizing:border-box; text-align:center;
+  background:#ECE9E2; color:#0d0d0b; border-radius:6px;
+  padding:15px; font-family:"Fira Sans Condensed",sans-serif; font-weight:700;
+  font-size:14px; letter-spacing:.08em; text-transform:uppercase;
+  text-decoration:none; transition:background .2s;
 }
-.mv-aff-input{
-  width:100%; box-sizing:border-box;
-  background:#0f0f0d; border:1px solid #3a392f; border-radius:6px;
-  padding:13px 15px; color:#ECE9E2;
-  font-family:'Fira Sans Condensed',sans-serif; font-size:15px; margin-bottom:10px;
+.mv-aff-btn-primary:hover{ background:#fff; }
+.mv-aff-btn-secondary{
+  display:block; width:100%; box-sizing:border-box; text-align:center;
+  background:transparent; color:#ECE9E2; border:1px solid rgba(236,233,226,.25);
+  border-radius:6px; padding:15px; font-family:"Fira Sans Condensed",sans-serif;
+  font-weight:600; font-size:14px; letter-spacing:.04em;
+  text-decoration:none; transition:border-color .2s, color .2s;
 }
-.mv-aff-input::placeholder{ color:#6f6c64; }
-.mv-aff-input:focus{ outline:none; border-color:#ECE9E2; }
-.mv-aff-btn{
-  width:100%; background:#ECE9E2; color:#0d0d0b; border:none; border-radius:6px;
-  padding:14px; font-family:'Fira Sans Condensed',sans-serif; font-weight:700;
-  font-size:14px; letter-spacing:.08em; text-transform:uppercase; cursor:pointer;
-  margin-top:4px; transition:background .2s;
-}
-.mv-aff-btn:hover{ background:#fff; }
-.mv-aff-err{
-  font-family:'Fira Sans Condensed',sans-serif; color:#d98a8a; font-size:13px;
-  text-align:center; margin:0 0 16px; line-height:1.5;
-  background:rgba(217,138,138,.08); border:1px solid rgba(217,138,138,.25);
-  border-radius:6px; padding:10px 14px;
-}
+.mv-aff-btn-secondary:hover{ border-color:#ECE9E2; color:#fff; }
 .mv-aff-divider{
   display:flex; align-items:center; gap:12px;
-  margin:22px 0 18px; color:#56544d;
-  font-family:'Fira Sans Condensed',sans-serif; font-size:12px; letter-spacing:.1em; text-transform:uppercase;
+  margin:20px 0; color:#56544d;
+  font-family:"Fira Sans Condensed",sans-serif; font-size:12px;
+  letter-spacing:.1em; text-transform:uppercase;
 }
 .mv-aff-divider::before,.mv-aff-divider::after{
-  content:''; flex:1; height:1px; background:rgba(236,233,226,.1);
+  content:""; flex:1; height:1px; background:rgba(236,233,226,.1);
 }
-.mv-aff-register{
-  text-align:center; font-family:'Fira Sans Condensed',sans-serif;
-  color:#9b988f; font-size:14px; margin:0;
-}
-.mv-aff-register a{ color:#ECE9E2; text-decoration:underline; }
-.mv-aff-register a:hover{ color:#ffb800; }
 @media(max-width:480px){ .mv-aff-box{ padding:26px 18px; } }
 </style>
-
-<script>
-(function(){
-  // Set redirect flag before sign-in submits so theme.liquid picks it up on next load
-  var loginForm = document.querySelector('form[action="/account/login"]');
-  if(loginForm){
-    loginForm.addEventListener('submit', function(){
-      sessionStorage.setItem('mv_aff_redirect','1');
-    });
-  }
-
-  // Show block error if redirected back from gate after tag check failed
-  if(sessionStorage.getItem('mv_aff_blocked')){
-    sessionStorage.removeItem('mv_aff_blocked');
-    var el = document.getElementById('mv-aff-blocked');
-    if(el) el.hidden = false;
-  }
-})();
-</script>
 
 {% schema %}
 {
