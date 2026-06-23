@@ -9,6 +9,8 @@
  */
 {
   "current": {
+    "cart_ea_product": "ewqwerq",
+    "cart_pp_product": "ewqwerq",
     "sections": {
       "mv-affiliate": {
         "type": "mv-affiliate",
