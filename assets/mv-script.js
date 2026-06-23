@@ -87,7 +87,6 @@
 
 /* ===== SIDE CART (drawer) ===== */
 (function(){
-  console.log('[MV CART CONFIG]', JSON.stringify(window.MV_CART));
   var drawer  = document.getElementById('cartDrawer');
   var overlay = document.getElementById('cartOverlay');
   var toggle  = document.getElementById('cartToggle');
@@ -137,43 +136,13 @@
   }
 
   function renderUpsells(cart){
-    var el = document.getElementById('cartUpsells');
-    if (!el) return;
-    var cfg = window.MV_CART || {};
     var ids = (cart.items || []).map(function(i){ return i.product_id; });
-    var html = '';
-
-    if (cfg.ea && cfg.ea.variantId && ids.indexOf(cfg.ea.productId) === -1){
-      var img = cfg.ea.image
-        ? '<img src="'+cfg.ea.image+'" alt="" loading="lazy">'
-        : '<div class="cu-img-empty"></div>';
-      html +=
-        '<div class="cu-upsell">'+
-          '<div class="cu-img">'+img+'</div>'+
-          '<div class="cu-info">'+
-            '<p class="cu-label">'+(cfg.ea.label||'Add on')+'</p>'+
-            '<p class="cu-name">'+cfg.ea.title+'</p>'+
-            '<p class="cu-price">'+money(cfg.ea.price)+'</p>'+
-          '</div>'+
-          '<button class="cu-btn" type="button" data-vid="'+cfg.ea.variantId+'" onclick="mvCuAdd(this)">Add</button>'+
-        '</div>';
-    }
-
-    if (cfg.pp && cfg.pp.variantId && ids.indexOf(cfg.pp.productId) === -1){
-      html +=
-        '<div class="cu-protection">'+
-          '<div class="cu-pp-left">'+
-            '<div class="cu-pp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l7 4v6c0 4.4-3 8.3-7 9.3C8 21.3 5 17.4 5 13V6l7-4z"/></svg></div>'+
-            '<div>'+
-              '<p class="cu-pp-name">'+cfg.pp.title+'</p>'+
-              '<p class="cu-pp-price">'+money(cfg.pp.price)+'</p>'+
-            '</div>'+
-          '</div>'+
-          '<button class="cu-pp-btn" type="button" data-vid="'+cfg.pp.variantId+'" onclick="mvCuAdd(this)">+ Add</button>'+
-        '</div>';
-    }
-
-    el.innerHTML = html;
+    ['cuEa','cuPp'].forEach(function(id){
+      var el = document.getElementById(id);
+      if (!el) return;
+      var pid = parseInt(el.getAttribute('data-pid'), 10);
+      el.style.display = (pid && ids.indexOf(pid) === -1) ? '' : 'none';
+    });
   }
 
   function fetchCart(cb){
@@ -218,6 +187,8 @@
       .catch(function(){});
   });
 
+  window._mvRender = render;
+  window._mvUpsells = renderUpsells;
   fetchCart();
 })();
 
@@ -433,6 +404,7 @@
 function mvCuAdd(btn){
   var id = btn.getAttribute('data-vid');
   btn.disabled = true;
+  var orig = btn.textContent;
   btn.textContent = '...';
   fetch('/cart/add.js', {
     method:'POST',
@@ -441,9 +413,14 @@ function mvCuAdd(btn){
   })
   .then(function(r){ return r.json(); })
   .then(function(){
-    var drawer = document.getElementById('cartDrawer');
-    var fetchCartFn = window._mvFetchCart;
-    if (fetchCartFn) fetchCartFn();
+    fetch('/cart.js',{headers:{'Accept':'application/json'}})
+      .then(function(r){ return r.json(); })
+      .then(function(c){
+        var renderFn = window._mvRender;
+        var upsellFn = window._mvUpsells;
+        if(renderFn) renderFn(c);
+        if(upsellFn) upsellFn(c);
+      });
   })
-  .catch(function(){ btn.disabled=false; btn.textContent='Add'; });
+  .catch(function(){ btn.disabled=false; btn.textContent=orig; });
 }
