@@ -14,11 +14,16 @@
   {{ content_for_header }}
 </head>
 <body>
-  {% comment %}— Affiliate redirect: new reg → BixGrow, sign-in → dashboard —{% endcomment %}
+  {% comment %}— Redirect handlers: account register → my-account, affiliate flows → portal —{% endcomment %}
   {% if customer %}
   <script>
     (function(){
-      if(sessionStorage.getItem('mv_aff_new_reg')){
+      if(sessionStorage.getItem('mv_acct_redirect')){
+        sessionStorage.removeItem('mv_acct_redirect');
+        if(window.location.pathname !== '/pages/my-account'){
+          window.location.replace('/pages/my-account');
+        }
+      } else if(sessionStorage.getItem('mv_aff_new_reg')){
         sessionStorage.removeItem('mv_aff_new_reg');
         window.location.replace('https://Mountveritas.bixgrow.com/register');
       } else if(sessionStorage.getItem('mv_aff_redirect')){
