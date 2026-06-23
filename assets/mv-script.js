@@ -135,10 +135,50 @@
     itemsEl.innerHTML = html;
   }
 
+  function renderUpsells(cart){
+    var el = document.getElementById('cartUpsells');
+    if (!el) return;
+    var cfg = window.MV_CART || {};
+    var ids = (cart.items || []).map(function(i){ return i.product_id; });
+    var html = '';
+
+    if (cfg.ea && cfg.ea.variantId && ids.indexOf(cfg.ea.productId) === -1){
+      var img = cfg.ea.image
+        ? '<img src="'+cfg.ea.image+'" alt="" loading="lazy">'
+        : '<div class="cu-img-empty"></div>';
+      html +=
+        '<div class="cu-upsell">'+
+          '<div class="cu-img">'+img+'</div>'+
+          '<div class="cu-info">'+
+            '<p class="cu-label">'+(cfg.ea.label||'Add on')+'</p>'+
+            '<p class="cu-name">'+cfg.ea.title+'</p>'+
+            '<p class="cu-price">'+money(cfg.ea.price)+'</p>'+
+          '</div>'+
+          '<button class="cu-btn" type="button" data-vid="'+cfg.ea.variantId+'" onclick="mvCuAdd(this)">Add</button>'+
+        '</div>';
+    }
+
+    if (cfg.pp && cfg.pp.variantId && ids.indexOf(cfg.pp.productId) === -1){
+      html +=
+        '<div class="cu-protection">'+
+          '<div class="cu-pp-left">'+
+            '<div class="cu-pp-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l7 4v6c0 4.4-3 8.3-7 9.3C8 21.3 5 17.4 5 13V6l7-4z"/></svg></div>'+
+            '<div>'+
+              '<p class="cu-pp-name">'+cfg.pp.title+'</p>'+
+              '<p class="cu-pp-price">'+money(cfg.pp.price)+'</p>'+
+            '</div>'+
+          '</div>'+
+          '<button class="cu-pp-btn" type="button" data-vid="'+cfg.pp.variantId+'" onclick="mvCuAdd(this)">+ Add</button>'+
+        '</div>';
+    }
+
+    el.innerHTML = html;
+  }
+
   function fetchCart(cb){
     fetch('/cart.js', { headers:{ 'Accept':'application/json' } })
       .then(function(r){ return r.json(); })
-      .then(function(c){ render(c); if (cb) cb(c); })
+      .then(function(c){ render(c); renderUpsells(c); if (cb) cb(c); })
       .catch(function(){});
   }
 
@@ -147,7 +187,7 @@
       method:'POST',
       headers:{ 'Content-Type':'application/json', 'Accept':'application/json' },
       body: JSON.stringify({ line:line, quantity:qty })
-    }).then(function(r){ return r.json(); }).then(render).catch(function(){});
+    }).then(function(r){ return r.json(); }).then(function(c){ render(c); renderUpsells(c); }).catch(function(){});
   }
 
   if (toggle) toggle.addEventListener('click', function(e){ e.preventDefault(); openCart(); });
@@ -387,3 +427,22 @@
       .catch(function(){ results.innerHTML = '<p class="search-empty">Search is unavailable right now.</p>'; });
   }
 })();
+
+/* ===== CART UPSELL — add product from drawer ===== */
+function mvCuAdd(btn){
+  var id = btn.getAttribute('data-vid');
+  btn.disabled = true;
+  btn.textContent = '...';
+  fetch('/cart/add.js', {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ id: parseInt(id,10), quantity: 1 })
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(){
+    var drawer = document.getElementById('cartDrawer');
+    var fetchCartFn = window._mvFetchCart;
+    if (fetchCartFn) fetchCartFn();
+  })
+  .catch(function(){ btn.disabled=false; btn.textContent='Add'; });
+}
