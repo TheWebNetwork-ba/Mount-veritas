@@ -45,5 +45,28 @@
         "info": "Paste the affiliate page address (e.g. /pages/affiliate)."
       }
     ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "product",
+        "id": "cart_ea_product",
+        "label": "Early access upsell \u2014 product",
+        "info": "Shown above package protection in the cart drawer. Leave empty to hide."
+      },
+      {
+        "type": "text",
+        "id": "cart_ea_label",
+        "label": "Early access upsell \u2014 eyebrow label",
+        "default": "Exclusive add-on"
+      },
+      {
+        "type": "product",
+        "id": "cart_pp_product",
+        "label": "Package protection \u2014 product",
+        "info": "Shown as compact row above subtotal. Leave empty to hide."
+      }
+    ]
   }
 ]
