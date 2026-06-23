@@ -196,7 +196,7 @@
 
   if(form){
     form.addEventListener('submit', function(){
-      sessionStorage.setItem('mv_aff_redirect','1');
+      sessionStorage.setItem('mv_aff_new_reg','1');
       var note = [
         'Nickname: ' + (document.getElementById('RegNickname').value || ''),
         'Age: ' + (document.getElementById('RegAge').value || ''),
@@ -219,3 +219,4 @@
   "presets": [{ "name": "Affiliate register" }]
 }
 {% endschema %}
+
