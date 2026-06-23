@@ -122,7 +122,50 @@
       <button class="cart-close" id="cartClose" type="button" aria-label="Close cart">&times;</button>
     </div>
     <div class="cart-items" id="cartItems"></div>
-    <div id="cartUpsells"></div>
+
+    {%- comment -%}── EARLY ACCESS UPSELL (Liquid rendered, shown/hidden by JS){%- endcomment -%}
+    {%- if settings.cart_ea_product != blank -%}
+      <div class="cu-upsell" id="cuEa"
+        data-pid="{{ settings.cart_ea_product.id }}"
+        data-vid="{{ settings.cart_ea_product.selected_or_first_available_variant.id }}"
+        style="display:none;">
+        {%- if settings.cart_ea_product.featured_image -%}
+          <div class="cu-img"><img src="{{ settings.cart_ea_product.featured_image | image_url: width: 120 }}" alt="{{ settings.cart_ea_product.title | escape }}" loading="lazy"></div>
+        {%- else -%}
+          <div class="cu-img cu-img--empty"></div>
+        {%- endif -%}
+        <div class="cu-info">
+          <p class="cu-label">{{ settings.cart_ea_label | default: 'Exclusive add-on' }}</p>
+          <p class="cu-name">{{ settings.cart_ea_product.title }}</p>
+          <p class="cu-price">{{ settings.cart_ea_product.selected_or_first_available_variant.price | money }}</p>
+        </div>
+        <button class="cu-btn" type="button"
+          data-vid="{{ settings.cart_ea_product.selected_or_first_available_variant.id }}"
+          onclick="mvCuAdd(this)">Add</button>
+      </div>
+    {%- endif -%}
+
+    {%- comment -%}── PACKAGE PROTECTION (Liquid rendered){%- endcomment -%}
+    {%- if settings.cart_pp_product != blank -%}
+      <div class="cu-protection" id="cuPp"
+        data-pid="{{ settings.cart_pp_product.id }}"
+        data-vid="{{ settings.cart_pp_product.selected_or_first_available_variant.id }}"
+        style="display:none;">
+        <div class="cu-pp-left">
+          <div class="cu-pp-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l7 4v6c0 4.4-3 8.3-7 9.3C8 21.3 5 17.4 5 13V6l7-4z"/></svg>
+          </div>
+          <div>
+            <p class="cu-pp-name">{{ settings.cart_pp_product.title }}</p>
+            <p class="cu-pp-price">{{ settings.cart_pp_product.selected_or_first_available_variant.price | money }}</p>
+          </div>
+        </div>
+        <button class="cu-pp-btn" type="button"
+          data-vid="{{ settings.cart_pp_product.selected_or_first_available_variant.id }}"
+          onclick="mvCuAdd(this)">+ Add</button>
+      </div>
+    {%- endif -%}
+
     <div class="cart-foot">
       <div class="cart-subtotal-row"><span>Subtotal</span><span id="cartSubtotal">$0.00</span></div>
       <a class="cart-checkout" href="/checkout">Checkout</a>
@@ -134,25 +177,6 @@
       </div>
     </div>
   </aside>
-
-  <script>
-  window.MV_CART = {
-    ea: {
-      variantId: {{ settings.cart_ea_product.selected_or_first_available_variant.id | default: 0 }},
-      productId: {{ settings.cart_ea_product.id | default: 0 }},
-      title: {{ settings.cart_ea_product.title | default: "" | json }},
-      price: {{ settings.cart_ea_product.selected_or_first_available_variant.price | default: 0 }},
-      image: {{ settings.cart_ea_product.featured_image | image_url: width: 120 | default: "" | json }},
-      label: {{ settings.cart_ea_label | default: "Exclusive add-on" | json }}
-    },
-    pp: {
-      variantId: {{ settings.cart_pp_product.selected_or_first_available_variant.id | default: 0 }},
-      productId: {{ settings.cart_pp_product.id | default: 0 }},
-      title: {{ settings.cart_pp_product.title | default: "" | json }},
-      price: {{ settings.cart_pp_product.selected_or_first_available_variant.price | default: 0 }}
-    }
-  };
-  </script>
 
   <div class="search-overlay" id="searchOverlay" aria-hidden="true">
     <button class="search-close" id="searchClose" type="button" aria-label="Close search">&times;</button>
