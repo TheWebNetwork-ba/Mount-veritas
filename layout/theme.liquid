@@ -12,6 +12,34 @@
   <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Fira+Sans+Condensed:wght@400;500;700;900&display=swap" rel="stylesheet">
   {{ 'mv-styles.css' | asset_url | stylesheet_tag }}
   {{ content_for_header }}
+
+  <style>
+  /* Cart upsells */
+  #cartUpsells{ padding:0 16px; display:flex; flex-direction:column; gap:8px; }
+  .cu-upsell{ display:flex; align-items:center; gap:12px; padding:12px; background:#111110; border:1px solid rgba(236,233,226,.1); border-radius:6px; }
+  .cu-img{ width:48px; height:60px; background:#1c1c19; border-radius:4px; overflow:hidden; flex:none; }
+  .cu-img img{ width:100%; height:100%; object-fit:cover; }
+  .cu-img-empty{ width:100%; height:100%; }
+  .cu-info{ flex:1; min-width:0; }
+  .cu-label{ font-family:'Fira Sans Condensed',sans-serif; font-size:9px; letter-spacing:.18em; text-transform:uppercase; color:#ffb800; margin:0 0 2px; }
+  .cu-name{ font-family:'Fira Sans Condensed',sans-serif; font-size:13px; color:#ECE9E2; margin:0 0 2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .cu-price{ font-family:'Fira Sans Condensed',sans-serif; font-size:12px; color:#9b988f; margin:0; }
+  .cu-btn{ flex:none; background:#ECE9E2; color:#0d0d0b; border:none; border-radius:6px; padding:8px 14px; font-family:'Fira Sans Condensed',sans-serif; font-weight:700; font-size:11px; letter-spacing:.08em; text-transform:uppercase; cursor:pointer; white-space:nowrap; }
+  .cu-btn:hover{ background:#fff; }
+  .cu-btn:disabled{ opacity:.5; cursor:not-allowed; }
+  .cu-protection{ display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 12px; background:rgba(111,191,142,.06); border:1px solid rgba(111,191,142,.18); border-radius:6px; }
+  .cu-pp-left{ display:flex; align-items:center; gap:8px; }
+  .cu-pp-icon{ width:22px; height:22px; color:#8fd3a8; flex:none; }
+  .cu-pp-icon svg{ width:100%; height:100%; }
+  .cu-pp-name{ font-family:'Fira Sans Condensed',sans-serif; font-size:12px; color:#ECE9E2; margin:0 0 1px; }
+  .cu-pp-price{ font-family:'Fira Sans Condensed',sans-serif; font-size:11px; color:#9b988f; margin:0; }
+  .cu-pp-btn{ flex:none; background:transparent; color:#8fd3a8; border:1px solid rgba(143,211,168,.3); border-radius:6px; padding:6px 12px; font-family:'Fira Sans Condensed',sans-serif; font-weight:700; font-size:11px; letter-spacing:.06em; text-transform:uppercase; cursor:pointer; white-space:nowrap; }
+  .cu-pp-btn:hover{ background:rgba(143,211,168,.1); }
+  .cu-pp-btn:disabled{ opacity:.5; cursor:not-allowed; }
+  /* Payment icons */
+  .cart-payments{ display:flex; flex-wrap:wrap; justify-content:center; gap:5px; margin-top:10px; }
+  .cart-payment-icon{ height:22px; width:auto; border-radius:3px; opacity:.65; }
+  </style>
 </head>
 <body>
   {% comment %}— Redirect handlers: account register → my-account, affiliate flows → portal —{% endcomment %}
@@ -94,12 +122,37 @@
       <button class="cart-close" id="cartClose" type="button" aria-label="Close cart">&times;</button>
     </div>
     <div class="cart-items" id="cartItems"></div>
+    <div id="cartUpsells"></div>
     <div class="cart-foot">
       <div class="cart-subtotal-row"><span>Subtotal</span><span id="cartSubtotal">$0.00</span></div>
       <a class="cart-checkout" href="/checkout">Checkout</a>
-      <p class="cart-note">Shipping &amp; taxes calculated at checkout.</p>
+      <div class="cart-payments">
+        {%- assign payment_types = "shopify_pay,visa,master,american_express,diners_club,discover,apple_pay,google_pay" | split: "," -%}
+        {%- for type in payment_types -%}
+          <img class="cart-payment-icon" src="{{ type | payment_type_img_url: 'small' }}" alt="{{ type | replace: '_', ' ' }}" width="38" height="24" loading="lazy">
+        {%- endfor -%}
+      </div>
     </div>
   </aside>
+
+  <script>
+  window.MV_CART = {
+    ea: {
+      variantId: {{ settings.cart_ea_product.variants.first.id | default: 0 }},
+      productId: {{ settings.cart_ea_product.id | default: 0 }},
+      title: {{ settings.cart_ea_product.title | default: "" | json }},
+      price: {{ settings.cart_ea_product.price | default: 0 }},
+      image: {{ settings.cart_ea_product.featured_image | image_url: width: 120 | default: "" | json }},
+      label: {{ settings.cart_ea_label | default: "Exclusive add-on" | json }}
+    },
+    pp: {
+      variantId: {{ settings.cart_pp_product.variants.first.id | default: 0 }},
+      productId: {{ settings.cart_pp_product.id | default: 0 }},
+      title: {{ settings.cart_pp_product.title | default: "" | json }},
+      price: {{ settings.cart_pp_product.price | default: 0 }}
+    }
+  };
+  </script>
 
   <div class="search-overlay" id="searchOverlay" aria-hidden="true">
     <button class="search-close" id="searchClose" type="button" aria-label="Close search">&times;</button>
