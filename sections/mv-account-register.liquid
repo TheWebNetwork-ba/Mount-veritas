@@ -1,0 +1,75 @@
+<div class="mv-ar">
+  <div class="mv-ar-box">
+    <p class="mv-ar-eyebrow">Mount Veritas</p>
+    <h1 class="mv-ar-title">Create an account</h1>
+
+    {% form 'create_customer', id: 'mv-ar-form' %}
+      {% if form.errors %}
+        <div class="mv-ar-err">{{ form.errors | default_errors }}</div>
+      {% endif %}
+      <input type="hidden" name="return_to" value="/pages/my-account">
+
+      <div class="mv-ar-row">
+        <div class="mv-ar-field">
+          <label class="mv-ar-label" for="ArFirst">First name</label>
+          <input class="mv-ar-input" type="text" name="customer[first_name]" id="ArFirst" autocomplete="given-name" required>
+        </div>
+        <div class="mv-ar-field">
+          <label class="mv-ar-label" for="ArLast">Last name</label>
+          <input class="mv-ar-input" type="text" name="customer[last_name]" id="ArLast" autocomplete="family-name" required>
+        </div>
+      </div>
+
+      <div class="mv-ar-field">
+        <label class="mv-ar-label" for="ArEmail">Email</label>
+        <input class="mv-ar-input" type="email" name="customer[email]" id="ArEmail" autocomplete="email" required>
+      </div>
+
+      <div class="mv-ar-field">
+        <label class="mv-ar-label" for="ArPassword">Password</label>
+        <input class="mv-ar-input" type="password" name="customer[password]" id="ArPassword" autocomplete="new-password" required>
+      </div>
+
+      <button class="mv-ar-btn" type="submit" id="ArSubmit">Create account</button>
+    {% endform %}
+
+    <div class="mv-ar-links">
+      <a href="/pages/account-login">Already have an account? Sign in</a>
+    </div>
+  </div>
+</div>
+
+<style>
+.mv-ar{ min-height:100svh; background:#0d0d0b; display:flex; align-items:center; justify-content:center; padding:24px; box-sizing:border-box; }
+.mv-ar-box{ width:100%; max-width:460px; background:#111110; border:1px solid rgba(236,233,226,.12); border-radius:6px; padding:40px 32px; }
+.mv-ar-eyebrow{ font-family:'Fira Sans Condensed',sans-serif; font-size:11px; letter-spacing:.4em; text-transform:uppercase; color:#ffb800; margin:0 0 12px; text-align:center; }
+.mv-ar-title{ font-family:'Abril Fatface',serif; font-weight:400; color:#ECE9E2; font-size:32px; margin:0 0 28px; text-align:center; }
+.mv-ar-row{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.mv-ar-field{ display:flex; flex-direction:column; margin-bottom:16px; }
+.mv-ar-label{ font-family:'Fira Sans Condensed',sans-serif; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#9b988f; margin-bottom:6px; }
+.mv-ar-input{ width:100%; box-sizing:border-box; background:#0f0f0d; border:1px solid #3a392f; border-radius:6px; padding:13px 15px; color:#ECE9E2; font-family:'Fira Sans Condensed',sans-serif; font-size:15px; }
+.mv-ar-input::placeholder{ color:#6f6c64; }
+.mv-ar-input:focus{ outline:none; border-color:#ECE9E2; }
+.mv-ar-btn{ width:100%; background:#ECE9E2; color:#0d0d0b; border:none; border-radius:6px; padding:14px; font-family:'Fira Sans Condensed',sans-serif; font-weight:700; font-size:14px; letter-spacing:.08em; text-transform:uppercase; cursor:pointer; margin-top:4px; transition:background .2s; }
+.mv-ar-btn:hover{ background:#fff; }
+.mv-ar-err{ font-family:'Fira Sans Condensed',sans-serif; color:#d98a8a; font-size:13px; margin:0 0 16px; background:rgba(217,138,138,.08); border:1px solid rgba(217,138,138,.2); border-radius:6px; padding:12px; line-height:1.5; }
+.mv-ar-links{ text-align:center; margin-top:20px; }
+.mv-ar-links a{ font-family:'Fira Sans Condensed',sans-serif; color:#9b988f; font-size:13px; text-decoration:underline; }
+.mv-ar-links a:hover{ color:#ECE9E2; }
+@media(max-width:480px){ .mv-ar-row{ grid-template-columns:1fr; } }
+</style>
+
+<script>
+(function(){
+  var form = document.getElementById('mv-ar-form');
+  if(form){
+    form.addEventListener('submit', function(){
+      sessionStorage.setItem('mv_acct_redirect','1');
+    });
+  }
+})();
+</script>
+
+{% schema %}
+{ "name": "Account register", "presets": [{ "name": "Account register" }] }
+{% endschema %}
