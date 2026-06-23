@@ -1,13 +1,266 @@
-{% layout none %}
-<!doctype html>
-<html lang="{{ request.locale.iso_code }}">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex,nofollow">
-  <title>My Account &mdash; Mount Veritas</title>
-</head>
-<body style="margin:0;padding:0;background:#ffffff;min-height:100vh;">
-  {% comment %} ——— ACCOUNT PAGE — built out in next phase ——— {% endcomment %}
-</body>
-</html>
+{% unless customer %}
+  <script>window.location.replace('/account/login');</script>
+{% endunless %}
+
+{% if customer %}
+<div class="mva">
+
+  {%- comment -%} ── HEADER ── {%- endcomment -%}
+  <div class="mva-header">
+    <div class="mva-header-inner">
+      <div>
+        <p class="mva-eyebrow">Welcome back</p>
+        <h1 class="mva-name">{{ customer.first_name }} {{ customer.last_name }}</h1>
+        <p class="mva-since">Member since {{ customer.created_at | date: "%B %Y" }}</p>
+      </div>
+      <div class="mva-badges">
+        {% if customer.tags contains 'vip-elite' %}
+          <span class="mva-badge mva-badge--elite">Elite</span>
+        {% elsif customer.tags contains 'vip' %}
+          <span class="mva-badge mva-badge--vip">VIP</span>
+        {% endif %}
+        {% if customer.tags contains 'affiliate' %}
+          <span class="mva-badge mva-badge--affiliate">Affiliate</span>
+        {% endif %}
+        {% if customer.tags contains 'waitlist' %}
+          <span class="mva-badge mva-badge--waitlist">Early access</span>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="mva-stats">
+      <div class="mva-stat">
+        <span class="mva-stat-num">{{ customer.orders_count }}</span>
+        <span class="mva-stat-label">Orders</span>
+      </div>
+      <div class="mva-stat-div"></div>
+      <div class="mva-stat">
+        <span class="mva-stat-num">{{ customer.total_spent | money }}</span>
+        <span class="mva-stat-label">Total spent</span>
+      </div>
+      <div class="mva-stat-div"></div>
+      <div class="mva-stat">
+        <span class="mva-stat-num">{{ customer.created_at | date: "%Y" }}</span>
+        <span class="mva-stat-label">Year joined</span>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} ── BODY ── {%- endcomment -%}
+  <div class="mva-body">
+
+    {%- comment -%} ── ORDERS ── {%- endcomment -%}
+    <div class="mva-main">
+      <h2 class="mva-section-title">Order history</h2>
+
+      {% paginate customer.orders by 10 %}
+        {% if customer.orders.size > 0 %}
+          <div class="mva-orders">
+            {% for order in customer.orders %}
+              <div class="mva-order">
+                <div class="mva-order-top">
+                  <div class="mva-order-meta">
+                    <span class="mva-order-num">{{ order.name }}</span>
+                    <span class="mva-order-date">{{ order.created_at | date: "%b %d, %Y" }}</span>
+                  </div>
+                  <div class="mva-order-statuses">
+                    <span class="mva-status mva-status--{{ order.financial_status }}">
+                      {{ order.financial_status | capitalize }}
+                    </span>
+                    <span class="mva-status mva-status--{{ order.fulfillment_status | default: 'unfulfilled' }}">
+                      {{ order.fulfillment_status | default: 'Unfulfilled' | capitalize }}
+                    </span>
+                  </div>
+                </div>
+
+                <div class="mva-order-items">
+                  {% for item in order.line_items limit: 3 %}
+                    <div class="mva-order-item">
+                      {% if item.image %}
+                        <img class="mva-order-img" src="{{ item.image | image_url: width: 80 }}" alt="{{ item.title }}">
+                      {% else %}
+                        <div class="mva-order-img mva-order-img--empty"></div>
+                      {% endif %}
+                      <div class="mva-order-item-info">
+                        <p class="mva-order-item-name">{{ item.title }}</p>
+                        {% unless item.variant.title == 'Default Title' %}
+                          <p class="mva-order-item-variant">{{ item.variant.title }}</p>
+                        {% endunless %}
+                        <p class="mva-order-item-qty">Qty: {{ item.quantity }}</p>
+                      </div>
+                      <span class="mva-order-item-price">{{ item.final_line_price | money }}</span>
+                    </div>
+                  {% endfor %}
+                  {% if order.line_items.size > 3 %}
+                    <p class="mva-order-more">+ {{ order.line_items.size | minus: 3 }} more item{% if order.line_items.size > 4 %}s{% endif %}</p>
+                  {% endif %}
+                </div>
+
+                <div class="mva-order-footer">
+                  <span class="mva-order-total">{{ order.total_price | money }}</span>
+                  <a class="mva-order-link" href="{{ order.customer_url }}">View order &rarr;</a>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+
+          {% if paginate.pages > 1 %}
+            <div class="mva-paginate">
+              {{ paginate | default_pagination }}
+            </div>
+          {% endif %}
+
+        {% else %}
+          <div class="mva-empty">
+            <p class="mva-empty-text">No orders yet.</p>
+            <a class="mva-empty-cta" href="/">Start shopping</a>
+          </div>
+        {% endif %}
+      {% endpaginate %}
+    </div>
+
+    {%- comment -%} ── SIDEBAR ── {%- endcomment -%}
+    <div class="mva-sidebar">
+
+      {%- comment -%} Account info {%- endcomment -%}
+      <div class="mva-card">
+        <h3 class="mva-card-title">Account info</h3>
+        <div class="mva-card-row">
+          <span class="mva-card-label">Name</span>
+          <span class="mva-card-val">{{ customer.first_name }} {{ customer.last_name }}</span>
+        </div>
+        <div class="mva-card-row">
+          <span class="mva-card-label">Email</span>
+          <span class="mva-card-val">{{ customer.email }}</span>
+        </div>
+        {% if customer.phone %}
+          <div class="mva-card-row">
+            <span class="mva-card-label">Phone</span>
+            <span class="mva-card-val">{{ customer.phone }}</span>
+          </div>
+        {% endif %}
+      </div>
+
+      {%- comment -%} Default address {%- endcomment -%}
+      {% if customer.default_address %}
+        <div class="mva-card">
+          <h3 class="mva-card-title">Default address</h3>
+          <div class="mva-address">
+            <p>{{ customer.default_address.name }}</p>
+            {% if customer.default_address.company %}<p>{{ customer.default_address.company }}</p>{% endif %}
+            <p>{{ customer.default_address.address1 }}</p>
+            {% if customer.default_address.address2 %}<p>{{ customer.default_address.address2 }}</p>{% endif %}
+            <p>{{ customer.default_address.city }}{% if customer.default_address.province %}, {{ customer.default_address.province }}{% endif %} {{ customer.default_address.zip }}</p>
+            <p>{{ customer.default_address.country }}</p>
+          </div>
+          <a class="mva-card-action" href="{{ routes.account_addresses_url }}">Manage addresses</a>
+        </div>
+      {% endif %}
+
+      {%- comment -%} Quick links {%- endcomment -%}
+      <div class="mva-card">
+        <h3 class="mva-card-title">Quick links</h3>
+        {% if customer.tags contains 'affiliate' %}
+          <a class="mva-quick-link" href="/pages/affiliate">Affiliate portal &rarr;</a>
+        {% endif %}
+        <a class="mva-quick-link" href="{{ routes.account_addresses_url }}">Manage addresses &rarr;</a>
+        <a class="mva-quick-link" href="/account/logout">Sign out &rarr;</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<style>
+/* ── Base ── */
+.mva{ min-height:100svh; background:#0d0d0b; padding:100px 0 80px; box-sizing:border-box; }
+
+/* ── Header ── */
+.mva-header{ border-bottom:1px solid rgba(236,233,226,.1); padding:0 40px 32px; max-width:1200px; margin:0 auto 40px; }
+.mva-header-inner{ display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:28px; flex-wrap:wrap; gap:16px; }
+.mva-eyebrow{ font-family:'Fira Sans Condensed',sans-serif; font-size:11px; letter-spacing:.4em; text-transform:uppercase; color:#ffb800; margin:0 0 8px; }
+.mva-name{ font-family:'Abril Fatface',serif; font-weight:400; color:#ECE9E2; font-size:clamp(28px,4vw,48px); margin:0 0 6px; line-height:1.05; }
+.mva-since{ font-family:'Fira Sans Condensed',sans-serif; color:#9b988f; font-size:13px; margin:0; }
+.mva-badges{ display:flex; gap:8px; flex-wrap:wrap; align-items:flex-start; padding-top:4px; }
+.mva-badge{ font-family:'Fira Sans Condensed',sans-serif; font-size:10px; letter-spacing:.12em; text-transform:uppercase; padding:4px 10px; border-radius:4px; font-weight:700; }
+.mva-badge--elite{ background:#ffb800; color:#0d0d0b; }
+.mva-badge--vip{ background:rgba(255,184,0,.15); color:#ffb800; border:1px solid rgba(255,184,0,.3); }
+.mva-badge--affiliate{ background:rgba(236,233,226,.1); color:#ECE9E2; border:1px solid rgba(236,233,226,.2); }
+.mva-badge--waitlist{ background:rgba(143,211,168,.1); color:#8fd3a8; border:1px solid rgba(143,211,168,.25); }
+.mva-stats{ display:flex; align-items:center; gap:28px; }
+.mva-stat{ display:flex; flex-direction:column; gap:2px; }
+.mva-stat-num{ font-family:'Abril Fatface',serif; font-weight:400; color:#ECE9E2; font-size:22px; }
+.mva-stat-label{ font-family:'Fira Sans Condensed',sans-serif; color:#9b988f; font-size:11px; letter-spacing:.1em; text-transform:uppercase; }
+.mva-stat-div{ width:1px; height:32px; background:rgba(236,233,226,.12); }
+
+/* ── Body layout ── */
+.mva-body{ display:grid; grid-template-columns:1fr 320px; gap:24px; max-width:1200px; margin:0 auto; padding:0 40px; }
+.mva-section-title{ font-family:'Fira Sans Condensed',sans-serif; font-weight:700; font-size:13px; letter-spacing:.12em; text-transform:uppercase; color:#9b988f; margin:0 0 16px; }
+
+/* ── Orders ── */
+.mva-orders{ display:flex; flex-direction:column; gap:12px; }
+.mva-order{ background:#111110; border:1px solid rgba(236,233,226,.1); border-radius:6px; overflow:hidden; }
+.mva-order-top{ display:flex; justify-content:space-between; align-items:center; padding:16px 20px; border-bottom:1px solid rgba(236,233,226,.08); flex-wrap:wrap; gap:8px; }
+.mva-order-meta{ display:flex; align-items:center; gap:12px; }
+.mva-order-num{ font-family:'Fira Sans Condensed',sans-serif; font-weight:700; color:#ECE9E2; font-size:15px; }
+.mva-order-date{ font-family:'Fira Sans Condensed',sans-serif; color:#9b988f; font-size:13px; }
+.mva-order-statuses{ display:flex; gap:6px; }
+.mva-status{ font-family:'Fira Sans Condensed',sans-serif; font-size:11px; letter-spacing:.08em; text-transform:uppercase; padding:3px 8px; border-radius:4px; }
+.mva-status--paid{ background:rgba(143,211,168,.12); color:#8fd3a8; }
+.mva-status--pending{ background:rgba(255,184,0,.1); color:#ffb800; }
+.mva-status--refunded, .mva-status--voided{ background:rgba(217,138,138,.1); color:#d98a8a; }
+.mva-status--fulfilled{ background:rgba(143,211,168,.12); color:#8fd3a8; }
+.mva-status--unfulfilled{ background:rgba(155,152,143,.1); color:#9b988f; }
+.mva-status--partial{ background:rgba(255,184,0,.1); color:#ffb800; }
+.mva-order-items{ padding:16px 20px; display:flex; flex-direction:column; gap:12px; border-bottom:1px solid rgba(236,233,226,.08); }
+.mva-order-item{ display:flex; align-items:center; gap:12px; }
+.mva-order-img{ width:48px; height:48px; border-radius:4px; object-fit:cover; flex:none; }
+.mva-order-img--empty{ background:#1a1a18; border:1px solid rgba(236,233,226,.08); }
+.mva-order-item-info{ flex:1; min-width:0; }
+.mva-order-item-name{ font-family:'Fira Sans Condensed',sans-serif; color:#ECE9E2; font-size:14px; margin:0 0 2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.mva-order-item-variant, .mva-order-item-qty{ font-family:'Fira Sans Condensed',sans-serif; color:#9b988f; font-size:12px; margin:0; }
+.mva-order-item-price{ font-family:'Fira Sans Condensed',sans-serif; color:#ECE9E2; font-size:14px; flex:none; }
+.mva-order-more{ font-family:'Fira Sans Condensed',sans-serif; color:#9b988f; font-size:12px; margin:0; }
+.mva-order-footer{ display:flex; justify-content:space-between; align-items:center; padding:14px 20px; }
+.mva-order-total{ font-family:'Fira Sans Condensed',sans-serif; font-weight:700; color:#ECE9E2; font-size:15px; }
+.mva-order-link{ font-family:'Fira Sans Condensed',sans-serif; color:#9b988f; font-size:13px; text-decoration:none; transition:color .2s; }
+.mva-order-link:hover{ color:#ECE9E2; }
+
+/* ── Empty state ── */
+.mva-empty{ background:#111110; border:1px solid rgba(236,233,226,.1); border-radius:6px; padding:48px 24px; text-align:center; }
+.mva-empty-text{ font-family:'Fira Sans Condensed',sans-serif; color:#9b988f; font-size:15px; margin:0 0 16px; }
+.mva-empty-cta{ font-family:'Fira Sans Condensed',sans-serif; background:#ECE9E2; color:#0d0d0b; text-decoration:none; padding:12px 24px; border-radius:6px; font-size:13px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+
+/* ── Sidebar cards ── */
+.mva-card{ background:#111110; border:1px solid rgba(236,233,226,.1); border-radius:6px; padding:20px; margin-bottom:12px; }
+.mva-card-title{ font-family:'Fira Sans Condensed',sans-serif; font-weight:700; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:#9b988f; margin:0 0 16px; }
+.mva-card-row{ display:flex; flex-direction:column; gap:2px; margin-bottom:12px; }
+.mva-card-row:last-of-type{ margin-bottom:0; }
+.mva-card-label{ font-family:'Fira Sans Condensed',sans-serif; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:#56544d; }
+.mva-card-val{ font-family:'Fira Sans Condensed',sans-serif; color:#ECE9E2; font-size:14px; word-break:break-all; }
+.mva-card-action{ display:inline-block; margin-top:14px; font-family:'Fira Sans Condensed',sans-serif; color:#9b988f; font-size:13px; text-decoration:none; }
+.mva-card-action:hover{ color:#ECE9E2; }
+.mva-address p{ font-family:'Fira Sans Condensed',sans-serif; color:#ECE9E2; font-size:14px; margin:0 0 3px; line-height:1.5; }
+
+/* ── Quick links ── */
+.mva-quick-link{ display:block; font-family:'Fira Sans Condensed',sans-serif; color:#9b988f; font-size:14px; text-decoration:none; padding:8px 0; border-bottom:1px solid rgba(236,233,226,.06); transition:color .2s; }
+.mva-quick-link:last-child{ border-bottom:none; }
+.mva-quick-link:hover{ color:#ECE9E2; }
+
+/* ── Pagination ── */
+.mva-paginate{ margin-top:20px; text-align:center; font-family:'Fira Sans Condensed',sans-serif; }
+.mva-paginate a, .mva-paginate span{ color:#9b988f; margin:0 6px; font-size:14px; text-decoration:none; }
+.mva-paginate a:hover{ color:#ECE9E2; }
+
+/* ── Responsive ── */
+@media(max-width:900px){
+  .mva-body{ grid-template-columns:1fr; }
+  .mva-sidebar{ order:-1; }
+}
+@media(max-width:600px){
+  .mva-header, .mva-body{ padding-left:20px; padding-right:20px; }
+  .mva-stats{ gap:16px; }
+  .mva-order-top{ flex-direction:column; align-items:flex-start; }
+}
+</style>
