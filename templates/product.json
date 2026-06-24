@@ -1,14 +1,9 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
+    "main": {
+      "type": "mv-product",
+      "settings": {}
+    },
     "faq": {
       "type": "mv-faq",
       "blocks": {
@@ -30,7 +25,7 @@
           "type": "faq_item",
           "settings": {
             "question": "Can I return it?",
-            "answer": "<p>Yes - unworn pieces within 14 days. Message us and we'll handle it.</p>"
+            "answer": "<p>Yes \u2014 unworn pieces within 14 days. Message us and we'll handle it.</p>"
           }
         }
       },
@@ -42,25 +37,10 @@
       "settings": {
         "faq_title": "Questions"
       }
-    },
-    "mv_popup": {
-      "type": "mv-popup",
-      "settings": {
-        "enabled": true,
-        "eyebrow": "Launch offer",
-        "headline": "10% off your first piece.",
-        "subtext": "Enter your email — your code is yours.",
-        "button_label": "Get my code",
-        "fine_print": "First order. One use.",
-        "thanks_headline": "You're in.",
-        "thanks_subtext": "Here's 10% off your first piece. Use it at checkout.",
-        "discount_code": "BASECAMP",
-        "delay": 6
-      }
     }
   },
   "order": [
-    "faq",
-    "mv_popup"
+    "main",
+    "faq"
   ]
 }
