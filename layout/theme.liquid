@@ -39,6 +39,17 @@
   /* Payment icons */
   .cart-payments{ display:flex; flex-wrap:wrap; justify-content:center; gap:5px; margin-top:10px; }
   .cart-payment-icon{ display:inline-flex; height:22px; opacity:.7; } .cart-payment-icon svg{ height:22px; width:auto; border-radius:3px; }
+  .cart-discount{ padding:0 0 14px; }
+  .cart-discount-row{ display:flex; gap:8px; }
+  .cart-discount-input{ flex:1; background:#0f0f0d; border:1px solid #3a392f; border-radius:6px; padding:11px 14px; color:#ECE9E2; font-family:'Fira Sans Condensed',sans-serif; font-size:14px; min-width:0; }
+  .cart-discount-input::placeholder{ color:#6f6c64; }
+  .cart-discount-input:focus{ outline:none; border-color:#ECE9E2; }
+  .cart-discount-btn{ flex:none; background:transparent; border:1px solid rgba(236,233,226,.25); border-radius:6px; padding:11px 16px; color:#ECE9E2; font-family:'Fira Sans Condensed',sans-serif; font-weight:700; font-size:12px; letter-spacing:.08em; text-transform:uppercase; cursor:pointer; transition:border-color .2s; white-space:nowrap; }
+  .cart-discount-btn:hover{ border-color:#ECE9E2; }
+  .cart-discount-btn:disabled{ opacity:.5; cursor:not-allowed; }
+  .cart-discount-msg{ font-family:'Fira Sans Condensed',sans-serif; font-size:12px; margin:8px 0 0; }
+  .cart-discount-msg--ok{ color:#ffb800; }
+  .cart-discount-msg--err{ color:#d98a8a; }
   </style>
 </head>
 <body>
@@ -167,8 +178,17 @@
     {%- endif -%}
 
     <div class="cart-foot">
+
+      <div class="cart-discount">
+        <div class="cart-discount-row">
+          <input class="cart-discount-input" type="text" id="cartDiscountInput" placeholder="Discount code" autocomplete="off" autocapitalize="characters">
+          <button class="cart-discount-btn" type="button" id="cartDiscountApply">Apply</button>
+        </div>
+        <p class="cart-discount-msg" id="cartDiscountMsg" style="display:none;"></p>
+      </div>
+
       <div class="cart-subtotal-row"><span>Subtotal</span><span id="cartSubtotal">$0.00</span></div>
-      <a class="cart-checkout" href="/checkout">Checkout</a>
+      <a class="cart-checkout" href="/checkout" id="cartCheckoutBtn">Checkout</a>
       <div class="cart-payments">
         {%- assign payment_types = "shopify_pay,visa,master,american_express,diners_club,discover,apple_pay,google_pay" | split: "," -%}
         {%- for type in payment_types -%}
