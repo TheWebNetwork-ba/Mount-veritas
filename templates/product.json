@@ -2,7 +2,40 @@
   "sections": {
     "main": {
       "type": "mv-product",
-      "settings": {}
+      "blocks": {
+        "panel1": {
+          "type": "panel",
+          "settings": {
+            "heading": "Details",
+            "use_description": true,
+            "content": "<p>Add details here.</p>"
+          }
+        },
+        "panel2": {
+          "type": "panel",
+          "settings": {
+            "heading": "Shipping",
+            "use_description": false,
+            "content": "<p>Orders process in 2-3 business days, with tracking emailed at dispatch.</p>"
+          }
+        },
+        "panel3": {
+          "type": "panel",
+          "settings": {
+            "heading": "Size & Fit",
+            "use_description": false,
+            "content": "<p>Add size and fit information here.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "panel1",
+        "panel2",
+        "panel3"
+      ],
+      "settings": {
+        "pair_title": "Make it a Pair"
+      }
     },
     "faq": {
       "type": "mv-faq",
