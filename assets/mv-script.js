@@ -424,3 +424,62 @@ function mvCuAdd(btn){
   })
   .catch(function(){ btn.disabled=false; btn.textContent=orig; });
 }
+
+/* ===== CART DISCOUNT CODE ===== */
+(function(){
+  var input   = document.getElementById('cartDiscountInput');
+  var btn     = document.getElementById('cartDiscountApply');
+  var msg     = document.getElementById('cartDiscountMsg');
+  var checkout = document.getElementById('cartCheckoutBtn');
+
+  if (!input || !btn) return;
+
+  function showMsg(text, ok){
+    msg.textContent = text;
+    msg.className = 'cart-discount-msg ' + (ok ? 'cart-discount-msg--ok' : 'cart-discount-msg--err');
+    msg.style.display = 'block';
+  }
+
+  btn.addEventListener('click', function(){
+    var code = input.value.trim();
+    if (!code) return;
+    btn.disabled = true;
+    btn.textContent = '...';
+
+    // Apply discount by updating the checkout URL with the code
+    fetch('/discount/' + encodeURIComponent(code), {
+      method: 'GET',
+      redirect: 'follow'
+    })
+    .then(function(r){
+      if (r.ok || r.redirected) {
+        showMsg('Code applied — discount will reflect at checkout.', true);
+        // Append discount to checkout URL
+        if (checkout) {
+          var url = checkout.getAttribute('href').split('?')[0];
+          checkout.setAttribute('href', url + '?discount=' + encodeURIComponent(code));
+        }
+        input.value = '';
+      } else {
+        showMsg('Invalid or expired code — try again.', false);
+      }
+    })
+    .catch(function(){
+      // Network error — still pass code to checkout URL
+      showMsg('Code saved — discount will apply at checkout.', true);
+      if (checkout) {
+        var url = checkout.getAttribute('href').split('?')[0];
+        checkout.setAttribute('href', url + '?discount=' + encodeURIComponent(code));
+      }
+    })
+    .finally(function(){
+      btn.disabled = false;
+      btn.textContent = 'Apply';
+    });
+  });
+
+  // Apply on Enter key
+  input.addEventListener('keydown', function(e){
+    if (e.key === 'Enter') btn.click();
+  });
+})();
