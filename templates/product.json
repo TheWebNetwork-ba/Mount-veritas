@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -8,7 +17,7 @@
           "settings": {
             "heading": "Details",
             "use_description": true,
-            "content": "<p>Add details here.</p>"
+            "content": "<ul><li>80% COTTON / 20% POLYESTER FLEECE</li><li>380 GSM</li></ul>"
           }
         },
         "panel2": {
@@ -58,7 +67,7 @@
           "type": "faq_item",
           "settings": {
             "question": "Can I return it?",
-            "answer": "<p>Yes \u2014 unworn pieces within 14 days. Message us and we'll handle it.</p>"
+            "answer": "<p>Yes — unworn pieces within 14 days. Message us and we'll handle it.</p>"
           }
         }
       },
