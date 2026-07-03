@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "mv-client-services",
+      "blocks": {},
+      "block_order": [],
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}
