@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main": {
+      "type": "mv-legal",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}
