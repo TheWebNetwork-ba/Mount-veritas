@@ -20,7 +20,7 @@
       <h2 class="mv-pop-title">{{ section.settings.thanks_headline | default: "You're in." }}</h2>
       {% if section.settings.thanks_subtext != blank %}<p class="mv-pop-sub">{{ section.settings.thanks_subtext }}</p>{% endif %}
       <button class="mv-pop-code" id="mv-pop-code" type="button" aria-label="Copy discount code">
-        <span class="mv-pop-code-tx">{{ section.settings.discount_code | default: 'BASECAMP' }}</span>
+        <span class="mv-pop-code-tx">{{ section.settings.discount_code | default: 'BASECAMP10' }}</span>
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
       </button>
       <p class="mv-pop-copied" id="mv-pop-copied" hidden>Copied</p>
@@ -124,7 +124,7 @@
     { "type": "text", "id": "fine_print", "label": "Fine print", "default": "First order. One use." },
     { "type": "text", "id": "thanks_headline", "label": "Thank-you headline", "default": "You're in." },
     { "type": "textarea", "id": "thanks_subtext", "label": "Thank-you subtext", "default": "Here's 10% off your first piece. Use it at checkout." },
-    { "type": "text", "id": "discount_code", "label": "Discount code shown", "info": "Must match a real 10% code in Shopify Discounts.", "default": "BASECAMP" },
+    { "type": "text", "id": "discount_code", "label": "Discount code shown", "info": "Must match a real 10% code in Shopify Discounts.", "default": "BASECAMP10" },
     { "type": "range", "id": "delay", "label": "Delay before showing", "min": 0, "max": 30, "step": 1, "unit": "s", "default": 6 }
   ],
   "presets": [{ "name": "Launch popup" }]
