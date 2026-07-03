@@ -1,0 +1,235 @@
+<section class="mv-contact" aria-label="Contact Us">
+  <div class="contact-wrap">
+    <h1 class="contact-title">Contact us.</h1>
+    <p class="contact-sub">Fill out the form below and we will respond within 48 hours.</p>
+
+    {% form 'contact' %}
+      {% if form.posted_successfully? %}
+        <div class="contact-success">
+          <p>Message sent. We will be in touch.</p>
+        </div>
+      {% else %}
+        {% if form.errors %}
+          <div class="contact-errors">
+            {{ form.errors | default_errors }}
+          </div>
+        {% endif %}
+
+        <div class="contact-fields">
+          <div class="contact-row">
+            <div class="contact-field">
+              <label for="ContactFirstName" class="contact-label">First name <span aria-hidden="true">*</span></label>
+              <input type="text" id="ContactFirstName" name="contact[first_name]"
+                     class="contact-input" required autocomplete="given-name"
+                     value="{{ form.first_name }}">
+            </div>
+            <div class="contact-field">
+              <label for="ContactLastName" class="contact-label">Last name <span aria-hidden="true">*</span></label>
+              <input type="text" id="ContactLastName" name="contact[last_name]"
+                     class="contact-input" required autocomplete="family-name"
+                     value="{{ form.last_name }}">
+            </div>
+          </div>
+
+          <div class="contact-field">
+            <label for="ContactEmail" class="contact-label">Email address <span aria-hidden="true">*</span></label>
+            <input type="email" id="ContactEmail" name="contact[email]"
+                   class="contact-input" required autocomplete="email"
+                   value="{{ form.email }}">
+          </div>
+
+          <div class="contact-field">
+            <label for="ContactPhone" class="contact-label">Phone number</label>
+            <input type="tel" id="ContactPhone" name="contact[phone]"
+                   class="contact-input" autocomplete="tel"
+                   value="{{ form.phone }}">
+          </div>
+
+          <div class="contact-field">
+            <label for="ContactBody" class="contact-label">Message <span aria-hidden="true">*</span></label>
+            <textarea id="ContactBody" name="contact[body]"
+                      class="contact-input contact-textarea" required rows="6">{{ form.body }}</textarea>
+          </div>
+
+          <div class="contact-consent">
+            <label class="contact-consent-label">
+              <input type="checkbox" name="contact[tags]" value="newsletter"
+                     class="contact-checkbox" id="ContactConsent" required>
+              <span class="contact-consent-text">
+                I agree to receive promotional and subscription emails from Mount Veritas.
+                I understand I can unsubscribe at any time by clicking the unsubscribe link
+                in any email. By submitting, I agree to the
+                <a href="/pages/legal-notices" target="_blank" rel="noopener">Terms of Service</a>
+                and
+                <a href="/pages/legal-notices#privacy" target="_blank" rel="noopener">Privacy Policy</a>.
+              </span>
+            </label>
+          </div>
+
+          <button type="submit" class="contact-submit">Send message</button>
+          <p class="contact-required-note">Fields marked * are required.</p>
+        </div>
+      {% endif %}
+    {% endform %}
+  </div>
+</section>
+
+<style>
+  .mv-contact{
+    max-width:660px;
+    margin:0 auto;
+    padding:140px 24px 100px;
+  }
+  .contact-title{
+    font-family:var(--serif);
+    font-size:clamp(36px,5vw,60px);
+    color:var(--smoke);
+    line-height:1.05;
+    margin:0 0 14px;
+  }
+  .contact-sub{
+    font-family:var(--grotesk);
+    font-size:15px;
+    color:var(--smoke-dim);
+    margin:0 0 44px;
+    line-height:1.6;
+  }
+  .contact-fields{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+  }
+  .contact-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+  }
+  .contact-field{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+  }
+  .contact-label{
+    font-family:var(--grotesk);
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    color:var(--smoke-dim);
+  }
+  .contact-input{
+    background:var(--black-2);
+    border:1px solid rgba(236,233,226,0.16);
+    border-radius:var(--radius);
+    color:var(--smoke);
+    font-family:var(--grotesk);
+    font-size:15px;
+    padding:13px 16px;
+    width:100%;
+    transition:border-color 0.2s;
+    outline:none;
+    -webkit-appearance:none;
+  }
+  .contact-input:focus{
+    border-color:rgba(236,233,226,0.45);
+  }
+  .contact-input::placeholder{
+    color:var(--smoke-faint);
+  }
+  .contact-textarea{
+    resize:vertical;
+    min-height:140px;
+    line-height:1.6;
+    font-family:var(--grotesk);
+  }
+  .contact-consent{
+    margin-top:4px;
+  }
+  .contact-consent-label{
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+    cursor:pointer;
+  }
+  .contact-checkbox{
+    flex:none;
+    width:16px;
+    height:16px;
+    margin-top:2px;
+    border:1px solid rgba(236,233,226,0.3);
+    border-radius:3px;
+    accent-color:#ECE9E2;
+    cursor:pointer;
+    background:var(--black-2);
+  }
+  .contact-consent-text{
+    font-family:var(--grotesk);
+    font-size:12px;
+    color:var(--smoke-dim);
+    line-height:1.65;
+  }
+  .contact-consent-text a{
+    color:var(--smoke);
+    text-decoration:underline;
+    text-underline-offset:2px;
+  }
+  .contact-submit{
+    display:block;
+    width:100%;
+    background:var(--smoke);
+    color:var(--black);
+    border:0;
+    border-radius:var(--radius);
+    padding:16px 24px;
+    font-family:var(--grotesk);
+    font-size:13px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    cursor:pointer;
+    margin-top:8px;
+    transition:opacity 0.2s;
+  }
+  .contact-submit:hover{
+    opacity:0.88;
+  }
+  .contact-required-note{
+    font-family:var(--grotesk);
+    font-size:11px;
+    color:var(--smoke-faint);
+    letter-spacing:0.04em;
+    margin:0;
+  }
+  .contact-success{
+    padding:32px;
+    border:1px solid rgba(236,233,226,0.14);
+    border-radius:var(--radius);
+    text-align:center;
+  }
+  .contact-success p{
+    font-family:var(--grotesk);
+    font-size:15px;
+    color:var(--smoke);
+  }
+  .contact-errors{
+    padding:14px 18px;
+    border:1px solid rgba(217,138,138,0.35);
+    border-radius:var(--radius);
+    color:#d98a8a;
+    font-family:var(--grotesk);
+    font-size:13px;
+    margin-bottom:4px;
+  }
+  @media (max-width:520px){
+    .contact-row{ grid-template-columns:1fr; }
+    .mv-contact{ padding:120px 20px 80px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "MV Contact",
+  "settings": [],
+  "blocks": [],
+  "presets": [{ "name": "MV Contact" }]
+}
+{% endschema %}
