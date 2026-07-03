@@ -60,8 +60,9 @@
         </div>
       {% endif %}
       <div class="fp-inner">
+        {% if section.settings.fp_eyebrow != blank %}<span class="fp-eyebrow">{{ section.settings.fp_eyebrow | escape }}</span>{% endif %}
         <h2 class="fp-title">{{ section.settings.fp_title | default: 'Where the climb begins.' | escape }}</h2>
-        <span class="fp-cta">{{ section.settings.fp_cta | default: 'SHOP NOW' | escape }} &rarr;</span>
+        <span class="fp-cta">{{ section.settings.fp_cta | default: 'See the piece' | escape }} &rarr;</span>
       </div>
     </a>
   </section>
@@ -115,13 +116,14 @@
     { "type": "image_picker", "id": "hero_image", "label": "Background image (optional)" },
 
     { "type": "header", "content": "Slide 2 — First Ascent" },
+    { "type": "text", "id": "fp_eyebrow", "label": "Eyebrow (gold text)", "default": "Collection 01" },
     { "type": "text", "id": "fp_title", "label": "Headline", "default": "Where the climb begins." },
-    { "type": "text", "id": "fp_cta", "label": "Button text", "default": "SHOP NOW" },
+    { "type": "text", "id": "fp_cta", "label": "Button text", "default": "See the piece" },
     { "type": "image_picker", "id": "fp_image", "label": "Background image (optional)" },
     { "type": "url", "id": "fp_link", "label": "Link (blank = all products)" },
 
     { "type": "header", "content": "Slide 3 — Mountain Collection" },
-    { "type": "text", "id": "mtn_eyebrow", "label": "Eyebrow", "default": "The Mountain Collection" },
+    { "type": "text", "id": "mtn_eyebrow", "label": "Eyebrow (gold text)", "default": "The Mountain Collection" },
     { "type": "text", "id": "mtn_title", "label": "Headline", "default": "Built for the climb." },
     { "type": "text", "id": "mtn_text", "label": "Sub text", "default": "Four collections. One ascent." },
     { "type": "image_picker", "id": "mtn_image", "label": "Background image (optional)" },
