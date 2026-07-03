@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -30,7 +39,7 @@
           "type": "faq_item",
           "settings": {
             "question": "How fast does it ship?",
-            "answer": "<p>Orders process within 2\u20133 business days. Tracking is sent by email the moment your order leaves.</p>"
+            "answer": "<p>Orders process within 2–3 business days. Tracking is sent by email the moment your order leaves.</p>"
           }
         },
         "q3": {
@@ -76,7 +85,16 @@
           }
         }
       },
-      "block_order": ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8"],
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6",
+        "q7",
+        "q8"
+      ],
       "settings": {
         "faq_title": "Questions"
       }
@@ -87,15 +105,19 @@
         "enabled": true,
         "eyebrow": "Launch offer",
         "headline": "10% off your first piece.",
-        "subtext": "Enter your email \u2014 your code is yours.",
+        "subtext": "Enter your email — your code is yours.",
         "button_label": "Get my code",
         "fine_print": "First order. One use.",
         "thanks_headline": "You're in.",
-        "thanks_subtext": "Here\u2019s 10% off your first piece. Use it at checkout.",
-        "discount_code": "BASECAMP",
+        "thanks_subtext": "Here’s 10% off your first piece. Use it at checkout.",
+        "discount_code": "BASECAMP10",
         "delay": 6
       }
     }
   },
-  "order": ["main", "faq", "mv_popup"]
+  "order": [
+    "main",
+    "faq",
+    "mv_popup"
+  ]
 }
