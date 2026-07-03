@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main": {
+      "type": "mv-contact",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}
