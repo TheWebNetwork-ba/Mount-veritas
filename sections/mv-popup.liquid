@@ -86,7 +86,7 @@
     var body=new URLSearchParams();
     body.append('form_type','customer');
     body.append('utf8','\u2713');
-    body.append('contact[tags]','popup-launch');
+    body.append('contact[tags]','newsletter');
     body.append('contact[email]',email);
     fetch('/contact',{method:'POST',body:body,headers:{'Accept':'application/json'}})
       .then(thanks).catch(thanks);
