@@ -1,14 +1,26 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "mv-home",
       "settings": {
+        "hero_image": "shopify://shop_images/Heart_Rate_212e620d-8739-4fb6-b332-1ab9d64637ae.jpg",
         "fp_title": "Where the climb begins.",
-        "fp_cta": "SHOP NOW",
+        "fp_cta": "See the first pieces",
+        "fp_image": "shopify://shop_images/A_single_wide_horizontal_photorealistic_3D_rendered_image_split_perfectly_down_the_middle._The_left_half_shows_a_dirty_dark_grimy_kitchen_with_grease_stains_messy_countertops_and_clut.png",
         "fp_link": "",
         "mtn_eyebrow": "The Mountain Collection",
         "mtn_title": "Built for the climb.",
         "mtn_text": "Four collections. One ascent.",
+        "mtn_image": "shopify://shop_images/Snoring_Mouthbreathing.jpg",
         "mtn_collection_1": "",
         "mtn_collection_2": "",
         "mtn_collection_3": "",
@@ -22,60 +34,29 @@
           "type": "faq_item",
           "settings": {
             "question": "How does the fit run?",
-            "answer": "<p>Relaxed and true to size. If you prefer a closer fit, size down one.</p>"
+            "answer": "<p>Relaxed and true to size. Prefer it closer? Size down one.</p>"
           }
         },
         "q2": {
           "type": "faq_item",
           "settings": {
             "question": "How fast does it ship?",
-            "answer": "<p>Orders process within 2\u20133 business days. Tracking is sent by email the moment your order leaves.</p>"
+            "answer": "<p>Orders process in 2-3 business days. Tracking is emailed the moment it ships.</p>"
           }
         },
         "q3": {
           "type": "faq_item",
           "settings": {
-            "question": "What is the return policy?",
-            "answer": "<p>Unworn, unaltered pieces can be returned within 14 days of delivery. Contact us and we will take care of it.</p>"
-          }
-        },
-        "q4": {
-          "type": "faq_item",
-          "settings": {
-            "question": "What is BASECAMP?",
-            "answer": "<p>BASECAMP is your first-order discount. 10% off, one use, earned the moment you place your first order. It arrives in your order confirmation.</p>"
-          }
-        },
-        "q5": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Are the pieces limited?",
-            "answer": "<p>The core Mountain Collection runs permanently. Seasonal pieces are limited by design and will not be restocked once sold through.</p>"
-          }
-        },
-        "q6": {
-          "type": "faq_item",
-          "settings": {
-            "question": "What comes in the box?",
-            "answer": "<p>Your piece, a printed card, and packaging built to feel like an opening, not just a delivery.</p>"
-          }
-        },
-        "q7": {
-          "type": "faq_item",
-          "settings": {
-            "question": "How do I care for my pieces?",
-            "answer": "<p>Cold wash, inside out, hang dry. Every piece carries care instructions on the inner tag.</p>"
-          }
-        },
-        "q8": {
-          "type": "faq_item",
-          "settings": {
-            "question": "Where is Mount Veritas based?",
-            "answer": "<p>Edmonton, Alberta. Built in Canada.</p>"
+            "question": "What's the return policy?",
+            "answer": "<p>Unworn pieces can be returned within 14 days. Message us and we'll take care of it.</p>"
           }
         }
       },
-      "block_order": ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8"],
+      "block_order": [
+        "q1",
+        "q2",
+        "q3"
+      ],
       "settings": {
         "faq_title": "Questions"
       }
@@ -86,15 +67,19 @@
         "enabled": true,
         "eyebrow": "Launch offer",
         "headline": "10% off your first piece.",
-        "subtext": "Enter your email \u2014 your code is yours.",
+        "subtext": "Enter your email — your code is yours.",
         "button_label": "Get my code",
         "fine_print": "First order. One use.",
         "thanks_headline": "You're in.",
-        "thanks_subtext": "Here\u2019s 10% off your first piece. Use it at checkout.",
+        "thanks_subtext": "Here's 10% off your first piece. Use it at checkout.",
         "discount_code": "BASECAMP",
         "delay": 6
       }
     }
   },
-  "order": ["main", "faq", "mv_popup"]
+  "order": [
+    "main",
+    "faq",
+    "mv_popup"
+  ]
 }
