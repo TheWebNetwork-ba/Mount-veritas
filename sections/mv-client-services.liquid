@@ -1,0 +1,248 @@
+<section class="mv-cs" aria-label="Client Services">
+  <div class="cs-wrap">
+    <h1 class="cs-title">Client services.</h1>
+    <p class="cs-sub">Everything you need about your order, payment, and delivery.</p>
+
+    <nav class="cs-nav" aria-label="Service categories">
+      <a href="#cs-orders" class="cs-tab">Orders</a>
+      <a href="#cs-payments" class="cs-tab">Payments</a>
+      <a href="#cs-shipping" class="cs-tab">Shipping</a>
+      <a href="#cs-returns" class="cs-tab">Returns</a>
+      <a href="#cs-contact" class="cs-tab">Contact</a>
+    </nav>
+
+    <div class="cs-sections">
+
+      {% assign categories = 'orders,payments,shipping,returns,contact' | split: ',' %}
+      {% assign labels = 'Orders,Payments,Shipping,Returns,Contact' | split: ',' %}
+
+      {% for cat in categories %}
+        {% assign label = labels[forloop.index0] %}
+        <div class="cs-section" id="cs-{{ cat }}">
+          <h2 class="cs-section-title">{{ label }}</h2>
+          <div class="cs-faq-list">
+            {% assign has_items = false %}
+            {% for block in section.blocks %}
+              {% if block.settings.category == cat %}
+                {% assign has_items = true %}
+                <div class="cs-faq-item" {{ block.shopify_attributes }}>
+                  <button class="cs-faq-q" type="button" aria-expanded="false">
+                    <span>{{ block.settings.question | escape }}</span>
+                    <span class="cs-faq-ic" aria-hidden="true">+</span>
+                  </button>
+                  <div class="cs-faq-a" role="region">
+                    <div class="cs-faq-a-inner">{{ block.settings.answer }}</div>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+            {% unless has_items %}
+              <p class="cs-empty">Questions coming soon.</p>
+            {% endunless %}
+          </div>
+          {% if cat == 'contact' %}
+            <div class="cs-contact-cta">
+              <p>Still need help?</p>
+              <a href="/pages/contact-us" class="cs-contact-link">Send us a message &rarr;</a>
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .mv-cs{
+    max-width:800px;
+    margin:0 auto;
+    padding:140px 24px 100px;
+  }
+  .cs-title{
+    font-family:var(--serif);
+    font-size:clamp(36px,5vw,60px);
+    color:var(--smoke);
+    line-height:1.05;
+    margin:0 0 14px;
+  }
+  .cs-sub{
+    font-family:var(--grotesk);
+    font-size:15px;
+    color:var(--smoke-dim);
+    margin:0 0 44px;
+    line-height:1.6;
+  }
+  .cs-nav{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:56px;
+  }
+  .cs-tab{
+    font-family:var(--grotesk);
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    color:var(--smoke-dim);
+    border:1px solid rgba(236,233,226,0.2);
+    border-radius:100px;
+    padding:9px 20px;
+    text-decoration:none;
+    transition:color 0.2s, border-color 0.2s;
+  }
+  .cs-tab:hover{
+    color:var(--smoke);
+    border-color:rgba(236,233,226,0.5);
+  }
+  .cs-sections{
+    display:flex;
+    flex-direction:column;
+    gap:64px;
+  }
+  .cs-section-title{
+    font-family:var(--grotesk);
+    font-weight:900;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:0.3em;
+    color:#ffb800;
+    margin:0 0 18px;
+  }
+  .cs-faq-list{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .cs-faq-q{
+    position:relative;
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    text-align:left;
+    cursor:pointer;
+    font-family:var(--grotesk);
+    font-weight:500;
+    font-size:14px;
+    letter-spacing:0.03em;
+    color:var(--smoke);
+    padding:18px 20px;
+    border-radius:var(--radius);
+    border:1px solid rgba(236,233,226,0.14);
+    background:var(--black-2);
+    transition:border-color 0.2s;
+  }
+  .cs-faq-q:hover{
+    border-color:rgba(236,233,226,0.32);
+  }
+  .cs-faq-ic{
+    flex:none;
+    font-size:22px;
+    line-height:1;
+    transition:transform 0.3s ease;
+    color:var(--smoke-dim);
+  }
+  .cs-faq-item.open .cs-faq-ic{
+    transform:rotate(45deg);
+  }
+  .cs-faq-a{
+    overflow:hidden;
+    max-height:0;
+    transition:max-height 0.45s ease;
+  }
+  .cs-faq-a-inner{
+    padding:14px 22px 8px;
+    color:var(--smoke-dim);
+    font-size:15px;
+    line-height:1.7;
+    font-family:var(--grotesk);
+  }
+  .cs-empty{
+    font-family:var(--grotesk);
+    font-size:14px;
+    color:var(--smoke-faint);
+    padding:8px 0;
+  }
+  .cs-contact-cta{
+    margin-top:28px;
+    padding-top:24px;
+    border-top:1px solid rgba(236,233,226,0.08);
+  }
+  .cs-contact-cta p{
+    font-family:var(--grotesk);
+    font-size:14px;
+    color:var(--smoke-dim);
+    margin:0 0 10px;
+  }
+  .cs-contact-link{
+    font-family:var(--grotesk);
+    font-size:14px;
+    color:var(--smoke);
+    text-decoration:underline;
+    text-underline-offset:3px;
+    transition:color 0.2s;
+  }
+  .cs-contact-link:hover{ color:var(--smoke-dim); }
+  @media (max-width:520px){
+    .mv-cs{ padding:120px 20px 80px; }
+    .cs-tab{ font-size:11px; padding:7px 16px; }
+  }
+</style>
+
+<script>
+  (function(){
+    document.querySelectorAll('.cs-faq-q').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var item = this.closest('.cs-faq-item');
+        var ans  = item.querySelector('.cs-faq-a');
+        var open = item.classList.contains('open');
+        /* close siblings in same section */
+        var sec  = this.closest('.cs-section');
+        sec.querySelectorAll('.cs-faq-item.open').forEach(function(o){
+          o.classList.remove('open');
+          o.querySelector('.cs-faq-a').style.maxHeight = '0';
+          o.querySelector('.cs-faq-q').setAttribute('aria-expanded','false');
+        });
+        if(!open){
+          item.classList.add('open');
+          ans.style.maxHeight = ans.scrollHeight + 'px';
+          this.setAttribute('aria-expanded','true');
+        }
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "MV Client Services",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "cs_item",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "select",
+          "id": "category",
+          "label": "Category",
+          "options": [
+            { "value": "orders",   "label": "Orders" },
+            { "value": "payments", "label": "Payments" },
+            { "value": "shipping", "label": "Shipping" },
+            { "value": "returns",  "label": "Returns" },
+            { "value": "contact",  "label": "Contact" }
+          ],
+          "default": "orders"
+        },
+        { "type": "text",     "id": "question", "label": "Question", "default": "Your question here" },
+        { "type": "richtext", "id": "answer",   "label": "Answer",   "default": "<p>Your answer here.</p>" }
+      ]
+    }
+  ],
+  "max_blocks": 60,
+  "presets": [{ "name": "MV Client Services" }]
+}
+{% endschema %}
