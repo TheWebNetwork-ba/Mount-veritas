@@ -1,18 +1,14 @@
-/* ============================================================
-     MOUNT VERITAS — DESIGN TOKENS
-     washed black + off-white (white smoke direction)
-     ============================================================ */
   :root{
-    --black:      #0d0d0b;   /* washed black — page base */
-    --black-2:    #141412;   /* raised surfaces */
-    --black-3:    #1c1c19;   /* cards */
-    --smoke:      #ECE9E2;   /* off-white, slightly grey — primary text */
-    --smoke-dim:  #9b988f;   /* secondary text */
-    --smoke-faint:#56544d;   /* hints, hairlines */
+    --black:      #0d0d0b;
+    --black-2:    #141412;
+    --black-3:    #1c1c19;
+    --smoke:      #ECE9E2;
+    --smoke-dim:  #9b988f;
+    --smoke-faint:#56544d;
     --line:       rgba(236,233,226,0.14);
-    --serif:      'Abril Fatface', serif;  /* the display voice — fat didone */
-    --grotesk:    'Fira Sans Condensed', sans-serif; /* Frutiger Condensed twin */
-    --radius:     6px;     /* one rounding for every button / control */
+    --serif:      'Abril Fatface', serif;
+    --grotesk:    'Fira Sans Condensed', sans-serif;
+    --radius:     6px;
   }
 
   *{ margin:0; padding:0; box-sizing:border-box; }
@@ -29,9 +25,6 @@
   a{ color:inherit; text-decoration:none; }
   img{ display:block; max-width:100%; }
 
-  /* ============================================================
-     NAV
-     ============================================================ */
   .nav{
     position:fixed; top:0; left:0; right:0; z-index:50;
     display:grid; grid-template-columns:1fr auto 1fr; align-items:center;
@@ -69,22 +62,14 @@
   .nav-icons a:hover, .nav-icons a:focus-visible{ opacity:1; }
   .nav-icons svg{ width:19px; height:19px; }
 
-  /* ============================================================
-     SECTION 1 — HERO
-     >>> IMAGE SWAP #1: replace .hero-bg contents with your hero
-         photograph (full-bleed, dark, cinematic). The SVG mountain
-         below is a stand-in so the page never looks empty. <<<
-     ============================================================ */
   .hero{
     position:relative; min-height:100svh;
     display:flex; flex-direction:column;
     align-items:flex-start; justify-content:flex-end;
     text-align:left; overflow:hidden;
-    /* hero image removed for now — sits on washed-black + SBO wall */
+
   }
-  /* The SBO wall — SEE IT. BELIEVE IT. OBTAIN IT. repeating,
-     rebuilt from the brand PDF in site colors. Fixed behind
-     the ENTIRE store (rows injected by JS). */
+
   .pattern-wall{
     position:fixed; inset:0; z-index:-1; overflow:hidden;
     display:flex; flex-direction:column; justify-content:center;
@@ -127,7 +112,7 @@
     overflow:hidden;
     transition:transform .3s, box-shadow .3s, border-color .3s;
   }
-  /* moving sheen across the glass */
+
   .cta::before{
     content:''; position:absolute; top:0; left:-60%; width:45%; height:100%;
     background:linear-gradient(100deg, transparent, rgba(255,255,255,0.5), transparent);
@@ -142,13 +127,6 @@
   }
   .cta:hover::before, .cta:focus-visible::before{ left:120%; }
 
-  /* ============================================================
-     SECTION 2 — THE MIRROR  (scroll-pinned line reveal)
-     The section is 4 screens tall; the inner panel is sticky.
-     As you scroll, each line lights up one by one and the
-     background image drifts upward (parallax).
-     >>> IMAGE SWAP #2: replace .mirror-bg contents. <<<
-     ============================================================ */
   .mirror{ position:relative; height:230vh; }
   .mirror-panel{
     position:sticky; top:0; height:100vh; overflow:hidden;
@@ -160,17 +138,12 @@
     font-size:clamp(15px, 4vw, 54px);
     line-height:1.6; text-transform:uppercase; letter-spacing:0.03em;
     color:var(--smoke);
-    white-space:nowrap; /* a line is ONE line — never wraps */
+    white-space:nowrap;
     opacity:0; filter:blur(2px); transform:translateY(14px);
     transition:opacity .5s ease, transform .5s ease, filter .5s ease;
   }
   .mirror-lines p.lit{ opacity:1; filter:blur(0); transform:translateY(0); }
 
-  /* ============================================================
-     SECTION 3 — THE PRODUCT  (horizontal scroller)
-     Native scroll-snap row. Swipe / scroll sideways.
-     >>> IMAGE SWAP #3: each .card-img gets a product photo. <<<
-     ============================================================ */
   .shop{ padding:70px 0 60px; }
   .shop-head{ text-align:center; padding:0 5vw 36px; }
   .shop-head h2{
@@ -238,7 +211,6 @@
   .card-meta{ display:flex; justify-content:space-between; padding-top:16px; font-size:13px; letter-spacing:0.06em; text-transform:uppercase; }
   .card-meta .price{ color:var(--smoke-dim); }
 
-
   footer{
     border-top:1px solid var(--line);
     padding:0 5vw 34px; display:block;
@@ -246,9 +218,6 @@
   }
   footer .fm{ font-weight:500; }
 
-  /* ============================================================
-     FAQ — glass accordion, editable in the theme customizer
-     ============================================================ */
   .faq{ padding:90px 0 100px; }
   .faq-wrap{ max-width:760px; margin:0 auto; padding:0 6vw; }
   .faq-title{
@@ -289,19 +258,17 @@
   .faq-a-inner{ padding:14px 22px 6px; color:var(--smoke-dim); font-size:15px; line-height:1.7; }
   .faq-a-inner a{ color:var(--smoke); text-decoration:underline; }
 
-
   @media (prefers-reduced-motion: reduce){
     .mirror-lines p{ opacity:1; filter:none; transform:none; transition:none; }
     html{ scroll-behavior:auto; }
   }
   @media (max-width:640px){
-    /* NAV — smaller logo, tighter icons */
+
     .nav{ padding:12px 5vw; }
     .nav .wordmark img{ height:22px; }
     .nav-icons{ gap:16px; }
     .nav-icons svg{ width:21px; height:21px; }
 
-    /* HERO — full screen, headline shifts to bottom-left, reframe photo to show the goods */
     .hero{ min-height:100svh; }
     .hero-inner{ padding:0 6vw 12vh; max-width:100%; }
     .hero h1{ font-size:clamp(40px, 14vw, 72px); line-height:1.02; }
@@ -309,12 +276,10 @@
     .hero .sub{ margin-top:18px; font-size:14px; }
     .cta{ margin-top:30px; padding:15px 34px; font-size:11px; letter-spacing:0.22em; }
 
-    /* MIRROR — shorter scroll, lines sized so they NEVER wrap on a phone */
     .mirror{ height:200vh; }
     .mirror-lines{ padding:0 7vw; }
     .mirror-lines p{ font-size:clamp(17px, 6.4vw, 30px); line-height:1.7; letter-spacing:0.02em; }
 
-    /* PRODUCT — smaller arrows, card fills more width, less side padding */
     .shop{ padding:64px 0 56px; }
     .carousel{ gap:10px; padding:0 3vw; }
     .arrow{ width:40px; height:40px; font-size:17px; }
@@ -324,17 +289,15 @@
     .faq{ padding:64px 0 72px; }
     .faq-q{ font-size:12.5px; padding:16px 16px; }
 
-    /* FOOTER */
     footer{ text-align:center; }
   }
 
-  /* very small phones */
   @media (max-width:380px){
     .hero h1{ font-size:38px; }
     .mirror-lines p{ font-size:16px; }
     .nav .wordmark img{ height:19px; }
   }
-/* ===== SIDE CART (drawer) ===== */
+
 .cart-toggle{ position:relative; background:none; border:0; padding:0; color:inherit; cursor:pointer; line-height:0; }
 .cart-toggle svg{ width:22px; height:22px; display:block; }
 .cart-count{ position:absolute; top:-8px; right:-9px; min-width:16px; height:16px; padding:0 4px; border-radius:9px; background:#ECE9E2; color:#0d0d0b; font-family:'Fira Sans Condensed',sans-serif; font-size:11px; font-weight:700; line-height:16px; text-align:center; }
@@ -375,7 +338,6 @@
 .cart-note{ font-family:'Fira Sans Condensed',sans-serif; font-size:11px; color:#56544d; text-align:center; margin:12px 0 0; }
 .cart-drawer.is-empty .cart-foot{ display:none; }
 
-/* ===== PRODUCT PAGE (PDP) ===== */
 .pdp{ max-width:1100px; margin:0 auto; padding:130px 24px 90px; }
 .pdp-grid{ display:grid; grid-template-columns:1fr 1fr; gap:54px; align-items:start; }
 .pdp-media{ position:sticky; top:96px; }
@@ -408,8 +370,6 @@
 .pdp-desc p{ margin:0 0 12px; }
 @media (max-width:760px){ .pdp-grid{ grid-template-columns:1fr; gap:28px; } .pdp-media{ position:static; } }
 
-/* ===== CATALOG (collection grid) ===== */
-/* ===== CATALOG (Zara-grade grid) ===== */
 .catalog{ max-width:1480px; margin:0 auto; padding:140px 30px 110px; }
 .catalog-head{ text-align:center; margin-bottom:64px; }
 .catalog-title{ font-family:'Abril Fatface',serif; font-size:clamp(30px,4.4vw,52px); color:#ECE9E2; margin:0; }
@@ -431,7 +391,6 @@
 @media (max-width:900px){ .catalog-grid{ grid-template-columns:repeat(2,1fr); column-gap:16px; row-gap:40px; } .catalog{ padding:120px 18px 90px; } }
 @media (max-width:520px){ .catalog-head{ margin-bottom:42px; } }
 
-/* ===== PDP ACCORDION (Details / Shipping / Size & Fit) ===== */
 .pdp-acc{ margin-top:30px; border-top:1px solid rgba(236,233,226,0.12); }
 .pdp-acc-item{ border-bottom:1px solid rgba(236,233,226,0.12); }
 .pdp-acc-q{ width:100%; display:flex; align-items:center; justify-content:space-between; gap:16px; background:none; border:0; padding:18px 2px; cursor:pointer; color:#ECE9E2; font-family:'Fira Sans Condensed',sans-serif; font-size:14px; font-weight:500; text-transform:uppercase; letter-spacing:0.1em; text-align:left; }
@@ -444,7 +403,6 @@
 .pdp-acc-a-inner a{ color:#ECE9E2; text-decoration:underline; }
 .pdp-acc-a-inner ul{ margin:0 0 10px; padding-left:18px; }
 
-/* ===== PDP OPTION BOXES (Color / Size) ===== */
 .pdp-opts{ display:flex; gap:12px; margin-bottom:20px; flex-wrap:wrap; }
 .pdp-optbox{ flex:1 1 0; min-width:0; border:1px solid rgba(236,233,226,0.16); border-radius:10px; padding:8px 14px; }
 .pdp-optname{ display:block; font-family:'Fira Sans Condensed',sans-serif; font-size:10px; text-transform:uppercase; letter-spacing:0.14em; color:#9b988f; margin-bottom:8px; }
@@ -455,7 +413,6 @@
 .pdp-sizechart{ display:inline-block; margin-top:12px; background:none; border:0; padding:0; color:#9b988f; font-family:'Fira Sans Condensed',sans-serif; font-size:12px; letter-spacing:0.05em; text-decoration:underline; text-underline-offset:3px; cursor:pointer; transition:color .2s; }
 .pdp-sizechart:hover{ color:#ECE9E2; }
 
-/* ===== SIZE CHART slide-out ===== */
 .sizechart-drawer{ position:fixed; top:0; right:0; height:100%; width:min(560px,94vw); background:#0d0d0b; color:#ECE9E2; transform:translateX(100%); transition:transform .35s cubic-bezier(.4,0,.2,1); z-index:100; display:flex; flex-direction:column; box-shadow:-20px 0 60px rgba(0,0,0,0.5); }
 .sizechart-drawer.open{ transform:translateX(0); }
 .sizechart-head{ display:flex; align-items:center; justify-content:space-between; padding:24px 26px 18px; border-bottom:1px solid rgba(236,233,226,0.12); }
@@ -466,11 +423,9 @@
 .sizechart-body img{ width:100%; height:auto; border-radius:8px; display:block; }
 .sizechart-empty{ font-family:'Fira Sans Condensed',sans-serif; color:#9b988f; text-align:center; padding:54px 18px; line-height:1.7; font-size:14px; }
 
-/* ===== PDP accordion size-chart link ===== */
 .pdp-acc-sizechart{ display:inline-block; margin-top:12px; background:none; border:0; padding:0; color:#ECE9E2; font-family:'Fira Sans Condensed',sans-serif; font-size:13px; letter-spacing:0.04em; text-decoration:underline; text-underline-offset:3px; cursor:pointer; transition:color .2s; }
 .pdp-acc-sizechart:hover{ color:#9b988f; }
 
-/* ===== MAKE IT A PAIR ===== */
 .pdp-pair{ margin-top:26px; padding-top:24px; border-top:1px solid rgba(236,233,226,0.12); }
 .pdp-pair-title{ display:block; font-family:'Fira Sans Condensed',sans-serif; font-size:13px; text-transform:uppercase; letter-spacing:0.12em; color:#ECE9E2; margin-bottom:14px; }
 .pdp-pair-card{ display:flex; align-items:center; gap:14px; border:1px solid rgba(236,233,226,0.14); border-radius:10px; padding:12px; }
@@ -484,7 +439,6 @@
 .pdp-pair-add:hover{ background:#ECE9E2; color:#0d0d0b; }
 .pdp-pair-add:disabled{ opacity:0.4; cursor:not-allowed; }
 
-/* ===== IMAGE ZOOM (lightbox) ===== */
 #pdpImg{ cursor:zoom-in; }
 .pdp-zoom{ position:fixed; inset:0; background:rgba(7,7,6,0.93); z-index:120; display:flex; align-items:center; justify-content:center; padding:30px; opacity:0; visibility:hidden; transition:opacity .3s ease, visibility .3s; }
 .pdp-zoom.open{ opacity:1; visibility:visible; }
@@ -494,7 +448,6 @@
 .pdp-zoom-close{ position:absolute; top:20px; right:26px; background:none; border:0; color:#ECE9E2; font-size:34px; line-height:1; cursor:pointer; opacity:0.8; transition:opacity .2s; }
 .pdp-zoom-close:hover{ opacity:1; }
 
-/* ===== JOIN THE CLIMB (footer email capture) ===== */
 .join{ text-align:center; padding:50px 24px 34px; }
 .join-title{ font-family:'Abril Fatface',serif; font-size:clamp(24px,3.4vw,34px); color:#ECE9E2; margin:0 0 18px; white-space:nowrap; }
 .join-row{ display:flex; align-items:center; max-width:360px; margin:0 auto; border-bottom:1px solid rgba(236,233,226,0.3); }
@@ -507,7 +460,6 @@
 .join-brand{ margin:18px 0 0; font-family:'Fira Sans Condensed',sans-serif; font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:#56544d; }
 .join-brand .fm{ font-weight:500; }
 
-/* ===== FOOTER LINK BAR ===== */
 .foot-bottom{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px 24px; max-width:1200px; margin:34px auto 0; padding:24px 0 0; border-top:1px solid var(--line); }
 .foot-tag{ font-family:'Fira Sans Condensed',sans-serif; font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:#56544d; }
 .foot-links{ display:flex; flex-wrap:wrap; gap:22px; margin-left:auto; }
@@ -518,7 +470,6 @@
   .foot-links{ margin-left:0; justify-content:center; }
 }
 
-/* ===== SEARCH OVERLAY ===== */
 .nav-search{ background:none; border:0; padding:0; color:inherit; cursor:pointer; display:inline-flex; opacity:0.85; transition:opacity .2s; }
 .nav-search:hover{ opacity:1; }
 .nav-search svg{ width:19px; height:19px; }
@@ -541,9 +492,6 @@
 .search-result-title{ color:#ECE9E2; font-family:'Fira Sans Condensed',sans-serif; font-size:15px; }
 .search-empty{ color:#56544d; font-family:'Fira Sans Condensed',sans-serif; font-size:14px; padding:14px 4px; }
 
-
-/* ===== HOMEPAGE: FIRST PIECES full-screen teaser ===== */
-/* ===== HOMEPAGE SLIDESHOW (stacked cover panels) ===== */
 .slides{ position:relative; }
 .slide{ position:sticky; top:0; height:100svh; min-height:100svh; overflow:hidden; background:#0d0d0b; }
 .slide.hero{ background:transparent; }
@@ -551,7 +499,6 @@
 .slide-bg img{ width:100%; height:100%; object-fit:cover; }
 .slide-shade{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(13,13,11,0.5) 0%, rgba(13,13,11,0.68) 100%); }
 
-/* Slide 2 - First Pieces */
 .firstpieces{ display:block; }
 .fp-link{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; text-decoration:none; overflow:hidden; background:#0d0d0b; }
 .fp-bg{ position:absolute; inset:0; z-index:0; }
@@ -565,7 +512,6 @@
 .fp-cta{ display:inline-block; font-family:'Fira Sans Condensed',sans-serif; font-size:13px; text-transform:uppercase; letter-spacing:0.18em; color:#ECE9E2; border:1px solid rgba(236,233,226,0.55); border-radius:7px; padding:15px 32px; transition:background .3s ease, color .3s ease, border-color .3s ease; }
 .fp-link:hover .fp-cta{ background:#ECE9E2; color:#0d0d0b; border-color:#ECE9E2; }
 
-/* Slide 3 - Most Worn */
 .liked{ display:flex; align-items:center; }
 .liked-inner{ position:relative; z-index:2; width:100%; max-width:1180px; margin:0 auto; padding:40px 30px; }
 .liked-head{ text-align:center; margin-bottom:42px; }
@@ -582,7 +528,6 @@
 .liked-card-price{ font-family:'Fira Sans Condensed',sans-serif; font-size:13px; color:#9b988f; }
 .liked-card--empty{ opacity:0.5; }
 
-/* Slide 4 - Mountain Collection */
 .mountain{ display:flex; align-items:center; }
 .mtn-inner{ position:relative; z-index:2; width:100%; max-width:1180px; margin:0 auto; padding:40px 30px; text-align:center; }
 .mtn-head{ margin-bottom:34px; }
@@ -614,8 +559,6 @@
   .fp-bg img, .liked-card-img img, .mtn-card img{ transition:none; }
 }
 
-
-/* ===== MV Premium Pass 1 - restraint + matte button ===== */
 #patternWall{opacity:.05;}
 .cta{background:#ECE9E2;color:#0d0d0b;border:none;border-radius:2px;padding:15px 42px;box-shadow:none;font-family:'Fira Sans Condensed',sans-serif;font-weight:600;font-size:11px;letter-spacing:.3em;text-transform:uppercase;transition:opacity .3s ease;}
 .cta:hover{opacity:.82;box-shadow:none;transform:none;}
