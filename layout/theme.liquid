@@ -14,7 +14,7 @@
   {{ content_for_header }}
 
   <style>
-  /* Cart upsells */
+  
   #cartUpsells{ padding:0 16px; display:flex; flex-direction:column; gap:8px; }
   .cu-upsell{ display:flex; align-items:center; gap:12px; padding:12px; background:#111110; border:1px solid rgba(236,233,226,.1); border-radius:6px; }
   .cu-img{ width:48px; height:60px; background:#1c1c19; border-radius:4px; overflow:hidden; flex:none; }
@@ -36,7 +36,7 @@
   .cu-pp-btn{ flex:none; background:transparent; color:#c8b273; border:1px solid rgba(200,178,115,.3); border-radius:6px; padding:6px 12px; font-family:'Fira Sans Condensed',sans-serif; font-weight:700; font-size:11px; letter-spacing:.06em; text-transform:uppercase; cursor:pointer; white-space:nowrap; }
   .cu-pp-btn:hover{ background:rgba(200,178,115,.1); }
   .cu-pp-btn:disabled{ opacity:.5; cursor:not-allowed; }
-  /* Payment icons */
+  
   .cart-payments{ display:flex; flex-wrap:wrap; justify-content:center; gap:5px; margin-top:10px; }
   .cart-payment-icon{ display:inline-flex; height:22px; opacity:.7; } .cart-payment-icon svg{ height:22px; width:auto; border-radius:3px; }
   .cart-discount{ padding:0 0 14px; }
@@ -53,7 +53,7 @@
   </style>
 </head>
 <body>
-  {% comment %}— Redirect handlers: account register → my-account, affiliate flows → portal —{% endcomment %}
+  
   {% if customer %}
   <script>
     (function(){
@@ -134,7 +134,6 @@
     </div>
     <div class="cart-items" id="cartItems"></div>
 
-    {%- comment -%}── EARLY ACCESS UPSELL (Liquid rendered, shown/hidden by JS){%- endcomment -%}
     {%- if settings.cart_ea_product != blank -%}
       <div class="cu-upsell" id="cuEa"
         data-pid="{{ settings.cart_ea_product.id }}"
@@ -156,7 +155,6 @@
       </div>
     {%- endif -%}
 
-    {%- comment -%}── PACKAGE PROTECTION (Liquid rendered){%- endcomment -%}
     {%- if settings.cart_pp_product != blank -%}
       <div class="cu-protection" id="cuPp"
         data-pid="{{ settings.cart_pp_product.id }}"
@@ -212,5 +210,4 @@
   {{ 'mv-script.js' | asset_url | script_tag }}
 </body>
 </html>
-
 
