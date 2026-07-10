@@ -613,3 +613,9 @@
 @media (prefers-reduced-motion: reduce){
   .fp-bg img, .liked-card-img img, .mtn-card img{ transition:none; }
 }
+
+
+/* ===== MV Premium Pass 1 - restraint + matte button ===== */
+#patternWall{opacity:.05;}
+.cta{background:#ECE9E2;color:#0d0d0b;border:none;border-radius:2px;padding:15px 42px;box-shadow:none;font-family:'Fira Sans Condensed',sans-serif;font-weight:600;font-size:11px;letter-spacing:.3em;text-transform:uppercase;transition:opacity .3s ease;}
+.cta:hover{opacity:.82;box-shadow:none;transform:none;}
