@@ -74,8 +74,6 @@
         <button type="submit" name="add" id="pdpAdd" class="pdp-add"{% unless cv.available %} disabled{% endunless %}>
           {% if cv.available %}Add to Cart{% else %}Sold Out{% endif %}
         </button>
-
-        {{ form | payment_button }}
       {% endform %}
 
       {% if section.blocks.size > 0 %}
