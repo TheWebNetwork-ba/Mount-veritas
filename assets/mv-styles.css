@@ -99,7 +99,7 @@
   .hero-inner{ position:relative; z-index:2; padding:0 0 0 3.5vw; max-width:1100px; }
   .hero .eyebrow{
     font-family:var(--grotesk); font-size:12px; font-weight:500;
-    letter-spacing:0.5em; text-transform:uppercase; color:#ffb800;
+    letter-spacing:0.5em; text-transform:uppercase; color:#c8b273;
     margin-bottom:10px;
   }
   .hero h1{
@@ -559,7 +559,7 @@
 .fp-link:hover .fp-bg img{ transform:scale(1.05); }
 .fp-shade{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(13,13,11,0.35) 0%, rgba(13,13,11,0.62) 100%); }
 .fp-inner{ position:relative; z-index:2; text-align:center; padding:48px 28px; max-width:780px; }
-.fp-eyebrow{ display:block; font-family:'Fira Sans Condensed',sans-serif; font-size:13px; text-transform:uppercase; letter-spacing:0.34em; color:#ffb800; margin-bottom:24px; }
+.fp-eyebrow{ display:block; font-family:'Fira Sans Condensed',sans-serif; font-size:13px; text-transform:uppercase; letter-spacing:0.34em; color:#c8b273; margin-bottom:24px; }
 .fp-title{ font-family:'Abril Fatface',serif; font-size:clamp(40px,7vw,88px); line-height:1.03; color:#ECE9E2; margin:0 0 22px; }
 .fp-text{ font-family:'Fira Sans Condensed',sans-serif; font-size:clamp(15px,1.6vw,18px); line-height:1.7; color:#9b988f; margin:0 auto 34px; max-width:540px; }
 .fp-cta{ display:inline-block; font-family:'Fira Sans Condensed',sans-serif; font-size:13px; text-transform:uppercase; letter-spacing:0.18em; color:#ECE9E2; border:1px solid rgba(236,233,226,0.55); border-radius:7px; padding:15px 32px; transition:background .3s ease, color .3s ease, border-color .3s ease; }
@@ -569,7 +569,7 @@
 .liked{ display:flex; align-items:center; }
 .liked-inner{ position:relative; z-index:2; width:100%; max-width:1180px; margin:0 auto; padding:40px 30px; }
 .liked-head{ text-align:center; margin-bottom:42px; }
-.liked-eyebrow{ display:block; font-family:'Fira Sans Condensed',sans-serif; font-size:12px; text-transform:uppercase; letter-spacing:0.3em; color:#ffb800; margin-bottom:16px; }
+.liked-eyebrow{ display:block; font-family:'Fira Sans Condensed',sans-serif; font-size:12px; text-transform:uppercase; letter-spacing:0.3em; color:#c8b273; margin-bottom:16px; }
 .liked-title{ font-family:'Abril Fatface',serif; font-size:clamp(30px,5vw,58px); line-height:1.02; color:#ECE9E2; margin:0; }
 .liked-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
 .liked-card{ text-decoration:none; color:#ECE9E2; display:flex; flex-direction:column; }
@@ -586,7 +586,7 @@
 .mountain{ display:flex; align-items:center; }
 .mtn-inner{ position:relative; z-index:2; width:100%; max-width:1180px; margin:0 auto; padding:40px 30px; text-align:center; }
 .mtn-head{ margin-bottom:34px; }
-.mtn-eyebrow{ display:block; font-family:'Fira Sans Condensed',sans-serif; font-size:12px; text-transform:uppercase; letter-spacing:0.3em; color:#ffb800; margin-bottom:16px; }
+.mtn-eyebrow{ display:block; font-family:'Fira Sans Condensed',sans-serif; font-size:12px; text-transform:uppercase; letter-spacing:0.3em; color:#c8b273; margin-bottom:16px; }
 .mtn-title{ font-family:'Abril Fatface',serif; font-size:clamp(30px,5vw,58px); line-height:1.02; color:#ECE9E2; margin:0 0 14px; }
 .mtn-text{ font-family:'Fira Sans Condensed',sans-serif; font-size:clamp(14px,1.5vw,17px); color:#9b988f; margin:0; }
 .mtn-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin:0 0 32px; }
