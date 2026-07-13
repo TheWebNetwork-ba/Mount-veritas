@@ -444,17 +444,41 @@ function mvCuAdd(btn){
     var code = input.value.trim().toUpperCase();
     if (!code) return;
 
-    // Point checkout button through Shopify's native discount redemption URL
-    // /discount/{code}?redirect=/checkout sets the discount cookie then goes to checkout
-    if (checkout) {
-      checkout.setAttribute('href', '/discount/' + encodeURIComponent(code) + '?redirect=%2Fcheckout');
-    }
-
-    showMsg('✓ Code applied — click Checkout to redeem.', true);
-    btn.textContent = 'Applied';
     btn.disabled = true;
-    input.readOnly = true;
-    input.style.opacity = '.6';
+    btn.textContent = 'Checking';
+    if (msg) msg.style.display = 'none';
+
+    // Validate for real: apply to the cart, then read /cart.js back.
+    // discount_codes carries an "applicable" flag we can trust.
+    fetch('/discount/' + encodeURIComponent(code), { redirect:'follow' })
+      .then(function(){ return fetch('/cart.js', { headers:{ 'Accept':'application/json' } }); })
+      .then(function(r){ return r.json(); })
+      .then(function(cart){
+        var codes = cart.discount_codes || [];
+        var hit = null;
+        for (var i = 0; i < codes.length; i++){
+          if ((codes[i].code || '').toUpperCase() === code){ hit = codes[i]; break; }
+        }
+        if (hit && hit.applicable){
+          showMsg('Code applied. It comes off at checkout.', true);
+          btn.textContent = 'Applied';
+          btn.disabled = true;
+          input.readOnly = true;
+          input.style.opacity = '.6';
+          if (checkout) checkout.setAttribute('href', '/discount/' + encodeURIComponent(code) + '?redirect=%2Fcheckout');
+        } else {
+          showMsg('That code isn’t valid. Check it and try again.', false);
+          btn.textContent = 'Apply';
+          btn.disabled = false;
+          if (checkout) checkout.setAttribute('href', '/checkout');
+        }
+      })
+      .catch(function(){
+        showMsg('Could not verify just now. It will apply at checkout if valid.', false);
+        btn.textContent = 'Apply';
+        btn.disabled = false;
+        if (checkout) checkout.setAttribute('href', '/discount/' + encodeURIComponent(code) + '?redirect=%2Fcheckout');
+      });
   }
 
   btn.addEventListener('click', applyCode);
