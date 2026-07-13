@@ -35,12 +35,21 @@
             "use_description": false,
             "content": "<p>Cut relaxed through the body and shoulders. Available in M and L. Check the size chart for exact measurements.</p>"
           }
+        },
+        "panel_AAWmrw": {
+          "type": "panel",
+          "settings": {
+            "heading": "Socials",
+            "use_description": false,
+            "content": "<p>fdsafdasf asfadfdasf. dsafdasfasdf</p>"
+          }
         }
       },
       "block_order": [
         "panel1",
         "panel2",
-        "panel3"
+        "panel3",
+        "panel_AAWmrw"
       ],
       "settings": {
         "pair_title": "Make it a Pair"
