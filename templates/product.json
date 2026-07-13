@@ -25,7 +25,7 @@
           "settings": {
             "heading": "Shipping",
             "use_description": false,
-            "content": "<p>Orders process in 2-3 business days, with tracking emailed at dispatch.</p>"
+            "content": "<p>Orders are processed within two to three business days. You receive tracking by email as soon as your order ships.</p>"
           }
         },
         "panel3": {
@@ -33,7 +33,7 @@
           "settings": {
             "heading": "Size & Fit",
             "use_description": false,
-            "content": "<p>Add size and fit information here.</p>"
+            "content": "<p>Cut relaxed through the body and shoulders. Available in M and L. Check the size chart for exact measurements.</p>"
           }
         }
       },
@@ -53,21 +53,21 @@
           "type": "faq_item",
           "settings": {
             "question": "How does the fit run?",
-            "answer": "<p>Relaxed and true to size. Prefer it closer? Size down one.</p>"
+            "answer": "<p>The hoodie is cut relaxed and runs true to size. For a closer fit, order one size down.</p>"
           }
         },
         "q2": {
           "type": "faq_item",
           "settings": {
             "question": "How fast does it ship?",
-            "answer": "<p>Orders process in 2-3 business days, with tracking emailed at dispatch.</p>"
+            "answer": "<p>Orders are processed within two to three business days. You receive tracking by email as soon as your order ships.</p>"
           }
         },
         "q3": {
           "type": "faq_item",
           "settings": {
             "question": "Can I return it?",
-            "answer": "<p>Yes — unworn pieces within 14 days. Message us and we'll handle it.</p>"
+            "answer": "<p>Unworn pieces can be returned within 14 days of delivery. Contact us and we will arrange it.</p>"
           }
         }
       },
