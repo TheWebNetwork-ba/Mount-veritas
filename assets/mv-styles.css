@@ -565,5 +565,5 @@
 
 
 /* MV atmosphere - vignette + film grain so every page reads framed, not flat */
-body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:2;background:radial-gradient(135% 115% at 50% 40%, rgba(0,0,0,0) 54%, rgba(0,0,0,.58) 100%);}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:2;background:radial-gradient(120% 90% at 50% 38%, rgba(255,255,255,0.022), rgba(255,255,255,0) 46%),radial-gradient(130% 115% at 50% 44%, rgba(0,0,0,0) 50%, rgba(0,0,0,.66) 100%);}
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:2;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
