@@ -85,13 +85,21 @@
             "question": "Is this a limited drop?",
             "answer": "<p>Every drop is its own chapter. Each piece is numbered to the person who owns it, and once a drop closes it does not come back. What you wear is proof you were there.</p>"
           }
+        },
+        "q5": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What comes in the box?",
+            "answer": "<p>Your piece arrives in a custom magnetic box, wrapped in tissue, with a card that carries your number. No plastic, nothing loose. The box is made to keep. It is the first sign that this was built for you and no one else.</p>"
+          }
         }
       },
       "block_order": [
         "q1",
         "q2",
         "q3",
-        "q4"
+        "q4",
+        "q5"
       ],
       "settings": {
         "faq_title": "Questions"
