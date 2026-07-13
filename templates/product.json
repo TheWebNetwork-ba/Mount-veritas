@@ -17,7 +17,7 @@
           "settings": {
             "heading": "Details",
             "use_description": false,
-            "content": "<ul><li>80% COTTON / 20% POLYESTER FLEECE</li><li>380 GSM</li></ul>"
+            "content": "<ul><li>BASECAMP™ Collection</li><li>Relaxed body</li><li>Double-layered hood</li><li>Kangaroo pocket</li><li>Ribbed cuffs and hem</li><li>80% cotton, 20% polyester fleece, 380 GSM</li><li>Embroidered Mount Veritas labels</li><li>Imported</li></ul>"
           }
         },
         "panel2": {
@@ -25,7 +25,7 @@
           "settings": {
             "heading": "Shipping",
             "use_description": false,
-            "content": "<p>Orders are processed within two to three business days. You receive tracking by email as soon as your order ships.</p>"
+            "content": "<p>Orders arrive within 5 to 7 business days. You receive tracking by email as soon as your order ships.</p>"
           }
         },
         "panel3": {
@@ -60,7 +60,7 @@
           "type": "faq_item",
           "settings": {
             "question": "How fast does it ship?",
-            "answer": "<p>Orders are processed within two to three business days. You receive tracking by email as soon as your order ships.</p>"
+            "answer": "<p>Orders arrive within 5 to 7 business days. You receive tracking by email as soon as your order ships.</p>"
           }
         },
         "q3": {
