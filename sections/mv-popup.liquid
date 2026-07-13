@@ -12,7 +12,7 @@
         <input class="mv-pop-input" type="email" name="email" placeholder="Email" aria-label="Email" autocomplete="email" required>
         <button class="mv-pop-btn" type="submit">{{ section.settings.button_label | default: 'Get my code' }}</button>
         {% if section.settings.fine_print != blank %}<p class="mv-pop-fine">{{ section.settings.fine_print }}</p>{% endif %}
-        <p class="mv-pop-err" id="mv-pop-err" hidden>That didn't go through &mdash; try again.</p>
+        <p class="mv-pop-err" id="mv-pop-err" hidden>That did not go through. Try again.</p>
       </form>
     </div>
 
@@ -35,7 +35,7 @@
 .mv-pop-card{ position:relative; width:100%; max-width:380px; background:#1b1914; border:1px solid rgba(236,233,226,.12); border-radius:10px; padding:32px 26px; box-sizing:border-box; }
 .mv-pop-x{ position:absolute; top:10px; right:12px; background:none; border:none; color:#6f6c64; font-size:24px; line-height:1; cursor:pointer; padding:4px 8px; }
 .mv-pop-x:hover{ color:#ECE9E2; }
-.mv-pop-eyebrow{ text-align:center; font-family:'Fira Sans Condensed',sans-serif; color:#ffb800; font-size:12px; letter-spacing:2px; margin:0 0 12px; }
+.mv-pop-eyebrow{ text-align:center; font-family:'Fira Sans Condensed',sans-serif; color:#c8b273; font-size:12px; letter-spacing:2px; margin:0 0 12px; }
 .mv-pop-title{ text-align:center; font-family:'Abril Fatface',serif; font-weight:400; color:#ECE9E2; font-size:26px; line-height:1.1; margin:0 0 10px; }
 .mv-pop-sub{ text-align:center; font-family:'Fira Sans Condensed',sans-serif; color:#9b988f; font-size:13.5px; line-height:1.5; margin:0 0 18px; }
 .mv-pop-input{ width:100%; box-sizing:border-box; background:#0f0f0d; border:1px solid #3a392f; border-radius:6px; padding:13px 15px; color:#ECE9E2; font-family:'Fira Sans Condensed',sans-serif; font-size:15px; margin-bottom:10px; }
@@ -46,24 +46,21 @@
 .mv-pop-btn:disabled{ opacity:.6; cursor:default; }
 .mv-pop-fine{ text-align:center; font-family:'Fira Sans Condensed',sans-serif; color:#6f6c64; font-size:11px; margin:10px 0 0; }
 .mv-pop-err{ text-align:center; color:#d98a8a; font-family:'Fira Sans Condensed',sans-serif; font-size:12px; margin:8px 0 0; }
-.mv-pop-code{ width:100%; box-sizing:border-box; display:flex; align-items:center; justify-content:center; gap:10px; background:rgba(255,184,0,.06); border:1px solid rgba(255,184,0,.45); border-radius:6px; padding:14px; cursor:pointer; color:#9b988f; }
-.mv-pop-code:hover{ border-color:rgba(255,184,0,.75); }
-.mv-pop-code-tx{ font-family:'Fira Sans Condensed',sans-serif; color:#ffd27a; font-size:19px; font-weight:500; letter-spacing:3px; }
+.mv-pop-code{ width:100%; box-sizing:border-box; display:flex; align-items:center; justify-content:center; gap:10px; background:rgba(200,178,115,.06); border:1px solid rgba(200,178,115,.45); border-radius:6px; padding:14px; cursor:pointer; color:#9b988f; }
+.mv-pop-code:hover{ border-color:rgba(200,178,115,.75); }
+.mv-pop-code-tx{ font-family:'Fira Sans Condensed',sans-serif; color:#d8c48f; font-size:19px; font-weight:500; letter-spacing:3px; }
 .mv-pop-copied{ text-align:center; font-family:'Fira Sans Condensed',sans-serif; color:#8fd3a8; font-size:12px; margin:8px 0 0; }
 @media (max-width:600px){ .mv-pop-card{ padding:28px 20px; } }
 </style>
 
 <script>
 (function(){
-  var KEY='mv_launch_popup_v2';
   var pop=document.getElementById('mv-pop');
   if(!pop) return;
-  try{ if(localStorage.getItem(KEY)) return; }catch(e){}
   var delay=(parseInt(pop.getAttribute('data-delay'),10)||6)*1000;
   var timer=setTimeout(open,delay);
 
   function open(){
-    try{ localStorage.setItem(KEY,'1'); }catch(e){}
     pop.hidden=false;
   }
   function close(){
