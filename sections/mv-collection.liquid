@@ -1,6 +1,10 @@
 {% paginate collection.products by 24 %}
 <section class="catalog" aria-label="Catalog">
+  <div class="catalog-glow" aria-hidden="true"></div>
+  <div class="catalog-grain" aria-hidden="true"></div>
+
   <div class="catalog-head">
+    <p class="catalog-eyebrow">{{ section.settings.catalog_eyebrow | default: 'The Ascent' }}</p>
     <h1 class="catalog-title">{% if collection.handle == 'all' %}The Drop{% else %}{{ collection.title | default: 'The Catalog' }}{% endif %}</h1>
     <span class="catalog-count">{{ collection.products_count }} {% if collection.products_count == 1 %}piece{% else %}pieces{% endif %}</span>
   </div>
@@ -13,7 +17,9 @@
             {% if product.featured_image %}
               <img src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.title | escape }}" loading="lazy">
             {% else %}
-              <svg viewBox="0 0 100 100" aria-hidden="true"><path d="M30 18 L42 12 Q50 18 58 12 L70 18 L82 32 L70 42 L70 88 L30 88 L30 42 L18 32 Z" fill="none" stroke="#56544d" stroke-width="1.4"/></svg>
+              <div class="cat-card-empty" aria-hidden="true">
+                <img class="cat-empty-mark" src="{{ 'mv-mountain-gold.png' | asset_url }}" alt="" loading="lazy">
+              </div>
             {% endif %}
             {% unless product.available %}<span class="cat-soldout">Sold out</span>{% endunless %}
           </div>
@@ -34,6 +40,17 @@
 </section>
 {% endpaginate %}
 
+<style>
+  .catalog{ position:relative; overflow:hidden; }
+  .catalog-glow{ position:absolute; left:50%; top:0; width:120vw; height:60vh; transform:translate(-50%,-30%); z-index:0; pointer-events:none; background:radial-gradient(closest-side, rgba(200,178,115,.10), rgba(200,178,115,0) 70%); }
+  .catalog-grain{ position:absolute; inset:0; z-index:0; pointer-events:none; opacity:.045; mix-blend-mode:overlay; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='cn'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23cn)'/%3E%3C/svg%3E"); background-size:180px 180px; }
+  .catalog-head, .catalog-grid, .catalog-pager, .catalog-empty{ position:relative; z-index:1; }
+  .catalog-eyebrow{ font-family:'Fira Sans Condensed',sans-serif; font-size:11px; letter-spacing:.42em; text-transform:uppercase; color:#c8b273; margin:0 0 16px; }
+  .cat-card-empty{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:radial-gradient(120% 95% at 50% 0%, #17160f 0%, #131311 55%, #0f0f0d 100%); }
+  .cat-card-img .cat-empty-mark{ width:62%; max-width:160px; height:auto; object-fit:contain; opacity:.6; }
+  .cat-card:hover .cat-empty-mark{ opacity:.78; transition:opacity .5s ease; }
+</style>
+
 {% schema %}
-{ "name": "MV Catalog", "settings": [], "blocks": [] }
+{ "name": "MV Catalog", "settings": [ { "type": "text", "id": "catalog_eyebrow", "label": "Eyebrow (gold text above title)", "default": "The Ascent" } ], "blocks": [] }
 {% endschema %}
