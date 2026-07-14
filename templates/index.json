@@ -12,6 +12,7 @@
     "main": {
       "type": "mv-home",
       "settings": {
+        "fp_product": "mv-fw26-basecamp-signature-hoodie",
         "fp_eyebrow": "Collection 01",
         "fp_title": "Where the climb begins.",
         "fp_cta": "See the piece",

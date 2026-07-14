@@ -1,9 +1,11 @@
 <style>
+  /* ---- hero ---- */
   .hero{ align-items:center; justify-content:center; }
   .hero-inner{
     display:flex; flex-direction:column; align-items:center;
     gap:22px; text-align:center;
     max-width:900px; margin:0 auto; padding:0 24px;
+    position:relative; z-index:2;
   }
   .hero-eyebrow{
     margin:0;
@@ -27,39 +29,43 @@
   }
   .hero-cta:hover{ border-color:#c8b273; color:#c8b273; }
 
+  /* hero depth: faint mountain ridge behind the words */
+  .hero-ridge{ position:absolute; left:50%; bottom:-1%; transform:translateX(-50%); width:min(1500px,150vw); z-index:0; opacity:.10; pointer-events:none; }
+  .hero-ridge img{ width:100%; height:auto; display:block; animation:mvRidge 16s ease-in-out infinite; }
+
+  /* ---- collection cards (coming soon) ---- */
   .mtn-card--soon{
-    opacity:1;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-    gap:14px;
-    background:#0f0f0d;
+    opacity:1; display:flex; align-items:center; justify-content:center;
+    flex-direction:column; gap:14px; background:#0f0f0d;
   }
   .mtn-soon-logo{ position:relative; z-index:2; }
   .mtn-soon-logo svg{ width:44px; height:44px; display:block; }
   .mtn-card--soon .mtn-soon-logo img{ position:static; inset:auto; width:132px; max-width:62%; height:auto; object-fit:contain; display:block; opacity:.9; }
   .mtn-card--soon .mtn-card-shade{ opacity:0.4; }
   .mtn-card--soon .mtn-card-name{
-    position:relative;
-    left:auto; right:auto; bottom:auto;
-    z-index:2;
-    text-align:center;
-    font-size:11px;
-    letter-spacing:0.22em;
-    color:#9b988f;
-  }
-  @media (max-width:640px){
-    .hero h1{ font-size:clamp(30px,10vw,48px); }
-    .hero-inner{ gap:18px; padding:0 20px; }
+    position:relative; left:auto; right:auto; bottom:auto; z-index:2;
+    text-align:center; font-size:11px; letter-spacing:0.22em; color:#9b988f;
   }
 
+  /* ---- first ascent: showcase the piece ---- */
   .firstpieces .fp-cta{ background:none; border:none; border-radius:0; padding:0 0 6px; color:#ECE9E2; border-bottom:1px solid rgba(236,233,226,.38); font-family:'Fira Sans Condensed',sans-serif; font-size:11px; letter-spacing:.34em; text-transform:uppercase; transition:border-color .3s ease,color .3s ease; }
   .firstpieces .fp-link:hover .fp-cta{ background:none; border-color:#c8b273; color:#c8b273; }
+  .fp-piece{ display:block; margin:0 0 22px; font-family:'Fira Sans Condensed',sans-serif; font-size:13px; letter-spacing:.06em; color:#9b988f; }
+  .fp-price{ color:#c8b273; margin-left:8px; }
 
-  /* ===== arrival + atmosphere: continues the threshold ===== */
+  /* ---- the call to climb (manifesto) ---- */
+  .manifesto{ display:flex; align-items:center; justify-content:center; background:#0b0b09; }
+  .mf-glow{ position:absolute; left:50%; top:44%; width:90vw; height:60vh; transform:translate(-50%,-50%); z-index:0; pointer-events:none; background:radial-gradient(closest-side, rgba(200,178,115,.07), rgba(200,178,115,0) 70%); }
+  .mf-inner{ position:relative; z-index:2; max-width:760px; margin:0 auto; padding:40px 28px; text-align:center; }
+  .mf-eyebrow{ display:block; font-family:'Fira Sans Condensed',sans-serif; font-size:11px; letter-spacing:.42em; text-transform:uppercase; color:#c8b273; margin:0 0 28px; }
+  .mf-statement{ font-family:'Abril Fatface',Georgia,serif; font-weight:400; color:#ECE9E2; font-size:clamp(22px,3.4vw,40px); line-height:1.32; margin:0 0 26px; }
+  .mf-close{ display:block; font-family:'Fira Sans Condensed',sans-serif; font-size:clamp(14px,1.5vw,17px); letter-spacing:.02em; color:#9b988f; }
+
+  /* ---- cinematic stack: dim overlay per slide ---- */
+  .slide-dim{ position:absolute; inset:0; z-index:5; background:#080807; opacity:0; pointer-events:none; }
+
+  /* ---- arrival + atmosphere: continues the threshold ---- */
   .mv-arrive{ position:fixed; inset:0; z-index:60; background:#080807; pointer-events:none; animation:mvArriveLift .9s ease .05s forwards; }
-
   .hero-glow{ position:absolute; top:0; left:50%; width:120vw; height:72vh; transform:translate(-50%,-32%); z-index:1; pointer-events:none; background:radial-gradient(closest-side, rgba(200,178,115,.14), rgba(200,178,115,0) 70%); animation:mvGlowH 9s ease-in-out infinite; }
   .hero-grain{ position:absolute; inset:0; z-index:1; pointer-events:none; opacity:.05; mix-blend-mode:overlay; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='hn'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23hn)'/%3E%3C/svg%3E"); background-size:180px 180px; }
 
@@ -68,11 +74,9 @@
   .hero-scroll-line{ width:1px; height:46px; position:relative; overflow:hidden; background:rgba(236,233,226,.14); }
   .hero-scroll-line::after{ content:""; position:absolute; left:0; top:-45%; width:1px; height:45%; background:#c8b273; animation:mvScroll 2.4s cubic-bezier(.5,0,.5,1) infinite; }
 
-  /* hero arrival stagger */
   .ar{ opacity:0; transform:translateY(14px); animation:mvRiseH 1s cubic-bezier(.2,.7,.2,1) forwards; }
   .ar1{ animation-delay:.3s; } .ar2{ animation-delay:.5s; } .ar3{ animation-delay:.78s; } .ar4{ animation-delay:1.05s; }
 
-  /* scroll reveals for the lower slides */
   .mvjs .reveal{ opacity:0; transform:translateY(26px); transition:opacity 1.1s cubic-bezier(.2,.7,.2,1), transform 1.1s cubic-bezier(.2,.7,.2,1); }
   .reveal.in{ opacity:1; transform:none; }
 
@@ -80,12 +84,19 @@
   @keyframes mvRiseH{ to{ opacity:1; transform:none; } }
   @keyframes mvGlowH{ 0%,100%{ opacity:.5; } 50%{ opacity:.9; } }
   @keyframes mvScroll{ 0%{ top:-45%; } 55%,100%{ top:100%; } }
+  @keyframes mvRidge{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-8px); } }
+
+  @media (max-width:640px){
+    .hero h1{ font-size:clamp(30px,10vw,48px); }
+    .hero-inner{ gap:18px; padding:0 20px; }
+    .mf-statement{ font-size:clamp(20px,6vw,30px); }
+  }
 
   @media (prefers-reduced-motion: reduce){
     .mv-arrive{ display:none; }
     .ar{ opacity:1; transform:none; animation:none; }
     .mvjs .reveal{ opacity:1; transform:none; transition:none; }
-    .hero-glow, .hero-scroll-line::after{ animation:none; }
+    .hero-glow, .hero-scroll-line::after, .hero-ridge img{ animation:none; }
   }
 </style>
 
@@ -100,32 +111,52 @@
       <div class="slide-bg"><img src="{{ section.settings.hero_image | image_url: width: 2400 }}" alt="" loading="lazy"><span class="slide-shade"></span></div>
     {% endif %}
     <div class="hero-glow" aria-hidden="true"></div>
+    <div class="hero-ridge" aria-hidden="true"><img src="{{ 'mv-mountain-gold.png' | asset_url }}" alt=""></div>
     <div class="hero-grain" aria-hidden="true"></div>
     <div class="hero-inner">
       <span class="hero-eyebrow ar ar1">See it. Believe it. Obtain it.</span>
       <h1 class="ar ar2">Wear the Greater Man.</h1>
       <a class="hero-cta ar ar3" href="{{ section.settings.fp_link | default: routes.all_products_collection_url }}">Shop the drop</a>
     </div>
-    <a class="hero-scroll ar ar4" href="#shop" aria-label="Scroll to the collection">
+    <a class="hero-scroll ar ar4" href="#climb" aria-label="Scroll">
       <span>Scroll</span>
       <span class="hero-scroll-line"></span>
     </a>
+    <div class="slide-dim" aria-hidden="true"></div>
   </header>
 
+  <section class="slide manifesto" id="climb" aria-label="The Call to Climb">
+    <div class="mf-glow" aria-hidden="true"></div>
+    <div class="mf-inner reveal">
+      {% if section.settings.mf_eyebrow != blank %}<span class="mf-eyebrow">{{ section.settings.mf_eyebrow | escape }}</span>{% endif %}
+      <p class="mf-statement">{{ section.settings.mf_body | default: 'You saw a life most people never let themselves picture. You believed it was yours before anyone else agreed. Now you climb for it.' | newline_to_br }}</p>
+      {% if section.settings.mf_close != blank %}<span class="mf-close">{{ section.settings.mf_close | escape }}</span>{% endif %}
+    </div>
+    <div class="slide-dim" aria-hidden="true"></div>
+  </section>
+
   <section class="slide firstpieces" id="shop" aria-label="The First Ascent">
-    <a class="fp-link" href="{{ section.settings.fp_link | default: '/products/mv-fw26-basecamp-signature-hoodie' }}">
-      {% if section.settings.fp_image != blank %}
+    {%- assign fpp = section.settings.fp_product -%}
+    {%- assign fp_bg = section.settings.fp_image -%}
+    {%- if fpp != blank and fpp.featured_image -%}{%- assign fp_bg = fpp.featured_image -%}{%- endif -%}
+    {%- assign fp_url = section.settings.fp_link -%}
+    {%- if fp_url == blank and fpp != blank -%}{%- assign fp_url = fpp.url -%}{%- endif -%}
+    {%- if fp_url == blank -%}{%- assign fp_url = '/products/mv-fw26-basecamp-signature-hoodie' -%}{%- endif -%}
+    <a class="fp-link" href="{{ fp_url }}">
+      {% if fp_bg %}
         <div class="fp-bg">
-          <img src="{{ section.settings.fp_image | image_url: width: 2400 }}" alt="" loading="lazy">
+          <img src="{{ fp_bg | image_url: width: 2400 }}" alt="" loading="lazy">
           <span class="fp-shade"></span>
         </div>
       {% endif %}
       <div class="fp-inner reveal">
         {% if section.settings.fp_eyebrow != blank %}<span class="fp-eyebrow">{{ section.settings.fp_eyebrow | escape }}</span>{% endif %}
         <h2 class="fp-title">{{ section.settings.fp_title | default: 'Where the climb begins.' | escape }}</h2>
+        {%- if fpp != blank -%}<span class="fp-piece">{{ fpp.title }}<span class="fp-price">{{ fpp.price | money }}</span></span>{%- endif -%}
         <span class="fp-cta">{{ section.settings.fp_cta | default: 'See the piece' | escape }} &rarr;</span>
       </div>
     </a>
+    <div class="slide-dim" aria-hidden="true"></div>
   </section>
 
   <section class="slide mountain" aria-label="The Mountain Collection">
@@ -168,14 +199,39 @@
 
 <script>
 (function(){
-  if(!('IntersectionObserver' in window)){
+  document.documentElement.classList.add('mvjs');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* scroll reveals */
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    },{ threshold:0.18, rootMargin:'0px 0px -8% 0px' });
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  } else {
     document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
-    return;
   }
-  var io=new IntersectionObserver(function(es){
-    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-  },{ threshold:0.18, rootMargin:'0px 0px -8% 0px' });
-  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+  /* cinematic stack: each slide recedes and dims as the next covers it */
+  if(!reduce){
+    var slides = Array.prototype.slice.call(document.querySelectorAll('.slides > .slide'));
+    var ticking=false;
+    function frame(){
+      var vh = window.innerHeight || 1;
+      for(var i=0;i<slides.length-1;i++){
+        var t = slides[i+1].getBoundingClientRect().top;
+        var p = 1 - (t / vh); if(p<0)p=0; if(p>1)p=1;
+        slides[i].style.transform = 'scale(' + (1 - 0.06*p).toFixed(4) + ')';
+        var dim = slides[i].querySelector('.slide-dim');
+        if(dim) dim.style.opacity = (0.55*p).toFixed(3);
+      }
+      ticking=false;
+    }
+    function req(){ if(!ticking){ ticking=true; requestAnimationFrame(frame); } }
+    window.addEventListener('scroll', req, {passive:true});
+    window.addEventListener('resize', req);
+    req();
+  }
 })();
 </script>
 
@@ -186,14 +242,20 @@
     { "type": "header", "content": "Slide 1 — Hero" },
     { "type": "image_picker", "id": "hero_image", "label": "Background image (optional)" },
 
-    { "type": "header", "content": "Slide 2 — First Ascent" },
+    { "type": "header", "content": "Slide 2 — The Call to Climb" },
+    { "type": "text", "id": "mf_eyebrow", "label": "Eyebrow (gold text)", "default": "The Call to Climb" },
+    { "type": "textarea", "id": "mf_body", "label": "Statement", "default": "You saw a life most people never let themselves picture. You believed it was yours before anyone else agreed. Now you climb for it." },
+    { "type": "text", "id": "mf_close", "label": "Closing line", "default": "Mount Veritas is what you wear on the way up. Proof you can put on." },
+
+    { "type": "header", "content": "Slide 3 — First Ascent" },
+    { "type": "product", "id": "fp_product", "label": "Featured product (shows name + price)" },
     { "type": "text", "id": "fp_eyebrow", "label": "Eyebrow (gold text)", "default": "Collection 01" },
     { "type": "text", "id": "fp_title", "label": "Headline", "default": "Where the climb begins." },
     { "type": "text", "id": "fp_cta", "label": "Button text", "default": "See the piece" },
-    { "type": "image_picker", "id": "fp_image", "label": "Background image (optional)" },
-    { "type": "url", "id": "fp_link", "label": "Link (blank = all products)" },
+    { "type": "image_picker", "id": "fp_image", "label": "Background image (optional, overrides product image)" },
+    { "type": "url", "id": "fp_link", "label": "Link (blank = the featured product)" },
 
-    { "type": "header", "content": "Slide 3 — Mountain Collection" },
+    { "type": "header", "content": "Slide 4 — Mountain Collection" },
     { "type": "text", "id": "mtn_eyebrow", "label": "Eyebrow (gold text)", "default": "The Mountain Collection" },
     { "type": "text", "id": "mtn_title", "label": "Headline", "default": "Built for the climb." },
     { "type": "text", "id": "mtn_text", "label": "Sub text", "default": "Four collections. One ascent." },
