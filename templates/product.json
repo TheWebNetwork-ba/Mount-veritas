@@ -25,7 +25,7 @@
           "settings": {
             "heading": "Shipping",
             "use_description": false,
-            "content": "<p>Orders arrive within 5 to 7 business days. You receive tracking by email as soon as your order ships.</p>"
+            "content": "<p>We ship across Canada. Flat 20 CAD, free on orders of 249 CAD or more. Orders arrive within 5 to 7 business days, with tracking sent to your email as soon as your piece ships.</p>"
           }
         },
         "panel3": {
@@ -35,21 +35,12 @@
             "use_description": false,
             "content": "<p>Cut relaxed through the body and shoulders. Available in M and L. Check the size chart for exact measurements.</p>"
           }
-        },
-        "panel_AAWmrw": {
-          "type": "panel",
-          "settings": {
-            "heading": "Socials",
-            "use_description": false,
-            "content": "<p>fdsafdasf asfadfdasf. dsafdasfasdf</p>"
-          }
         }
       },
       "block_order": [
         "panel1",
         "panel2",
-        "panel3",
-        "panel_AAWmrw"
+        "panel3"
       ],
       "settings": {
         "pair_title": "Make it a Pair"
@@ -69,7 +60,7 @@
           "type": "faq_item",
           "settings": {
             "question": "How fast does it ship?",
-            "answer": "<p>Orders arrive within 5 to 7 business days, with tracking sent to your email the moment your order ships. Shipping is a flat 20 CAD, and free on orders over 200 CAD.</p>"
+            "answer": "<p>Orders arrive within 5 to 7 business days, with tracking sent to your email the moment your order ships. Shipping is a flat 20 CAD, and free on orders of 249 CAD or more.</p>"
           }
         },
         "q3": {
