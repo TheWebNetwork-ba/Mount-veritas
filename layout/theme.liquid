@@ -6,6 +6,7 @@
   <meta name="theme-color" content="#0d0d0b">
   <link rel="icon" type="image/png" href="{{ 'mv-favicon.png' | asset_url }}">
   <link rel="apple-touch-icon" href="{{ 'mv-favicon.png' | asset_url }}">
+  <script>window.MV_MOUNTAIN = "{{ 'mv-mountain-gold.png' | asset_url }}";</script>
   <link rel="canonical" href="{{ canonical_url }}">
   <title>{% if page_title %}{{ page_title }}{% else %}{{ shop.name }}{% endif %}</title>
   {% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
@@ -70,6 +71,8 @@
   .cart-empty-sub{ font-family:'Fira Sans Condensed',sans-serif; color:#9b988f; font-size:14px; margin:0 0 26px; }
   .cart-empty-btn{ display:inline-block; background:#ECE9E2; color:#0d0d0b; text-decoration:none; border-radius:2px; padding:13px 30px; font-family:'Fira Sans Condensed',sans-serif; font-weight:700; font-size:12px; letter-spacing:.16em; text-transform:uppercase; }
   .cart-empty-btn:hover{ background:#fff; }
+  .search-result-img--empty{ display:flex; align-items:center; justify-content:center; background:#141412; }
+  .search-result-img--empty img{ width:58% !important; height:auto !important; object-fit:contain !important; opacity:.5; }
   </style>
 </head>
 <body>
@@ -84,7 +87,7 @@
         }
       } else if(sessionStorage.getItem('mv_aff_new_reg')){
         sessionStorage.removeItem('mv_aff_new_reg');
-        window.location.replace('https://Mountveritas.bixgrow.com/register');
+        window.location.replace('https://zp017b-kh.bixgrow.com/register');
       } else if(sessionStorage.getItem('mv_aff_redirect')){
         sessionStorage.removeItem('mv_aff_redirect');
         if(window.location.pathname !== '/pages/affiliate-dashboard'){

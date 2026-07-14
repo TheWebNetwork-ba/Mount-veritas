@@ -390,7 +390,7 @@
         var html = '';
         products.forEach(function(p){
           var img = (p.featured_image && p.featured_image.url) ? p.featured_image.url : (p.image || '');
-          var imgHtml = img ? '<span class="search-result-img"><img src="'+img+'" alt="" loading="lazy"></span>' : '<span class="search-result-img"></span>';
+          var imgHtml = img ? '<span class="search-result-img"><img src="'+img+'" alt="" loading="lazy"></span>' : '<span class="search-result-img search-result-img--empty">'+(window.MV_MOUNTAIN ? '<img src="'+window.MV_MOUNTAIN+'" alt="">' : '')+'</span>';
           html += '<a class="search-result" href="'+p.url+'">'+imgHtml+
                     '<span class="search-result-info"><span class="search-result-title">'+esc(p.title)+'</span></span></a>';
         });
