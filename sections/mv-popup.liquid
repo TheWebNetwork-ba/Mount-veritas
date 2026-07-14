@@ -28,6 +28,13 @@
   </div>
 </div>
 
+<button class="mv-pop-tab" id="mvPopTab" type="button" hidden aria-label="Open the launch offer">
+  <span class="mv-pop-tab-ico" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"/><path d="M12 8C11 5 9 4 7.8 4.6 6.4 5.3 7.8 8 12 8zM12 8c1-3 3-4 4.2-3.4 1.4.7 0 3.4-4.2 3.4z"/></svg>
+  </span>
+  <span class="mv-pop-tab-tx">{{ section.settings.tab_label | default: '10% off' }}</span>
+</button>
+
 <style>
 .mv-pop{ position:fixed; inset:0; z-index:9999; display:flex; align-items:center; justify-content:center; padding:20px; }
 .mv-pop[hidden]{ display:none; }
@@ -50,25 +57,64 @@
 .mv-pop-code:hover{ border-color:rgba(200,178,115,.75); }
 .mv-pop-code-tx{ font-family:'Fira Sans Condensed',sans-serif; color:#d8c48f; font-size:19px; font-weight:500; letter-spacing:3px; }
 .mv-pop-copied{ text-align:center; font-family:'Fira Sans Condensed',sans-serif; color:#8fd3a8; font-size:12px; margin:8px 0 0; }
-@media (max-width:600px){ .mv-pop-card{ padding:28px 20px; } }
+
+/* left-edge drawer tab */
+.mv-pop-tab{
+  position:fixed; left:0; top:50%; z-index:9998;
+  transform:translateY(-50%);
+  display:flex; flex-direction:column; align-items:center; gap:10px;
+  background:#1b1914; border:1px solid rgba(200,178,115,.4); border-left:none;
+  border-radius:0 9px 9px 0; padding:16px 9px 18px;
+  cursor:pointer; box-shadow:3px 0 20px rgba(0,0,0,.45);
+  transition:background .25s ease, padding-right .25s ease, border-color .25s ease;
+  animation:mvTabIn .55s cubic-bezier(.2,.7,.2,1) both;
+}
+.mv-pop-tab[hidden]{ display:none; }
+.mv-pop-tab:hover{ background:#232019; border-color:rgba(200,178,115,.7); padding-right:13px; }
+.mv-pop-tab-ico{ color:#c8b273; display:flex; }
+.mv-pop-tab-ico svg{ width:17px; height:17px; display:block; }
+.mv-pop-tab-tx{ writing-mode:vertical-rl; transform:rotate(180deg); font-family:'Fira Sans Condensed',sans-serif; font-size:12px; letter-spacing:.24em; text-transform:uppercase; color:#d8c48f; }
+
+@keyframes mvTabIn{ from{ transform:translate(-115%,-50%); opacity:0; } to{ transform:translate(0,-50%); opacity:1; } }
+
+@media (max-width:600px){
+  .mv-pop-card{ padding:28px 20px; }
+  .mv-pop-tab{ padding:13px 7px 15px; }
+  .mv-pop-tab-tx{ font-size:11px; }
+}
+@media (prefers-reduced-motion: reduce){ .mv-pop-tab{ animation:none; } }
 </style>
 
 <script>
 (function(){
   var pop=document.getElementById('mv-pop');
+  var tab=document.getElementById('mvPopTab');
   if(!pop) return;
+  var KEY='mv_pop_seen_v1';
+  var seen=false;
+  try{ seen = localStorage.getItem(KEY)==='1'; }catch(e){}
   var delay=(parseInt(pop.getAttribute('data-delay'),10)||6)*1000;
-  var timer=setTimeout(open,delay);
+  var timer=null;
 
-  function open(){
-    pop.hidden=false;
+  if(seen){
+    showTab();                         /* already seen: park the drawer, no auto-open */
+  } else {
+    timer=setTimeout(openPop, delay);  /* first visit only: auto-open once */
   }
-  function close(){
+
+  function markSeen(){ try{ localStorage.setItem(KEY,'1'); }catch(e){} }
+  function showTab(){ if(tab) tab.hidden=false; }
+  function openPop(){ pop.hidden=false; }
+  function closePop(){
     pop.hidden=true;
-    if(timer) clearTimeout(timer);
+    if(timer){ clearTimeout(timer); timer=null; }
+    markSeen();
+    showTab();
   }
-  pop.querySelectorAll('[data-mv-close]').forEach(function(el){ el.addEventListener('click',close); });
-  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&!pop.hidden) close(); });
+
+  pop.querySelectorAll('[data-mv-close]').forEach(function(el){ el.addEventListener('click',closePop); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&!pop.hidden) closePop(); });
+  if(tab){ tab.addEventListener('click',openPop); }
 
   var form=document.getElementById('mv-pop-form');
   var err=document.getElementById('mv-pop-err');
@@ -82,7 +128,7 @@
     btn.disabled=true;
     var body=new URLSearchParams();
     body.append('form_type','customer');
-    body.append('utf8','\u2713');
+    body.append('utf8','✓');
     body.append('contact[tags]','newsletter');
     body.append('contact[email]',email);
     fetch('/contact',{method:'POST',body:body,headers:{'Accept':'application/json'}})
@@ -93,6 +139,8 @@
     var t=pop.querySelector('[data-mv-state="thanks"]');
     if(o) o.hidden=true;
     if(t) t.hidden=false;
+    markSeen();
+    showTab();
   }
 
   var codeBtn=document.getElementById('mv-pop-code');
@@ -116,8 +164,9 @@
     { "type": "checkbox", "id": "enabled", "label": "Enable popup", "default": true },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Launch offer" },
     { "type": "text", "id": "headline", "label": "Headline", "default": "10% off your first piece." },
-    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Enter your email \u2014 your code is yours." },
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Enter your email — your code is yours." },
     { "type": "text", "id": "button_label", "label": "Button label", "default": "Get my code" },
+    { "type": "text", "id": "tab_label", "label": "Side drawer tab label", "default": "10% off" },
     { "type": "text", "id": "fine_print", "label": "Fine print", "default": "First order. One use." },
     { "type": "text", "id": "thanks_headline", "label": "Thank-you headline", "default": "You're in." },
     { "type": "textarea", "id": "thanks_subtext", "label": "Thank-you subtext", "default": "Here's 10% off your first piece. Use it at checkout." },
