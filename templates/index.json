@@ -39,14 +39,14 @@
           "type": "faq_item",
           "settings": {
             "question": "How fast does it ship?",
-            "answer": "<p>Orders process within 2–3 business days. Tracking is sent by email the moment your order leaves.</p>"
+            "answer": "<p>Orders process within 2–3 business days. Delivery runs 5 to 7 business days after that. Tracking is sent by email the moment your order leaves.</p>"
           }
         },
         "q3": {
           "type": "faq_item",
           "settings": {
             "question": "What is the return policy?",
-            "answer": "<p>Unworn, unaltered pieces can be returned within 14 days of delivery. Contact us and we will take care of it.</p>"
+            "answer": "<p>Unworn, unaltered pieces can be returned within 7 days of delivery. Contact us and we will take care of it.</p>"
           }
         },
         "q4": {
@@ -81,7 +81,7 @@
           "type": "faq_item",
           "settings": {
             "question": "Where is Mount Veritas based?",
-            "answer": "<p>Edmonton, Alberta. Built in Canada.</p>"
+            "answer": "<p>Calgary, Alberta. Built in Canada.</p>"
           }
         }
       },
