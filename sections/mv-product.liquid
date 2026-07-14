@@ -4,12 +4,6 @@
   .pdp-add:hover:not([disabled]){ opacity:.84; }
   .pdp-qd, #pdpQty, .pdp-chip{ border-radius:2px; }
   .pdp-chip.is-sel{ background:#ECE9E2; color:#0d0d0b; border-color:#ECE9E2; }
-
-  .sizechart-table{ width:100%; border-collapse:collapse; margin:6px 0 14px; font-family:'Fira Sans Condensed',sans-serif; }
-  .sizechart-table th{ text-align:left; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#9b988f; font-weight:600; padding:0 0 10px; border-bottom:1px solid rgba(236,233,226,.16); }
-  .sizechart-table td{ font-size:14px; color:#ECE9E2; padding:12px 0; border-bottom:1px solid rgba(236,233,226,.08); }
-  .sizechart-table td:first-child{ color:#c8b273; letter-spacing:.1em; }
-  .sizechart-note{ font-family:'Fira Sans Condensed',sans-serif; font-size:12px; line-height:1.6; color:#8b877e; margin:2px 0 0; }
 </style>
 
 <section class="pdp" aria-label="Product">
@@ -141,14 +135,7 @@
     {%- if chart_mf != blank and chart_mf.value != blank -%}
       <img src="{{ chart_mf.value | image_url: width: 1400 }}" alt="{{ product.title | escape }} size chart" loading="lazy">
     {%- else -%}
-      <table class="sizechart-table">
-        <thead><tr><th>Size</th><th>Chest</th><th>Length</th><th>Sleeve</th></tr></thead>
-        <tbody>
-          <tr><td>M</td><td>24"</td><td>27.5"</td><td>25"</td></tr>
-          <tr><td>L</td><td>26"</td><td>28.5"</td><td>25.75"</td></tr>
-        </tbody>
-      </table>
-      <p class="sizechart-note">Garment measured flat, in inches. Cut relaxed. For a closer fit, order one size down.</p>
+      <p class="sizechart-empty">No size chart uploaded for this piece yet.</p>
     {%- endif -%}
   </div>
 </aside>
