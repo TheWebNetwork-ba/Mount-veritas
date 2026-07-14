@@ -4,6 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#0d0d0b">
+  <link rel="icon" type="image/png" href="{{ 'mv-favicon.png' | asset_url }}">
+  <link rel="apple-touch-icon" href="{{ 'mv-favicon.png' | asset_url }}">
   <link rel="canonical" href="{{ canonical_url }}">
   <title>{% if page_title %}{{ page_title }}{% else %}{{ shop.name }}{% endif %}</title>
   {% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
@@ -12,6 +14,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Fira+Sans+Condensed:wght@400;500;700;900&display=swap" rel="stylesheet">
   {{ 'mv-styles.css' | asset_url | stylesheet_tag }}
   {{ content_for_header }}
+
+  {%- assign mv_share = 'mv-og.png' | asset_url | prepend: 'https:' -%}
+  {%- if product.featured_image -%}{%- assign mv_share = product.featured_image | image_url: width: 1200 | prepend: 'https:' -%}{%- endif -%}
+  <meta property="og:image" content="{{ mv_share }}">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{% if page_title %}{{ page_title }}{% else %}{{ shop.name }}{% endif %}">
+  <meta name="twitter:image" content="{{ mv_share }}">
 
   <style>
   
