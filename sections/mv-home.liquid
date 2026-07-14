@@ -66,12 +66,12 @@
     <div class="hero-inner">
       <span class="hero-eyebrow">See it. Believe it. Obtain it.</span>
       <h1>Wear the Greater Man.</h1>
-      <a class="hero-cta" href="{{ section.settings.fp_link | default: '/products/mv-signature-2-piece-hoodie' }}">Shop the drop</a>
+      <a class="hero-cta" href="{{ section.settings.fp_link | default: routes.all_products_collection_url }}">Shop the drop</a>
     </div>
   </header>
 
   <section class="slide firstpieces" id="shop" aria-label="The First Ascent">
-    <a class="fp-link" href="{{ section.settings.fp_link | default: routes.all_products_collection_url }}">
+    <a class="fp-link" href="{{ section.settings.fp_link | default: '/products/mv-signature-2-piece-hoodie' }}">
       {% if section.settings.fp_image != blank %}
         <div class="fp-bg">
           <img src="{{ section.settings.fp_image | image_url: width: 2400 }}" alt="" loading="lazy">
