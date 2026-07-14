@@ -4,6 +4,7 @@
   .pdp-add:hover:not([disabled]){ opacity:.84; }
   .pdp-qd, #pdpQty, .pdp-chip{ border-radius:2px; }
   .pdp-chip.is-sel{ background:#ECE9E2; color:#0d0d0b; border-color:#ECE9E2; }
+  .pdp-limited{ display:inline-block; margin:0 0 12px; font-family:'Fira Sans Condensed',sans-serif; font-size:11px; letter-spacing:.28em; text-transform:uppercase; color:#c8b273; border:1px solid rgba(200,178,115,.4); border-radius:2px; padding:5px 12px; }
 </style>
 
 <section class="pdp" aria-label="Product">
@@ -30,6 +31,7 @@
 
     <div class="pdp-info">
       <a class="pdp-back" href="/collections/all">&larr; All pieces</a>
+      {% if product.tags contains 'limited-sale' or product.tags contains 'Limited Sale' %}<span class="pdp-limited">Limited Sale</span>{% endif %}
       <h1 class="pdp-title">{{ product.title }}</h1>
 
       <div class="pdp-price">

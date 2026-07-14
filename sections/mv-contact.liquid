@@ -46,6 +46,19 @@
           </div>
 
           <div class="contact-field">
+            <label for="ContactReason" class="contact-label">Reason for contact <span aria-hidden="true">*</span></label>
+            <select id="ContactReason" name="contact[Reason for contact]" class="contact-input contact-select" required>
+              <option value="" disabled selected>Select a reason</option>
+              <option value="Order status or tracking">Order status or tracking</option>
+              <option value="Returns or refunds">Returns or refunds</option>
+              <option value="Wrong or defective item">Wrong or defective item</option>
+              <option value="Sizing or product question">Sizing or product question</option>
+              <option value="Affiliate or partnership">Affiliate or partnership</option>
+              <option value="Something else">Something else</option>
+            </select>
+          </div>
+
+          <div class="contact-field">
             <label for="ContactBody" class="contact-label">Message <span aria-hidden="true">*</span></label>
             <textarea id="ContactBody" name="contact[body]"
                       class="contact-input contact-textarea" required rows="6">{{ form.body }}</textarea>
@@ -135,6 +148,17 @@
   .contact-input::placeholder{
     color:var(--smoke-faint);
   }
+  .contact-select{
+    -webkit-appearance:none;
+    appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%239b988f' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;
+    background-position:right 16px center;
+    padding-right:40px;
+    cursor:pointer;
+  }
+  .contact-select:invalid{ color:var(--smoke-faint); }
+  .contact-select option{ color:#ECE9E2; background:#0d0d0b; }
   .contact-textarea{
     resize:vertical;
     min-height:140px;

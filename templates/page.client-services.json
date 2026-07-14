@@ -1,16 +1,236 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "main": {
       "type": "mv-client-services",
+      "blocks": {
+        "o1": {
+          "type": "cs_item",
+          "settings": {
+            "category": "orders",
+            "question": "How do I know my order went through?",
+            "answer": "<p>You get a confirmation email right after checkout. If it did not arrive, check your spam and promotions folders, then reach us with the email you used.</p>"
+          }
+        },
+        "o2": {
+          "type": "cs_item",
+          "settings": {
+            "category": "orders",
+            "question": "Can I change my order after placing it?",
+            "answer": "<p>If it has not shipped, reach us within 48 hours and we will do our best to update it. Once it ships, it cannot be changed.</p>"
+          }
+        },
+        "o3": {
+          "type": "cs_item",
+          "settings": {
+            "category": "orders",
+            "question": "Can I cancel my order?",
+            "answer": "<p>Yes, within 48 hours of placing it, as long as it has not shipped yet.</p>"
+          }
+        },
+        "o4": {
+          "type": "cs_item",
+          "settings": {
+            "category": "orders",
+            "question": "Do you restock sold-out pieces?",
+            "answer": "<p>Core Mountain Collection pieces run permanently. Pieces marked Limited Sale are not restocked once they sell through.</p>"
+          }
+        },
+        "o5": {
+          "type": "cs_item",
+          "settings": {
+            "category": "orders",
+            "question": "I never received my confirmation email.",
+            "answer": "<p>Check your spam and promotions folders first. If it is still missing, contact us with your name and the email you used and we will confirm your order.</p>"
+          }
+        },
+        "p1": {
+          "type": "cs_item",
+          "settings": {
+            "category": "payments",
+            "question": "What payment methods do you accept?",
+            "answer": "<p>All methods shown at checkout, including major cards and the express wallets your device supports.</p>"
+          }
+        },
+        "p2": {
+          "type": "cs_item",
+          "settings": {
+            "category": "payments",
+            "question": "What currency are prices in?",
+            "answer": "<p>All prices are in Canadian Dollars, CAD.</p>"
+          }
+        },
+        "p3": {
+          "type": "cs_item",
+          "settings": {
+            "category": "payments",
+            "question": "Is my payment secure?",
+            "answer": "<p>Checkout is handled by Shopify and is PCI compliant. We never see or store your full card details.</p>"
+          }
+        },
+        "p4": {
+          "type": "cs_item",
+          "settings": {
+            "category": "payments",
+            "question": "My payment was declined. What now?",
+            "answer": "<p>Confirm your card details and billing address, then try again. If it keeps failing, use another method or contact your bank.</p>"
+          }
+        },
+        "p5": {
+          "type": "cs_item",
+          "settings": {
+            "category": "payments",
+            "question": "Do you charge tax?",
+            "answer": "<p>Applicable taxes are calculated and shown at checkout before you pay.</p>"
+          }
+        },
+        "s1": {
+          "type": "cs_item",
+          "settings": {
+            "category": "shipping",
+            "question": "How much is shipping?",
+            "answer": "<p>A flat 20 CAD on orders under 249 CAD. Orders of 249 CAD or more ship free.</p>"
+          }
+        },
+        "s2": {
+          "type": "cs_item",
+          "settings": {
+            "category": "shipping",
+            "question": "Where do you ship?",
+            "answer": "<p>Within Canada only for now.</p>"
+          }
+        },
+        "s3": {
+          "type": "cs_item",
+          "settings": {
+            "category": "shipping",
+            "question": "How long does delivery take?",
+            "answer": "<p>About 5 to 7 business days once your order ships.</p>"
+          }
+        },
+        "s4": {
+          "type": "cs_item",
+          "settings": {
+            "category": "shipping",
+            "question": "How do I track my order?",
+            "answer": "<p>You get a tracking link by email the moment your order ships. Allow 1 to 3 business days for it to start updating.</p>"
+          }
+        },
+        "s5": {
+          "type": "cs_item",
+          "settings": {
+            "category": "shipping",
+            "question": "What is package protection?",
+            "answer": "<p>An optional add-on at checkout. If your package is confirmed lost or stolen in transit, we issue a full refund.</p>"
+          }
+        },
+        "r1": {
+          "type": "cs_item",
+          "settings": {
+            "category": "returns",
+            "question": "What is your refund policy?",
+            "answer": "<p>A monetary refund is issued only when a piece arrives defective. A wrong size or a wrong item is resolved with store credit for the product price.</p>"
+          }
+        },
+        "r2": {
+          "type": "cs_item",
+          "settings": {
+            "category": "returns",
+            "question": "My piece arrived defective.",
+            "answer": "<p>Contact us within 7 days of delivery with your order number and a photo. You are entitled to a replacement or a monetary refund.</p>"
+          }
+        },
+        "r3": {
+          "type": "cs_item",
+          "settings": {
+            "category": "returns",
+            "question": "I ordered the wrong size.",
+            "answer": "<p>You receive store credit for the product price, which you can put toward a new piece. Store credit does not include shipping or taxes.</p>"
+          }
+        },
+        "r4": {
+          "type": "cs_item",
+          "settings": {
+            "category": "returns",
+            "question": "How long do refunds take?",
+            "answer": "<p>Approved monetary refunds are processed around 3 business days after we accept the request.</p>"
+          }
+        },
+        "r5": {
+          "type": "cs_item",
+          "settings": {
+            "category": "returns",
+            "question": "Can I return a Limited Sale piece?",
+            "answer": "<p>Limited Sale pieces are final sale. The only exception is a wrong size, which is resolved with store credit.</p>"
+          }
+        },
+        "c1": {
+          "type": "cs_item",
+          "settings": {
+            "category": "contact",
+            "question": "How do I reach you?",
+            "answer": "<p>Use our Contact page. Pick a reason so we can route your message and reply faster.</p>"
+          }
+        },
+        "c2": {
+          "type": "cs_item",
+          "settings": {
+            "category": "contact",
+            "question": "How fast do you respond?",
+            "answer": "<p>Within 48 hours.</p>"
+          }
+        },
+        "c3": {
+          "type": "cs_item",
+          "settings": {
+            "category": "contact",
+            "question": "Do you have a phone line?",
+            "answer": "<p>Not yet. The Contact page is the fastest way to reach us and keeps everything in one thread.</p>"
+          }
+        },
+        "c4": {
+          "type": "cs_item",
+          "settings": {
+            "category": "contact",
+            "question": "I have a partnership or affiliate question.",
+            "answer": "<p>Choose that reason on the Contact page, or visit our Affiliate page to sign in or join.</p>"
+          }
+        },
+        "c5": {
+          "type": "cs_item",
+          "settings": {
+            "category": "contact",
+            "question": "Where are you based?",
+            "answer": "<p>Calgary, Alberta. Built in Canada.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "o1",
+        "o2",
+        "o3",
+        "o4",
+        "o5",
+        "p1",
+        "p2",
+        "p3",
+        "p4",
+        "p5",
+        "s1",
+        "s2",
+        "s3",
+        "s4",
+        "s5",
+        "r1",
+        "r2",
+        "r3",
+        "r4",
+        "r5",
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5"
+      ],
       "settings": {}
     }
   },
