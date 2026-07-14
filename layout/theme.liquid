@@ -60,6 +60,16 @@
   .cart-discount-msg{ font-family:'Fira Sans Condensed',sans-serif; font-size:12px; margin:8px 0 0; }
   .cart-discount-msg--ok{ color:#c8b273; }
   .cart-discount-msg--err{ color:#d98a8a; }
+
+  .cart-empty-state{ display:none; }
+  .cart-drawer.is-empty .cart-items{ display:none; }
+  .cart-drawer.is-empty .cart-empty-state{ display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; flex:1; padding:48px 26px; }
+  .cart-drawer.is-empty .cu-upsell, .cart-drawer.is-empty .cu-protection{ display:none !important; }
+  .cart-empty-mark{ width:150px; max-width:58%; height:auto; object-fit:contain; opacity:.55; margin-bottom:22px; }
+  .cart-empty-title{ font-family:'Abril Fatface',serif; color:#ECE9E2; font-size:22px; margin:0 0 8px; }
+  .cart-empty-sub{ font-family:'Fira Sans Condensed',sans-serif; color:#9b988f; font-size:14px; margin:0 0 26px; }
+  .cart-empty-btn{ display:inline-block; background:#ECE9E2; color:#0d0d0b; text-decoration:none; border-radius:2px; padding:13px 30px; font-family:'Fira Sans Condensed',sans-serif; font-weight:700; font-size:12px; letter-spacing:.16em; text-transform:uppercase; }
+  .cart-empty-btn:hover{ background:#fff; }
   </style>
 </head>
 <body>
@@ -143,6 +153,13 @@
       <button class="cart-close" id="cartClose" type="button" aria-label="Close cart">&times;</button>
     </div>
     <div class="cart-items" id="cartItems"></div>
+
+    <div class="cart-empty-state" aria-hidden="true">
+      <img class="cart-empty-mark" src="{{ 'mv-mountain-gold.png' | asset_url }}" alt="">
+      <p class="cart-empty-title">Your cart is empty.</p>
+      <p class="cart-empty-sub">The climb starts with one piece.</p>
+      <a class="cart-empty-btn" href="{{ routes.all_products_collection_url }}">Shop the drop</a>
+    </div>
 
     {%- if settings.cart_ea_product != blank -%}
       <div class="cu-upsell" id="cuEa"

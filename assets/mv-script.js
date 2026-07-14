@@ -106,7 +106,7 @@
     if (badge){ badge.textContent = cart.item_count; badge.hidden = cart.item_count === 0; }
     if (subEl) subEl.textContent = money(cart.total_price);
     if (!cart.items || !cart.items.length){
-      itemsEl.innerHTML = '<p class="cart-empty">Your cart is empty.</p>';
+      itemsEl.innerHTML = '';
       drawer.classList.add('is-empty');
       return;
     }
