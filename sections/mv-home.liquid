@@ -52,6 +52,10 @@
   .firstpieces .fp-link:hover .fp-cta{ background:none; border-color:#c8b273; color:#c8b273; }
   .fp-piece{ display:block; margin:0 0 22px; font-family:'Fira Sans Condensed',sans-serif; font-size:13px; letter-spacing:.06em; color:#9b988f; }
   .fp-price{ color:#c8b273; margin-left:8px; }
+  /* first ascent: anchor the words to the center bottom of the slide */
+  .firstpieces .fp-link{ align-items:flex-end; }
+  .firstpieces .fp-inner{ padding-bottom:64px; }
+  @media (max-width:640px){ .firstpieces .fp-inner{ padding-bottom:48px; } }
 
   /* ---- the call to climb (manifesto) ---- */
   .manifesto{ display:flex; align-items:center; justify-content:center; background:#0b0b09; }
@@ -131,26 +135,13 @@
       <h1 class="ar ar2">Wear the Greater Man.</h1>
       <a class="hero-cta ar ar3" href="{{ section.settings.fp_link | default: routes.all_products_collection_url }}">Shop the drop</a>
     </div>
-    <a class="hero-scroll ar ar4" href="#climb" aria-label="Scroll">
+    <a class="hero-scroll ar ar4" href="#shop" aria-label="Scroll">
       <span>Scroll</span>
       <span class="hero-scroll-line"></span>
     </a>
     <div class="slide-hud" aria-hidden="true"><span class="slide-hud-line"></span><span class="slide-hud-tx"><span class="slide-hud-num">01</span> &middot; The Trailhead</span></div>
     <div class="slide-dim" aria-hidden="true"></div>
   </header>
-
-  <section class="slide manifesto" id="climb" aria-label="The Call to Climb">
-    <div class="mf-glow" aria-hidden="true"></div>
-    <div class="slide-atmos-ridge is-zoom" aria-hidden="true"><img src="{{ 'mv-mountain-gold.png' | asset_url }}" alt=""></div>
-    <div class="slide-atmos-grain" aria-hidden="true"></div>
-    <div class="slide-hud" aria-hidden="true"><span class="slide-hud-line"></span><span class="slide-hud-tx"><span class="slide-hud-num">02</span> &middot; Base Camp</span></div>
-    <div class="mf-inner reveal">
-      {% if section.settings.mf_eyebrow != blank %}<span class="mf-eyebrow">{{ section.settings.mf_eyebrow | escape }}</span>{% endif %}
-      <p class="mf-statement">{{ section.settings.mf_body | default: 'You saw a life most people never let themselves picture. You believed it was yours before anyone else agreed. Now you climb for it.' | newline_to_br }}</p>
-      {% if section.settings.mf_close != blank %}<span class="mf-close">{{ section.settings.mf_close | escape }}</span>{% endif %}
-    </div>
-    <div class="slide-dim" aria-hidden="true"></div>
-  </section>
 
   <section class="slide firstpieces" id="shop" aria-label="The First Ascent">
     {%- assign fpp = section.settings.fp_product -%}
@@ -176,7 +167,20 @@
         <span class="fp-cta">{{ section.settings.fp_cta | default: 'See the piece' | escape }} &rarr;</span>
       </div>
     </a>
-    <div class="slide-hud" aria-hidden="true"><span class="slide-hud-line"></span><span class="slide-hud-tx"><span class="slide-hud-num">03</span> &middot; The First Ascent</span></div>
+    <div class="slide-hud" aria-hidden="true"><span class="slide-hud-line"></span><span class="slide-hud-tx"><span class="slide-hud-num">02</span> &middot; The First Ascent</span></div>
+    <div class="slide-dim" aria-hidden="true"></div>
+  </section>
+
+  <section class="slide manifesto" id="climb" aria-label="The Call to Climb">
+    <div class="mf-glow" aria-hidden="true"></div>
+    <div class="slide-atmos-ridge is-zoom" aria-hidden="true"><img src="{{ 'mv-mountain-gold.png' | asset_url }}" alt=""></div>
+    <div class="slide-atmos-grain" aria-hidden="true"></div>
+    <div class="slide-hud" aria-hidden="true"><span class="slide-hud-line"></span><span class="slide-hud-tx"><span class="slide-hud-num">03</span> &middot; Base Camp</span></div>
+    <div class="mf-inner reveal">
+      {% if section.settings.mf_eyebrow != blank %}<span class="mf-eyebrow">{{ section.settings.mf_eyebrow | escape }}</span>{% endif %}
+      <p class="mf-statement">{{ section.settings.mf_body | default: 'You saw a life most people never let themselves picture. You believed it was yours before anyone else agreed. Now you climb for it.' | newline_to_br }}</p>
+      {% if section.settings.mf_close != blank %}<span class="mf-close">{{ section.settings.mf_close | escape }}</span>{% endif %}
+    </div>
     <div class="slide-dim" aria-hidden="true"></div>
   </section>
 
@@ -275,7 +279,7 @@
 
     { "type": "header", "content": "Slide 3 — First Ascent" },
     { "type": "product", "id": "fp_product", "label": "Featured product (shows name + price)" },
-    { "type": "text", "id": "fp_eyebrow", "label": "Eyebrow (gold text)", "default": "Collection 01" },
+    { "type": "text", "id": "fp_eyebrow", "label": "Eyebrow (gold text)", "default": "Collection Basecamp" },
     { "type": "text", "id": "fp_title", "label": "Headline", "default": "Where the climb begins." },
     { "type": "text", "id": "fp_cta", "label": "Button text", "default": "See the piece" },
     { "type": "image_picker", "id": "fp_image", "label": "Background image (optional, overrides product image)" },
