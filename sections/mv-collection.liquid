@@ -4,7 +4,7 @@
   <div class="catalog-grain" aria-hidden="true"></div>
 
   <div class="catalog-head">
-    <p class="catalog-eyebrow">{{ section.settings.catalog_eyebrow | default: 'The Ascent' }}</p>
+    <p class="catalog-eyebrow">{{ section.settings.catalog_eyebrow | default: 'BASECAMP' }}</p>
     <h1 class="catalog-title">{% if collection.handle == 'all' %}The Drop{% else %}{{ collection.title | default: 'The Catalog' }}{% endif %}</h1>
     <span class="catalog-count">{{ collection.products_count }} {% if collection.products_count == 1 %}piece{% else %}pieces{% endif %}</span>
   </div>
@@ -52,5 +52,5 @@
 </style>
 
 {% schema %}
-{ "name": "MV Catalog", "settings": [ { "type": "text", "id": "catalog_eyebrow", "label": "Eyebrow (gold text above title)", "default": "The Ascent" } ], "blocks": [] }
+{ "name": "MV Catalog", "settings": [ { "type": "text", "id": "catalog_eyebrow", "label": "Eyebrow (gold text above title)", "default": "BASECAMP" } ], "blocks": [] }
 {% endschema %}
